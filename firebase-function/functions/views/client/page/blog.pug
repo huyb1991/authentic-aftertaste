@@ -1,0 +1,34 @@
+mixin blogPostTemplate(isAmp=false)
+  .hero-div.hero-blog
+
+  .blog
+
+    .container.container-blog
+      div
+        //- #slotLeaderBoard.banner.banner-728-90.mb20
+        //- Only display iframe ads on normal page
+        if (!isAmp)
+          .banner.banner-728-90.mb20
+            iframe(
+              title="Blog content"
+              data-aa="###",
+              src="###",
+              style="border:0px; border-radius: 8px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;"
+            )
+
+        article#blogContent.content
+
+          h1.m0= post.title
+          .flex.flex-end
+            i.text-small Cập nhật: #{post.modified}
+
+          //- Blog Content
+          | !{post.content}
+
+        #slotLeaderBoard.banner.banner-728-90.mb20
+
+        //- Comments
+        include ../components/_fb-comments.pug
+
+      div
+        include ../components/_blog-sidebar.pug

@@ -1,0 +1,52 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  .container
+    a(
+      class="navbar-brand",
+      href=""
+    ) Dashboard
+    button(
+      class="navbar-toggler",
+      type="button",
+      data-toggle="collapse",
+      data-target="#navbarNav",
+      aria-controls="navbarNav",
+      aria-expanded="false",
+      aria-label="Toggle navigation"
+    )
+      span.navbar-toggler-icon
+
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item.d-flex.flex-column.justify-content-center.dropdown
+          a(class="nav-link", href="/")
+            i.fa.fa-home.fa-lg
+        li.nav-item
+          a(class="nav-link", href="blog")
+            i.fa.fa-book.mr-2
+            | Blog
+        li.nav-item
+          a(class="nav-link", href="sitemap")
+            i.fa.fa-sitemap.mr-2
+            | Sitemap
+
+      ul.navbar-nav
+        li.nav-item
+          a(class="nav-link", href="#")
+            i.fa.fa-refresh.mr-1
+            | Update
+
+//- This JS only for admin for site settings
+script(type="text/javascript").
+  $(document).ready(function() {
+    //- $('body').on('click', '#btn-generate-sitemap', function() {
+    //-   var apiUrl = 'api/generate-sitemap';
+
+    //-   $.post(apiUrl, function () {})
+    //-     .done(function() {
+    //-       displayToast(true, 'Successfully generated sitemap.');
+    //-     })
+    //-     .fail(function() {
+    //-       displayToast(false, 'Error generated sitemap!!!');
+    //-     });
+    //- });
+  });

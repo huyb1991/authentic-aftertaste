@@ -1,0 +1,129 @@
+extends ../_default/base.pug
+
+block content
+  .container
+    h3= title
+    input(id="entity", type="hidden", value= entity)
+
+    form(
+      method="POST",
+      class="form-update",
+      action=`${entity}/${data.id ? 'update' : 'create'}`
+    )
+      .row
+        .col
+          .form-row
+            .form-group.col-7
+              label(for="id") ID
+              input(
+                id="id",
+                name="id",
+                type="text",
+                value= data.id,
+                class="form-control",
+                readonly
+              )
+            .form-group.col-5.text-right
+              -var generated = false
+                -if (typeof data.generated !== "undefined" && data.generated === true)
+                  -generated = true
+
+              label Generated
+              br
+              .btn-group
+                button(
+                  type="button",
+                  class=`btn btn-outline-secondary ${generated === false ? 'btn-warning' : ''} btn-state`,
+                  data-target="generated",
+                  data-value="0"
+                )
+                  i.fa.fa-ban.mr-2
+                  | No
+                button(
+                  type="button",
+                  class=`btn ${generated === true ? 'btn-success' : 'btn-outline-secondary'} btn-state`,
+                  data-target="generated",
+                  data-value="1"
+                )
+                  i.fa.fa-check.mr-2
+                  | Yes
+              input(
+                id="generated",
+                name="generated",
+                type="hidden",
+                value=`${generated ? 1 : 0}`
+              )
+
+          .form-row
+            .form-group.col-6
+              label Entity
+              .dropdown
+                button(
+                  class="btn btn-secondary btn-block dropdown-toggle",
+                  type="button",
+                  id="ddEntity",
+                  data-toggle="dropdown",
+                  aria-haspopup="true",
+                  aria-expanded="false"
+                ) Select Entity
+                div(id="ddEntity-menu", class="dropdown-menu", aria-labelledby="ddEntity")
+                  //- List Entity Option
+            .form-group.col-6
+              label(for="entity") Entity
+              input(
+                id="sitemapEntity",
+                name="entity",
+                type="text",
+                value= data.entity || 'bank',
+                class="form-control",
+                placeholder="Entity",
+                readonly
+              )
+
+        .col
+          .form-group
+            label(for="slug") Slug
+            input(
+              id="slug",
+              name="slug",
+              type="text",
+              value= data.slug,
+              class="form-control",
+              placeholder="Slug"
+            )
+
+          .form-group
+            label(for="modified") Modified
+            input(
+              id="modified",
+              name="modified",
+              type="text",
+              value= data.modified,
+              class="form-control",
+              placeholder="Modified"
+            )
+
+      .row.mt-2.mb-5
+        .col-12.d-flex.justify-content-between
+          a(href=`${entity}/`, class="btn btn-outline-secondary")
+            i.fa.fa-reply.fa-lg.mr-2
+            | Cancel
+
+          if data.id
+            button(
+              type="button",
+              class="btn btn-danger btn-delete ml-2",
+              data-toggle="modal",
+              data-target="#deleteConfirmModal",
+              data-id= data.id,
+              data-name= data.name
+            )
+              i.fa.fa-trash-o.fa-lg.mr-2
+              | Delete
+
+          button(type="submit", class="btn btn-success")
+            i.fa.fa-floppy-o.fa-lg.mr-2
+            | Submit
+        .col-12
+          p.text-right
+            em Auto save to JSON file and update sitemap

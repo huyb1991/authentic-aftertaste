@@ -1,0 +1,27 @@
+// Banner styles
+.banner {
+  margin: 0 auto;
+  text-align: center;
+
+  a {
+    display: block;
+    line-height: 0;
+  }
+
+  // 300x250
+  &-300-250 {
+    width: 300px;
+    height: 250px;
+  }
+
+  // 728x90
+  &-728-90 {
+    width: 728px;
+    height: 90px;
+
+    @media screen and (max-width: $mobileMax) {
+      width: auto;
+      height: 46px;
+    }
+  }
+}

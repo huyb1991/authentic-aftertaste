@@ -1,0 +1,16 @@
+extends _default/base.pug
+
+block metadata
+  -var metaContentType = "Article"
+  -var metaPageTitle = SITE_TITLE
+  -var metaPageDesc = SITE_DESC
+  -var metaPageImage = ''
+  -var metaCanonical = `${BASE_URL}`
+  -var metaAMPLink = `${BASE_URL}/amp`
+
+block schemaMarkup
+  //- include schema/blog.pug
+
+block main
+  .container
+    h1 Homepage

@@ -1,0 +1,29 @@
+script(type="application/ld+json").
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "#{post.seoTitle}",
+    "image": "#{post.imgCover}",
+    "genre": "#{post.slug.replace(/-/g, ' ')}",
+    "author": {
+      "url": "#{BASE_URL}/ve-chung-toi",
+      "@type": "Person",
+      "name": "Editor"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Admin",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "#{BASE_URL}/#{SITE_LOGO}"
+      }
+    },
+    "url": "#{BASE_URL}/blog/#{post.category}/#{post.slug}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "#{BASE_URL}/blog/#{post.category}/#{post.slug}"
+    },
+    "datePublished": "#{post.created}",
+    "dateModified": "#{post.modified}",
+    "description": "#{post.seoDesc}"
+  }

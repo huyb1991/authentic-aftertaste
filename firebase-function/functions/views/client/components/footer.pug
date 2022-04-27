@@ -1,0 +1,39 @@
+mixin footerTemplate(isAmp=false)
+  footer.footer
+    .container.flex.flex-between
+      //- Site Info
+      div
+        div.text-center
+        p.m0.copyright © #{new Date().getFullYear()} #{SITE_NAME}.
+
+      //- Navigation
+      div.footer-links
+        a(href="/ve-chung-toi", title="Về chúng tôi") Về chúng tôi
+        a(href="/mien-tru-trach-nhiem", title="Miễn trừ trách nhiệm") Miễn trừ trách nhiệm
+        a(href="/dieu-khoan", title="Điều khoản sử dụng")
+          | Điều khoản 
+          span.hidden-mobile sử dụng
+        a(href="/lien-he", title="Liên hệ") Liên hệ
+
+  - if (isAmp)
+    amp-analytics(type="gtag", data-credentials="include")
+      script(type="application/json").
+        {
+          "vars" : {
+            "gtag_id": "###",
+            "config" : {
+              "###": { "groups": "default" }
+            }
+          }
+        }
+  - else
+    script(async, src="https://www.googletagmanager.com/gtag/js?id=###")
+    -if (['home', 'rate'].indexOf(pageName) === -1)
+      script(
+        async,
+        defer,
+        crossorigin="anonymous",
+        src="###",
+        nonce="###"
+      )
+    script(async, src="/main.js")

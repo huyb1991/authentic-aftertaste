@@ -1,0 +1,37 @@
+.blog {
+  padding-top: $space-large;
+  padding-bottom: $space-normal;
+  background-color: #fff;
+}
+
+.content {
+  h1, .heading {
+    color: black;
+  }
+
+  a {
+    color: var(--primary-color);
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: $radius-normal;
+    margin: 0 auto;
+    display: block;
+  }
+
+  @media screen and (min-width: $desktopMin) {
+    border-right: 1px solid var(--divider-color);
+    padding-right: 60px;
+  }
+
+  @media screen and (max-width: $tabletMax) {
+    border-bottom: 1px solid var(--divider-color);
+    margin-bottom: $space-normal;
+    padding: 0 $space-normal;
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding: 0 $space-small;
+  }
+}

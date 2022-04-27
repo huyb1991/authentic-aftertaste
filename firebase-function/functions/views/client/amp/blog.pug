@@ -1,0 +1,14 @@
+extends _default/base.pug
+
+block metadata
+  -var metaPageTitle = post.seoTitle
+  -var metaPageDesc = post.seoDesc
+  -var metaCanonical = `${BASE_URL}/blog/${post.category}/${post.slug}`
+  -var metaAMPLink = `${BASE_URL}/amp/blog/${post.category}/${post.slug}`
+
+block schemaMarkup
+  include ../schema/blog.pug
+
+block main
+  include ../page/blog.pug
+  +blogPostTemplate(true)

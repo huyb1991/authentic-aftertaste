@@ -1,0 +1,11 @@
+include navigation.pug
+
+mixin headerTemplate(isAmp=false)
+  header.header
+    .container
+      .flex.flex-between
+        a.brand-link(href= '/', title= SITE_NAME)
+          svg(fill="currentColor", width="200", height="40")
+            title= SITE_NAME
+            use(xlink:href="#icon-brand")
+        +navTemplate(isAmp)

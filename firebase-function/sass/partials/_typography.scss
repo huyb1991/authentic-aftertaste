@@ -1,0 +1,99 @@
+$size-1: 3rem;
+$size-2: 2rem;
+$size-3: 1.5rem;
+$size-4: 1.25rem;
+$size-5: 0.9rem;
+$size-6: 0.8rem;
+
+.heading {
+  margin: 0;
+  font-weight: $font-weight-bold;
+
+  // Big Header like Homepage cover, Page Title
+  &-extra {
+    line-height: 1;
+    font-size: $size-1;
+    font-weight: $font-weight-bold-super;
+  }
+
+  // Heading on common pages
+  &-page {
+    line-height: 1;
+    font-weight: $font-weight-bold-light;
+
+    @media screen and (max-width: $tablet) {
+      font-size: $size-3;
+    }
+
+    @media screen and (min-width: $tablet) {
+      font-size: $size-2;
+    }
+  }
+
+  &-section {
+    font-size: $size-3;
+  }
+
+  // Widget title
+  &-item {
+    font-size: $size-4;
+  }
+
+  &-widget {
+    border-left: 4px solid var(--primary-color);
+    padding-left: $space-small;
+  }
+}
+
+.text {
+  &-left {
+    text-align: left;
+  }
+  &-center {
+    text-align: center;
+  }
+
+  &-small {
+    font-size: $size-5;
+  }
+
+  &-uppercase {
+    text-transform: uppercase;
+  }
+
+  &-primary {
+    color: var(--primary-color);
+  }
+  &-success {
+    color: var(--success-color);
+  }
+  &-error {
+    color: var(--error-color);
+  }
+  &-normal {
+    color: var(--text-color);
+  }
+
+  &-link {
+    color: var(--link-color);
+  }
+
+  &-light {
+    color: var(--text-secondary-color);
+  }
+
+  &-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Text buying ad slot
+  &-bid {
+    max-width: 728px;
+    margin: -5px auto 0;
+    text-align: right;
+    font-style: italic;
+    font-size: $size-6;
+  }
+}

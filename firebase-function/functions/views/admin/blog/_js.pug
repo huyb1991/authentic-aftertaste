@@ -1,0 +1,30 @@
+script(type="text/javascript").
+  $(document).ready(function() {
+    tinymce.init({
+      selector: '#content',
+      menubar: false,
+      statusbar: false,
+      plugins: 'fullscreen link image lists paste table',
+      toolbar: 'fullscreen | formatselect bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright alignjustify | link image | blockquote | removeformat | table tablemergecells tablesplitcells',
+      paste_as_text: true,
+      //- content_css: '/editor.css',
+      block_formats: 'Heading 2=h2; Heading 3=h3; Paragraph=p; Small Text=smallText',
+      formats: {
+        h2: { block: 'h2', classes: 'heading heading-section', exact: true },
+        h3: { block: 'h3', classes: 'heading heading-item', exact: true },
+        smallText: { inline: 'span', classes: 'text-small'}
+      },
+      style_formats: [
+        { title: 'Small Text', format: 'smallText' },
+      ],
+      rel_list: [
+        { title: 'Internal Link', value: '' },
+        { title: 'No Follow', value: 'nofollow' }
+      ]
+    });
+
+    $('#contentForm').submit(function() {
+      $('#content').val(tinymce.activeEditor.getContent());
+      return true;
+    });
+  });

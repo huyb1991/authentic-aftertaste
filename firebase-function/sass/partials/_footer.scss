@@ -1,0 +1,44 @@
+// Layout for Homepage and Listing page
+.footer {
+  color: var(--text-secondary-color);
+  padding: $space-super-large 0 $space-small;
+  font-size: 14px;
+
+  &-links {
+    a {
+      @media screen and (min-width: $tabletMin) {
+        margin-left: $space-large;
+      }
+  
+      @media screen and (max-width: $mobileMax) {
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+
+  .container {
+    align-items: end;
+
+    @media screen and (max-width: $mobileMax) {
+      display: block;
+    }
+  }
+
+  &-icon {
+    display: inline-block;
+    color: var(--text-color);
+    margin-right: $space-small;
+
+    .icon {
+      width: 1.25em;
+      height: 1.25em;
+    }
+  }
+}
+
+.copyright {
+  @media screen and (max-width: $mobileMax) {
+    text-align: center;
+  }
+}

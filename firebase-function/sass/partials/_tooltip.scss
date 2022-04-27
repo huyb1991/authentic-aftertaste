@@ -1,0 +1,89 @@
+$arr-position-vertical: 10px;
+$padding-top: 10px;
+
+.tooltip {
+  &-arrow {
+    transform: rotate(180deg);
+
+    &::before,
+    &::after {
+      height: 0;
+      width: 0;
+      content: "";
+      position: absolute;
+      top: $padding-top;
+      left: 294px;
+    }
+
+    &::before {
+      border: .51rem solid transparent;
+      border-top-color: #0157ff;
+      margin-left: -.1rem;
+    }
+
+    &::after {
+      border: .4rem solid transparent;
+      border-top-color: #fff;
+    }
+  }
+
+  &-content {
+    text-align: left;
+    display: none;
+    padding: $padding-top 20px;
+    animation: fadeIn .2s forwards;
+    position: absolute;
+    top: 27px;
+    left: -10px;
+    width: 300px;
+    background: #fff;
+    border-top: 2px solid #0157ff;
+    border-radius: 4px;
+    box-shadow: 0 0 1px 0 #1515151a, 0 2px 8px -1px #15151533;
+  }
+
+  // Position on mobile page
+  @media screen and (max-width: $tablet) {
+    &-content {
+      left: -225px;
+
+      &-rating {
+        left: -180px;
+      }
+    }
+
+    &-arrow {
+      &::before,
+      &::after {
+        left: 80px;
+      }
+
+      &-rating {
+        &::before,
+        &::after {
+          left: 127px;
+        }
+      }
+    }
+  }
+
+  // Active open content
+  @media screen and (max-width: $tabletMax) {
+    &.active {
+      position: relative;
+  
+      .tooltip-content {
+        display: block;
+      }
+    }
+  }
+  @media screen and (min-width: $desktopMin) {
+    &:hover {
+      position: relative;
+  
+      .tooltip-content {
+        display: block;
+      }
+    }
+  }
+}

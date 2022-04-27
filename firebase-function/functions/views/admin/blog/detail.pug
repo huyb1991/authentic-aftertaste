@@ -1,0 +1,228 @@
+extends ../_default/base.pug
+
+block styles
+  style(type='text/css').
+    .tox-tinymce {
+      min-height: 600px;
+      max-height: 600px;
+    }
+
+block content
+  script(src='https://cdn.tiny.cloud/1/69yu9r8rq253xgqrkz78e6tdol0h9x471pfw2sta06uyjjms/tinymce/5/tinymce.min.js', referrerpolicy='origin')
+
+  .container
+    h3= title
+    input(id="entity", type="hidden", value= entity)
+
+    form#contentForm(
+      method="POST",
+      class="form-update",
+      action=`${entity}/${data.id ? 'update' : 'create'}`
+    )
+      .row
+        .col
+          .form-row
+            .form-group.col-7
+              label(for="id") ID
+              input(
+                id="id",
+                name="id",
+                type="text",
+                value= data.id,
+                class="form-control",
+                readonly
+              )
+              input(name="prevSlug", type="hidden", value= data.slug, readonly)
+            .form-group.col-5.text-right
+              -var published = false
+                -if (typeof data.published !== "undefined" && data.published === true)
+                  -published = true
+
+              label Published
+              br
+              .btn-group
+                button(
+                  type="button",
+                  class=`btn btn-outline-secondary ${published === false ? 'btn-warning' : ''} btn-state`,
+                  data-target="published",
+                  data-value="0"
+                )
+                  i.fa.fa-ban.mr-2
+                  | Draft
+                button(
+                  type="button",
+                  class=`btn ${published === true ? 'btn-success' : 'btn-outline-secondary'} btn-state`,
+                  data-target="published",
+                  data-value="1"
+                )
+                  i.fa.fa-check.mr-2
+                  | Published
+              input(
+                id="published",
+                name="published",
+                type="hidden",
+                value=`${published ? 1 : 0}`
+              )
+
+          .form-group
+            label(for="title") Title
+            input(
+              id="title",
+              name="title",
+              type="text",
+              value= data.title,
+              class="form-control",
+              placeholder="Title"
+            )
+
+          .form-row
+            .form-group.col-9
+              label(for="slug") Slug
+              input(
+                id="slug",
+                name="slug",
+                type="text",
+                value= data.slug,
+                class="form-control",
+                placeholder="Slug"
+              )
+
+            .form-group.col-3
+              label(for="created") Created
+              input(
+                id="created",
+                name="created",
+                type="text",
+                value= data.created,
+                class="form-control",
+                placeholder="Created"
+              )
+
+        .col
+          .form-group
+            label(for="imgCover") Cover Image
+            input(
+              id="imgCover",
+              name="imgCover",
+              type="text",
+              value= data.imgCover,
+              class="form-control",
+              placeholder="Cover Image"
+            )
+
+          .form-group
+            label(for="seoTitle") SEO Title
+            input(
+              id="seoTitle",
+              name="seoTitle",
+              type="text",
+              value=data.seoTitle,
+              class="form-control",
+              placeholder="SEO Title"
+            )
+
+          .form-group
+            label(for="seoDesc") SEO Description
+            textarea(
+              id="seoDesc",
+              name="seoDesc",
+              rows="3"
+              class="form-control",
+              placeholder="SEO Description"
+            ) #{data.seoDesc}
+
+      //- Blog taxonomy
+      .row
+        .col
+          //- Category dropdown
+          .form-row
+            .form-group.col-6
+              label Category
+              .dropdown
+                button(
+                  class="btn btn-secondary btn-block dropdown-toggle",
+                  type="button",
+                  id="ddCategory",
+                  data-toggle="dropdown",
+                  aria-haspopup="true",
+                  aria-expanded="false"
+                ) Select Category
+                div(id="ddCategory-menu", class="dropdown-menu", aria-labelledby="ddCategory")
+                  //- List Category Option
+            .form-group.col-6
+              label(for="category") Category
+              input(
+                id="category",
+                name="category",
+                type="text",
+                value= data.category || 'tai-chinh-ca-nhan',
+                class="form-control",
+                placeholder="Category",
+                readonly
+              )
+        .col
+          //- Tags dropdown
+          .form-row
+            .form-group.col-5
+              label Select Tag
+              .dropdown
+                button(
+                  class="btn btn-secondary btn-block dropdown-toggle",
+                  type="button",
+                  id="ddTag",
+                  data-toggle="dropdown",
+                  aria-haspopup="true",
+                  aria-expanded="false"
+                ) Select Tag
+                div(id="ddTag-menu", class="dropdown-menu", aria-labelledby="ddTag")
+                  //- List Tag Option
+            .form-group.col-7
+              label(for="tag") Tags
+              -var tags = (data.tags || []).join(',')
+              input(
+                id="tag",
+                name="tags",
+                type="text",
+                value= tags,
+                class="form-control",
+                placeholder="Tag",
+                data-type="list",
+                data-display="list-tag"
+              )
+          .row.mb-2
+            .col
+              #list-tag
+
+      //- Content
+      .row
+        .form-group.col-12
+          #content!= data.content
+
+      .row.mt-2.mb-5
+        .col-12.d-flex.justify-content-between
+          a(href=`${entity}/`, class="btn btn-outline-secondary")
+            i.fa.fa-reply.fa-lg.mr-2
+            | Cancel
+
+          if data.id
+            button(
+              type="button",
+              class="btn btn-danger btn-delete ml-2",
+              data-toggle="modal",
+              data-target="#deleteConfirmModal",
+              data-id= data.id,
+              data-name= data.name
+            )
+              i.fa.fa-trash-o.fa-lg.mr-2
+              | Delete
+
+          button(type="submit", class="btn btn-success")
+            i.fa.fa-floppy-o.fa-lg.mr-2
+            | Submit
+        .col-12
+          p.text-right
+            em Auto save to JSON file and update sitemap
+
+block scripts
+  include _js.pug
+  include ../_default/_js-seo.pug

@@ -1,0 +1,75 @@
+/* Theme colors */
+$primary-color: #007aff;
+$primary-light-color: #66afff;
+$link-color: #007aff;
+
+$body-bg-color: #f4f4f4;
+$body-bg-color-dark: #242526;
+$section-bg-color: #f0f2f5;
+$section-bg-color-dark: #18191a;
+$text-color: #2f363d;
+$text-color-dark: #e4e6eb;
+$text-color-revert: $text-color-dark;
+$text-color-revert-dark: $text-color;
+$text-secondary-color: #959da5;
+$text-secondary-color-dark: #b0b3b8;
+$text-placeholder-color: #e1e1e1;
+$text-placeholder-color-dark: #181818;
+$divider-color: #ced0d4;
+$divider-color-dark: #3e4042;
+$shadow-color: #00000033;
+$shadow-color-dark: #ffffff33;
+$card-bg-color: #fff;
+$card-bg-color-dark: #fff; // TODO
+
+/* Breakpoint */
+$tablet: 768px + 1px; // Tablet breakpoint
+$mobileMax: 767px;
+$tabletMin: 768px;
+$tabletMax: 1199px;
+$desktopMin: 1200px;
+
+/* Container */
+// Max width on desktop
+$container-small-max-w: 960px;
+$container-max-w: 1160px;
+$container-full-max-w: 1600px;
+$sidebar-width: 300px;
+
+/* Metrics */
+$space-tiny: 5px;
+$space-small: 10px;
+$space-normal: 20px;
+$space-large: 30px;
+$space-super-large: 40px;
+
+/* Typography */
+/**
+ * Use system-fonts for performance and native UI
+ * https://meta.stackexchange.com/q/364048
+ * https://markdotto.com/2018/02/07/github-system-fonts/
+ **/
+$font-size-base: 18px;
+$font-family:
+  system-ui, -apple-system, BlinkMacSystemFont, // San Francisco on macOS and iOS
+  "Segoe UI", // Windows
+  "Ubuntu", // Ubuntu
+  "Roboto", "Noto Sans", "Droid Sans", // Chrome OS and Android with fallbacks
+  sans-serif; // The final fallback for rendering in sans-serif.
+$font-weight-bold: 600;
+$font-weight-bold-light: 500;
+$font-weight-bold-super: 700;
+
+/* Icon */
+$icon-size-small: 12px;
+$icon-size-normal: 24px;
+$icon-size-large: 48px;
+
+/* Radius */
+$radius-small: 4px;
+$radius-normal: 8px;
+$radius-large: 16px;
+
+/* Animation */
+$easing: ease-out;
+$speed: 0.5s;

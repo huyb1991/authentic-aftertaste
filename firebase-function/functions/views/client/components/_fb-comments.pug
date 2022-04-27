@@ -1,0 +1,19 @@
+-if (metaCanonical)
+  #comments.text-center
+    -if (isAmp)
+      amp-facebook-comments(
+        width="486"
+        height="657"
+        layout="responsive"
+        title="Facebook comments"
+        data-numposts="5"
+        data-href= metaCanonical
+      )
+    -else
+      #fb-root
+      div.fb-comments(
+        data-numposts="10"
+        data-lazy="true"
+        data-width="720"
+        data-href= metaCanonical
+      )

@@ -1,0 +1,93 @@
+.flex {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+
+  &-default {
+    align-items: unset;
+  }
+
+  &-item-end {
+    align-items: flex-end;
+  }
+
+  &-between {
+    justify-content: space-between;
+  }
+
+  &-center {
+    justify-content: center;
+  }
+
+  &-end {
+    justify-content: flex-end;
+  }
+}
+
+.hidden {
+  display: none;
+
+  &-mobile {
+    @media screen and (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &-tablet {
+    @media screen and (min-width: $tablet + 1px) {
+      display: none;
+    }
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.m0 {
+  margin: 0;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mt40 {
+  margin-top: 40px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.ml20 {
+  margin-left: 20px;
+}
+.p0 {
+  padding: 0;
+}
+.pt20 {
+  padding-top: 20px;
+}
+.pb20 {
+  padding-bottom: 20px;
+}
+
+#overlay {
+  overflow: hidden;
+  opacity: .5;
+  transition: opacity .15s linear;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.no-scroll {
+  position: fixed;
+  overflow-y: scroll;
+  width: 100%;
+}

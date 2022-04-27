@@ -1,0 +1,19 @@
+extends _default/base.pug
+
+block metadata
+  -var metaCanonical = `${BASE_URL}/404`
+
+block main
+  .container.text-center
+    h1.heading.heading-section Không tìm thấy trang
+
+    p Quay về 
+      a.text-primary(href="/", title="Lãi Ngân Hàng") trang chủ!
+    p.text-small.mt20 Tự động quay về trang chủ sau 
+      strong 1 phút.
+
+block script
+  script(type="text/javascript").
+    setTimeout(function() {
+      window.location.href = window.location.protocol + '//' + window.location.host;
+    }, 60000);

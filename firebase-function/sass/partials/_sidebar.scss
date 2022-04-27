@@ -1,0 +1,23 @@
+.sidebar {
+  @media screen and (max-width: $tablet) {
+    margin-top: $space-normal;
+  }
+
+  @media screen and (min-width: $tablet) {
+    position: sticky;
+    top: $space-normal;
+  }
+}
+
+.widget {
+  &-link {
+    display: block;
+    padding: $space-small 0;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--divider-color);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

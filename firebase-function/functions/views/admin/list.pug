@@ -1,0 +1,122 @@
+extends _default/base.pug
+
+block content
+  h3= title
+  .row
+    //- Pagination
+    .col-6.mb-2
+      - if (entity === 'sitemap')
+        a(
+          href="sitemap-generate",
+          class="btn btn-warning mr-2"
+        )
+          i.fa.fa-sitemap.mr-2
+          | Generate from DB
+        //- Add data from Bank and Rate to DB Collection
+        a(
+          href="sitemap-seed-db",
+          class= `btn btn-danger mr-2 ${data && data.length ? 'disabled' : ''}`
+        )
+          i.fa.fa-refresh.mr-2
+          | Init DB
+
+      -if (entity === 'blog')
+        form(
+          method="GET",
+          action= `${entity}/`
+        )
+          .input-group.mb-3
+            .input-group-prepend
+              span.input-group-text#blogTitle Search Title
+            input.form-control(
+              value= query,
+              type="text",
+              name="query",
+              placeholder="Search by Title",
+              aria-label="Title",
+              aria-describedby="blogTitle"
+            )
+
+    //- Search
+    .col-3
+
+    //- Adding new Btn
+    .col-3.text-right
+      a(
+        href=`${entity}/create`,
+        class="btn btn-success"
+      )
+        i.fa.fa-plus.mr-2
+        | Add New
+
+    -if (entity === 'sitemap' || entity === 'blog')
+      .col-12
+        p.text-right
+          em Only get 10 last items
+
+  .row
+    .col
+      table.table.table-hover.table-bordered.table-responsive-md
+        thead
+          tr
+            th #
+            each val in headers
+              th(scope="col")= val.name
+        tbody
+          each item, tableIdx in data
+            tr(id=`row-id-${item.id}`)
+              td= tableIdx + 1
+
+              each it, idx in headers
+                //- Action column
+                if idx === headers.length - 1
+                  td(style={'min-width': '120px'})
+                    -if (entity === 'sitemap')
+                      a(
+                        href=`sitemap-regenerate/${item.id}`,
+                        class="btn btn-success mr-2",
+                        role="button",
+                        aria-pressed="true"
+                      )
+                        i.fa.fa-cloud-download
+                    -if (entity === 'bank')
+                      a(
+                        href=`scraping-bank-rate/${item.slug}`,
+                        class= `btn btn-success mr-2 ${item.isAuto ? '' : 'disabled'}`,
+                        role="button",
+                        aria-pressed="true"
+                      )
+                        i.fa.fa-cloud-download
+                    a(
+                      href=`${entity}/${item.id}`,
+                      class="btn btn-secondary",
+                      role="button",
+                      aria-pressed="true"
+                    )
+                      i.fa.fa-pencil
+
+                    //- Hide Delete btn
+                    //- button(
+                    //-   type="button",
+                    //-   class="btn btn-danger btn-delete ml-2",
+                    //-   data-id= item.id
+                    //-   data-name= item.title || item.name
+                    //-   data-toggle="modal",
+                    //-   data-target="#deleteConfirmModal"
+                    //- )
+                    //-   i.fa.fa-trash-o
+                else
+                  if it.status
+                    td.text-center
+                      if !!item[it.field]
+                        i.fa.fa-check-circle.text-success
+                      else
+                        i.fa.fa-times-circle.text-danger
+                  else if it.url
+                    td
+                      a(href= item[it.field], target="_blank")= item[it.field]
+                  else
+                    td
+                      | #{`${item[it.field]}${it.percent ? '%' : ''}`}
+
+block scripts

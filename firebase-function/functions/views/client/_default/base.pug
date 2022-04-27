@@ -1,0 +1,28 @@
+doctype html
+//- html(lang='en', class= `${setting.darkMode ? 'dark' : ''}`)
+html(lang='vi')
+  head
+    include ./head.pug
+    link(rel="stylesheet", href="/styles.css")
+
+    //- Verify Google Adsense
+    //- script(async, data-ad-client="###", src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+
+  body(data-page= pageName || 'home')
+    //- Templates
+    include ../components/footer.pug
+    include ../components/header.pug
+    include ../components/image.pug
+
+    //- Icons
+    include ../components/svg-icons.pug
+    include ../components/social-network.pug
+
+    +headerTemplate()
+
+    div.main
+      block main
+
+    +footerTemplate()
+    #overlay.hidden
+    block script

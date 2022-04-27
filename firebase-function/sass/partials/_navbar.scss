@@ -1,0 +1,147 @@
+// Desktop
+$header-height: 68px;
+$header-height-mobile: 61px;
+$subnav-height: 200px;
+
+// Styles apply for both main and sub
+nav {
+  ul {
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: block;
+  }
+}
+
+.nav {
+  &-item {
+    padding: 10px 0;
+    display: inline-flex;
+
+    @media screen and (max-width: $tablet) {
+      display: block;
+      padding: 0;
+      border-bottom: 1px solid var(--divider-color);
+
+      &-active {
+        .nav-link {
+          background-color: #f2f7ff;
+          border-bottom: 4px solid var(--primary-color);
+        }
+      }
+    }
+
+    .nav-link {
+      @media screen and (min-width: $tablet) {
+        color: #fff;
+        opacity: 1;
+      }
+    }
+  }
+
+  &-link {
+    padding: $space-normal;
+
+    @media screen and (max-width: $tablet) {
+      display: block;
+      padding: $space-small;
+    }
+
+    @media screen and (min-width: $desktopMin) {
+      padding: $space-small $space-normal;
+      border-radius: 40px;
+      transition: #{'background 0.25s ease'};
+
+      &:hover {
+        background-color: #cdddff66;
+      }
+    }
+  }
+
+  &-sub {
+    @media screen and (max-width: $tablet) {
+      position: relative;
+
+      .container {
+        flex-direction: column;
+      }
+
+      .heading {
+        font-size: 1.25rem; // $size-4
+      }
+    }
+
+    @media screen and (min-width: $tablet) {
+      position: absolute;
+      top: $header-height;
+      left: 0;
+      right: 0;
+      height: $subnav-height;
+      border-bottom: 1px solid var(--divider-color);;
+    }
+
+    background-color: #fff;
+    padding: $space-normal;
+
+    a:hover {
+      color: var(--primary-color);
+    }
+
+    // Assume that 4 group each sub section
+    &-group {
+      height: 100%;
+
+      @media screen and (max-width: $tablet) {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid var(--divider-color);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      @media screen and (min-width: $tablet) {
+        display: inline-block;
+        width: 25%;
+        border-right: 1px solid var(--divider-color);
+        padding: 0 $space-normal;
+
+        &:first-child {
+          padding-left: 0;
+        }
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+
+  // Menu icon on mobile
+  &-icon {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    padding: 0;
+    color: #fff;
+
+    @media screen and (min-width: $tablet) {
+      display: none;
+    }
+  }
+
+  // Styles nav on mobile
+  @media screen and (max-width: $tablet) {
+    position: absolute;
+    top: $header-height-mobile;
+    right: 0;
+    width: 80%;
+    height: calc(100vh - #{$header-height-mobile});
+    background-color: #fff;
+  }
+}

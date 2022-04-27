@@ -1,0 +1,212 @@
+script(type="text/javascript").
+  var SPLIT_CHAR = ',';
+  var TODAY_STR = new Date().toJSON().slice(0, 10);
+  var STORAGE_KEY = {
+    LAST_UPDATE: 'last_update',
+    ENTITY: 'entities',
+    CATEGORY: 'category',
+    TAG: 'tag',
+  };
+
+  function getLocalStorageData(key) {
+    return JSON.parse(localStorage.getItem(key));
+  };
+
+  // Toast message
+  function displayToast(success, message) {
+    if (success) {
+      $("#toast-header").attr("class", "toast-header bg-success");
+      $("#toast-body").attr("class", "toast-body bg-success");
+    } else {
+      $("#toast-header").attr("class", "toast-header bg-danger");
+      $("#toast-body").attr("class", "toast-body bg-danger");
+    }
+
+    $("#toast-content").html(message);
+    $("#toast-message").toast('show');
+  };
+
+  // Render dropdown options
+  function renderDropdownOptions(
+    data, // Array object: { id, name, slug? }
+    ddWrapperId,
+    targetId,
+    targetDisplayId
+  ) {
+    var currentItem = $('#' + targetId).val();
+    var selectedItem = data.find(function(item) {
+      return item.id === (currentItem || '').trim();
+    });
+    var itemSelectorTemplate = '';
+
+    if (selectedItem) {
+      $("#" + ddWrapperId).html(selectedItem.name);
+    }
+
+    // Create item option
+    data.forEach(function(item, idx) {
+      itemSelectorTemplate += '<button class="dropdown-item btn-select" type="button"'
+        + ' data-value="' + item.id + '"'
+        + ' data-target="' + targetId + '"'
+        + ' data-display="' + (targetDisplayId || '') + '">'
+          + item.name
+        + '</button>'
+    });
+
+    // Render list option on dropdown selection
+    $("#" + ddWrapperId + "-menu").html(itemSelectorTemplate);
+  };
+
+  // Get all lookup data like Category, Entity, Banks
+  function getAllDataLookup() {
+    var apiUrl = 'api-all-data';
+    $.get(apiUrl, function(data) {
+      var entities = data.entities;
+      var categories = data.categories;
+      var tags = data.tags;
+
+      localStorage.setItem(STORAGE_KEY.ENTITY, JSON.stringify(entities || []));
+      localStorage.setItem(STORAGE_KEY.CATEGORY, JSON.stringify(categories || []));
+      localStorage.setItem(STORAGE_KEY.TAG, JSON.stringify(tags || []));
+    }).done(function() {
+      localStorage.setItem(STORAGE_KEY.LAST_UPDATE, TODAY_STR);
+      displayToast(true, 'Successfully updated all refer data.');
+    })
+    .fail(function() {
+      displayToast(false, 'Error updated all refer data!!!');
+    });
+  };
+
+  function renderEntitySlugDropdown() {
+    var listEntity = getLocalStorageData(STORAGE_KEY.ENTITY) || [];
+
+    var formatList = listEntity.map(it => ({
+      id: it.value,
+      name: it.name,
+    }));
+
+    renderDropdownOptions(formatList, 'ddEntity', 'sitemapEntity', '');
+  };
+
+  function renderCategorySlugDropdown() {
+    var listCategory = getLocalStorageData(STORAGE_KEY.CATEGORY) || [];
+
+    var formatList = listCategory.map(it => ({
+      id: it.value,
+      name: it.name,
+    }));
+
+    renderDropdownOptions(formatList, 'ddCategory', 'category', '');
+  };
+
+  function renderTagDropdown() {
+    var listTags = getLocalStorageData(STORAGE_KEY.TAG) || [];
+
+    var formatList = listTags.map(it => ({
+      id: it.value,
+      name: it.name,
+    }));
+
+    renderDropdownOptions(formatList, 'ddTag', 'tag', '');
+  };
+
+  function listenBtnSelect() {
+    // Handle select action
+    $('body').on("click", ".btn-select", function() {
+      var dataTarget = $(this).data("target");
+      var dataTargetDisplay = $(this).data("display");
+      var displayId = $(this).parent().attr('aria-labelledby');
+      var displayText = $(this).text();
+      var selectedValue = $(this).data("value");
+      var isList = !!($("#" + dataTarget).data("type") === 'list');
+
+      if (isList) {
+        var currentTargetValue = $("#" + dataTarget).val();
+        var dataTargetDisplay = $("#" + dataTarget).data("display");
+        var valueInArr = currentTargetValue ? currentTargetValue.split(SPLIT_CHAR) : [];
+
+        if (valueInArr.find(it => it === selectedValue)) {
+          return;
+        }
+
+        valueInArr.push(selectedValue);
+        $("#" + dataTarget).val(valueInArr.join(SPLIT_CHAR));
+
+        // Display list as badge
+        var listDisplay = '';
+        valueInArr.forEach(it => {
+          listDisplay += '<span class="badge badge-pill badge-info ml-2">' + it + '</span>';
+          listDisplay += '<i class="fa fa-times ml-1 btn-list-remove" data-target="' + dataTarget + '" data-value="' + it + '"></i>'
+        });
+        $('#' + dataTargetDisplay).html(listDisplay);
+      } else {
+        $("#" + dataTarget).val(selectedValue);
+        $("#" + displayId).html(displayText);
+
+        // Sometime need to display on input also
+        if (dataTargetDisplay) {
+          $("#" + dataTargetDisplay).val(displayText);
+        }
+      }
+    });
+  };
+
+  function listenBtnState() {
+    // Set data value by state for Publish & Status
+    $(".btn-state").click(function() {
+      var defaultClass = "btn btn-outline-secondary btn-state";
+      var dataTarget = $(this).data("target");
+
+      $("#" + dataTarget).val($(this).data("value"));
+
+      // Set default class for other button in the same group
+      $(".btn-state").each(function() {
+        if ($(this).data("target") === dataTarget) {
+          $(this).attr("class", defaultClass);
+        }
+      })
+      $(this).toggleClass("btn-outline-secondary").toggleClass("btn-success");
+    });
+  };
+
+  function listenBtnRemove() {
+    $('body').on('click', '.btn-list-remove', function() {
+      var dataTarget = $(this).data("target");
+      var selectedValue = $(this).data("value");
+      var isList = !!($("#" + dataTarget).data("type") === 'list');
+
+      //- Remove out item from data list
+      var currentTargetValue = $("#" + dataTarget).val();
+      var dataTargetDisplay = $("#" + dataTarget).data("display");
+      var valueInArr = currentTargetValue ? currentTargetValue.split(SPLIT_CHAR) : [];
+      var newValue = valueInArr.filter(it => it !== selectedValue);
+      $("#" + dataTarget).val(newValue.join(SPLIT_CHAR));
+
+      //- Display
+      var listDisplay = '';
+      newValue.forEach(it => {
+        listDisplay += '<span class="badge badge-pill badge-info ml-2">' + it + '</span>';
+        listDisplay += '<i class="fa fa-times ml-1 btn-list-remove" data-target="' + dataTarget + '" data-value="' + it + '"></i>'
+      });
+      $('#' + dataTargetDisplay).html(listDisplay);
+    });
+  };
+
+  function initAdmin() {
+    var latestUpdate = localStorage.getItem(STORAGE_KEY.LAST_UPDATE);
+
+    if (latestUpdate !== TODAY_STR) {
+      getAllDataLookup();
+    }
+
+    renderEntitySlugDropdown();
+    renderCategorySlugDropdown();
+    renderTagDropdown();
+    listenBtnSelect();
+    listenBtnState();
+    listenBtnRemove();
+  };
+
+  $(document).ready(function() {
+    initAdmin();
+  });

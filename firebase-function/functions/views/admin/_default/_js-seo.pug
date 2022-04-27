@@ -1,0 +1,136 @@
+script(type='text/javascript').
+  var SITE_TITLE = 'domain.com';
+  var SEO_TITLE_MIN = 30;
+  var SEO_TITLE_MAX = 60;
+  var SEO_DESC_MIN = 64;
+  var SEO_DESC_MAX = 154;
+
+  // SEO validation
+  function seoInputValidation(elementId, min, max) {
+    if (!$(elementId).length) {
+      return;
+    }
+
+    var textLength = $(elementId).val().length;
+
+    // Reset
+    $(elementId).removeClass('is-invalid').removeClass('is-valid');
+
+    if (min <= textLength && textLength <= max) {
+      $(elementId).addClass('is-valid');
+    } else {
+      $(elementId).addClass('is-invalid');
+    }
+  };
+
+  // Check on init
+  function initValidation() {
+    seoInputValidation('#seoTitle', SEO_TITLE_MIN, SEO_TITLE_MAX);
+    seoInputValidation('#seoDesc', SEO_DESC_MIN, SEO_DESC_MAX);
+  };
+
+  //- If element exists: Check valid by value length
+  //- Else: Bypass validation
+  function validateElement(elID) {
+    var elExists = $(elID).length;
+    var elValid = true;
+
+    if (elExists) {
+      elValid = $(elID).val().length;
+
+      if (!elValid) {
+        $(elID).addClass('is-invalid');
+      } else {
+        $(elID).removeClass('is-invalid');
+      }
+    }
+
+    return !!elValid;
+  };
+
+  function convertToSlug(text) {
+    return text.toLowerCase()
+      .normalize('NFD')
+      // Vietnamese characters
+      .replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a')
+      .replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e')
+      .replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i')
+      .replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o')
+      .replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u')
+      .replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y')
+      .replace(/đ/gi, 'd')
+      // Special symbol
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .replace(/--+/g, '-');
+  };
+
+  function autoUpdateSlug() {
+    $('body').on('change', '#title', function(event) {
+      var title = event.target.value;
+      var seoTitleValue =  title;
+      var fullSeoTitle = seoTitleValue + ' | ' + SITE_TITLE;
+
+      if (fullSeoTitle.length <= SEO_TITLE_MAX) {
+        seoTitleValue = fullSeoTitle;
+      }
+
+      $('#slug').val(convertToSlug(title));
+      $('#seoTitle').val(seoTitleValue);
+      $('#seoDesc').val(title);
+    });
+  };
+
+  //- TODO
+  function validateDuplicatedSlug(elementId) {
+    return;
+    if (!$(elementId).length) {
+      return;
+    }
+
+    var apiUrl = 'api/check-duplicate';
+    var slug = $(elementId).val();
+    var type = 'book';
+
+    $.post(
+      apiUrl,
+      { slug: slug, type: type },
+      function (response) {
+        var duplicated = response['duplicated'];
+        console.log('duplicated: ', duplicated);
+
+        if (duplicated) {
+          $(elementId).addClass('is-invalid').removeClass('is-valid');
+          alert('Duplicated slug: ' + slug);
+        } else {
+          $(elementId).removeClass('is-invalid').addClass('is-valid');
+        }
+      }
+    )
+    .fail(function() {
+      displayToast(false, 'Validating duplicate error!!!');
+    });
+  };
+
+  $(document).ready(function() {
+    initValidation();
+    autoUpdateSlug();
+
+    // Checking content length for SEO Title and Description tag
+    $('form').on('keyup', '#seoTitle', function() {
+      seoInputValidation('#seoTitle', SEO_TITLE_MIN, SEO_TITLE_MAX);
+    });
+    $('form').on('keyup', '#seoDesc', function() {
+      seoInputValidation('#seoDesc', SEO_DESC_MIN, SEO_DESC_MAX);
+    });
+
+    // Name or Slug change will validate entity duplicated or not
+    $('body').on('change', '#slug', function() {
+      validateDuplicatedSlug('#slug');
+    });
+    $('body').on('change', '#title', function() {
+      validateDuplicatedSlug('#slug');
+    });
+  });

@@ -1,0 +1,27 @@
+doctype html
+html(⚡, lang='vi')
+  head
+    include ../../_default/head.pug
+    //- AMP head
+    include head.pug
+
+  body.wrapper
+    //- Templates
+    include ../../components/footer.pug
+    include ../../components/header.pug
+    include ../../components/image.pug
+
+    //- Icons
+    include ../../components/svg-icons.pug
+    include ../../components/social-network.pug
+
+    +headerTemplate(true)
+
+    div.main
+      block main
+
+    +footerTemplate(true)
+    a#overlay.hidden(
+      [class]="menuVisible ? '' : 'hidden'",
+      on="tap:AMP.setState({ menuVisible: !menuVisible})"
+    )
