@@ -9,7 +9,7 @@
   @media screen and (max-width: $mobileMax) {
     padding: $space-small 0;
   }
-  @media screen and (max-width: $tabletMin) {
+  @media screen and (min-width: $tabletMin) {
     padding: $space-super-large 0;
   }
 }

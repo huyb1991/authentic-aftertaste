@@ -8,12 +8,13 @@ $white: #fff;
 
 $black-dark-color: #131313;
 $black-color: #4e4e4e;
-$black-light-color: #d0d0d0; 
-$black-extra-color: #fafafa;
+$black-light-color: #d0d0d0;
+$black-extra-light-color: #e7e7e7;
+$black-super-light-color: #fafafa;
 
 /* Component colors */
-$body-bg-color: $black-extra-color;
-$body-bg-color-dark: $black-extra-color;
+$body-bg-color: $black-super-light-color;
+$body-bg-color-dark: $black-super-light-color;
 
 // Text
 $text-color: $black-color; // Text Body
@@ -24,8 +25,8 @@ $text-secondary-color: $black-light-color; // Text-light / Border
 $text-secondary-color-dark: $black-light-color;
 
 // Border
-$divider-color: $black-light-color;
-$divider-color-dark: $black-light-color;
+$divider-color: $black-extra-light-color;
+$divider-color-dark: $black-extra-light-color;
 
 // Card
 $card-bg-color: $white;
