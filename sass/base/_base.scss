@@ -28,13 +28,3 @@ a {
 button:hover {
   cursor: pointer;
 }
-
-blockquote {
-  border-left: 6px solid var(--divider-color);
-  padding-left: $space-normal;
-  font-style: italic;
-
-  @media screen and (max-width: $tablet) {
-    margin: $space-normal;
-  }
-}

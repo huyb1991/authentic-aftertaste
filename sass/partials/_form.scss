@@ -10,7 +10,7 @@
     border-bottom: 2px dashed var(--divider-color);
 
     // Only apply for mobile, no tablet
-    @media screen and (max-width: $tablet - 2px) {
+    @media screen and (max-width: $mobileMax) {
       max-width: 200px;
     }
   }

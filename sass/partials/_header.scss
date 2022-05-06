@@ -11,7 +11,7 @@
   position: relative;
   background-color: var(--primary-color);
 
-  @media screen and (max-width: $tablet) {
+  @media screen and (max-width: $mobileMax) {
     // Height with padding is 60px
     height: 40px; // Fixed value
     padding: $space-small 0;
