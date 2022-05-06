@@ -1,4 +1,4 @@
-extends ../_default/base.pug
+extends _default/base.pug
 
 block content
   .container
@@ -100,3 +100,6 @@ block content
           button(type="submit", class="btn btn-success")
             i.fa.fa-floppy-o.fa-lg.mr-2
             | Submit
+
+block scripts
+  include _default/_js-seo.pug
