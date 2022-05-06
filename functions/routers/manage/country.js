@@ -71,7 +71,6 @@ const CountryDetailUpdate = (req, res) => {
   if (id === 'create') {
     return MODELS.countryAdd(countryData)
       .then(newId => {
-        MODELS.siteAutoUpdateStats(ENTITY.COUNTRY, -1);
         const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
         return res.redirect(`/admin/${ENTITY.COUNTRY}/${newId}/?success=true&message=${message}`);
       })
