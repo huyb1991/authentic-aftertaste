@@ -1,8 +1,9 @@
 // BASE_URL = 'https://domain.com';
 BASE_URL = 'http://localhost:5000';
-BASE_URL_SITEMAP = 'https://domain.com';
+BASE_URL_SITEMAP = 'https://authenticaftertaste.com';
 
 const ENTITY = {
+  COUNTRY: 'country',
   BLOG: 'blog',
   SITEMAP: 'sitemap'
 };
