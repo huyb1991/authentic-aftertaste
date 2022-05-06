@@ -1,0 +1,102 @@
+extends ../_default/base.pug
+
+block content
+  .container
+    h3= title
+    input(id="entity", type="hidden", value= entity)
+
+    form#contentForm(
+      method="POST",
+      class="form-update",
+      action=`${entity}/${data.id ? 'update' : 'create'}`
+    )
+      .row
+        .col-md-6
+          .form-row
+            .form-group.col-md-6
+              label(for="id") ID
+              input(
+                id="id",
+                name="id",
+                type="text",
+                value= data.id,
+                class="form-control",
+                readonly
+              )
+
+          .form-group
+            label(for="name") Name
+            input(
+              id="name",
+              name="name",
+              type="text",
+              value= data.name,
+              class="form-control",
+              placeholder="Name"
+            )
+
+          .form-group
+            label(for="slug") Slug
+            input(
+              id="slug",
+              name="slug",
+              type="text",
+              value= data.slug,
+              class="form-control",
+              placeholder="Slug"
+            )
+
+        .col-md-6
+          .form-group
+            label(for="imgCover") Cover Image
+            input(
+              id="imgCover",
+              name="imgCover",
+              type="text",
+              value= data.imgCover,
+              class="form-control",
+              placeholder="Cover Image"
+            )
+
+          .form-group
+            label(for="seoTitle") SEO Title
+            input(
+              id="seoTitle",
+              name="seoTitle",
+              type="text",
+              value=data.seoTitle,
+              class="form-control",
+              placeholder="SEO Title"
+            )
+
+          .form-group
+            label(for="seoDesc") SEO Description
+            textarea(
+              id="seoDesc",
+              name="seoDesc",
+              rows="3"
+              class="form-control",
+              placeholder="SEO Description"
+            ) #{data.seoDesc}
+
+      .row.mt-2.mb-5
+        .col-12.d-flex.justify-content-between
+          a(href=`${entity}/`, class="btn btn-outline-secondary")
+            i.fa.fa-reply.fa-lg.mr-2
+            | Cancel
+
+          if data.id
+            button(
+              type="button",
+              class="btn btn-danger btn-delete",
+              data-toggle="modal",
+              data-target="#deleteConfirmModal",
+              data-url= `${entity}/delete/${data.id}`,
+              data-name= data.name
+            )
+              i.fa.fa-trash-o.fa-lg.mr-2
+              | Delete
+
+          button(type="submit", class="btn btn-success")
+            i.fa.fa-floppy-o.fa-lg.mr-2
+            | Submit
