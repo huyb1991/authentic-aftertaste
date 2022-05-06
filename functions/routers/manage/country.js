@@ -36,7 +36,7 @@ const CountryDetail = (req, res) => {
   // Create new Country
   if (id === 'create') {
     return res.render(
-      `admin/${ENTITY.COUNTRY}/detail`,
+      `admin/detail`,
       {
         title: `Create new ${ENTITY_NAME[ENTITY.COUNTRY]}`,
         entity: ENTITY.COUNTRY,
@@ -49,7 +49,7 @@ const CountryDetail = (req, res) => {
   return MODELS.countryGetDetailById(id)
     .then(data => {
       return res.render(
-        `admin/${ENTITY.COUNTRY}/detail`,
+        `admin/detail`,
         {
           title: `Detail ${ENTITY_NAME[ENTITY.COUNTRY]}`,
           entity: ENTITY.COUNTRY,
