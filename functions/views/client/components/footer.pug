@@ -19,20 +19,11 @@ mixin footerTemplate(isAmp=false)
       script(type="application/json").
         {
           "vars" : {
-            "gtag_id": "###",
+            "gtag_id": "G-8BLXZ1QYMW",
             "config" : {
               "###": { "groups": "default" }
             }
           }
         }
   - else
-    script(async, src="https://www.googletagmanager.com/gtag/js?id=###")
-    -if (['home', 'rate'].indexOf(pageName) === -1)
-      script(
-        async,
-        defer,
-        crossorigin="anonymous",
-        src="###",
-        nonce="###"
-      )
     script(async, src="/main.js")
