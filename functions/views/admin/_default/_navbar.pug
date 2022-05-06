@@ -29,6 +29,25 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
             i.fa.fa-sitemap.mr-2
             | Sitemap
 
+      li.nav-item.dropdown.navbar-nav
+        a.nav-link.dropdown-toggle(
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        )
+          i.fa.fa-folder-open.mr-1.ml-2
+          | Admin
+        div.dropdown-menu(aria-labelledby="navbarDropdownMenuLink")
+          a(class="dropdown-item", href="country")
+            i.fa.fa-flag.mr-1
+            | Country
+          button#btnRefresh(class="dropdown-item", type="button")
+            i.fa.fa-refresh.mr-1
+            | Refresh
+
       ul.navbar-nav
         li.nav-item
           a(class="nav-link", href="#")
@@ -38,15 +57,4 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
 //- This JS only for admin for site settings
 script(type="text/javascript").
   $(document).ready(function() {
-    //- $('body').on('click', '#btn-generate-sitemap', function() {
-    //-   var apiUrl = 'api/generate-sitemap';
-
-    //-   $.post(apiUrl, function () {})
-    //-     .done(function() {
-    //-       displayToast(true, 'Successfully generated sitemap.');
-    //-     })
-    //-     .fail(function() {
-    //-       displayToast(false, 'Error generated sitemap!!!');
-    //-     });
-    //- });
   });
