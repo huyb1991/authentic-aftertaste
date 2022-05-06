@@ -1,19 +1,15 @@
 // Logo
 .brand {
   &-link {
-    height: 40px;
-    color: transparent
+    height: 50px;
   }
 }
 
 .header {
-  z-index: 2;
-  position: relative;
-  background-color: var(--primary-color);
-
   @media screen and (max-width: $mobileMax) {
-    // Height with padding is 60px
-    height: 40px; // Fixed value
     padding: $space-small 0;
+  }
+  @media screen and (max-width: $tabletMin) {
+    padding: $space-super-large 0;
   }
 }
