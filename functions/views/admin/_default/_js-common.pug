@@ -192,6 +192,25 @@ script(type="text/javascript").
     });
   };
 
+  function listenBtnDelete() {
+    $('body').on('click', '.btn-delete', function() {
+      var dataTarget = $(this).data('target');
+      var dataName = $(this).data('name');
+      var dataUrl = $(this).data('url');
+      console.log('dataUrl: ', dataUrl);
+
+      if (dataName) {
+        $('#deleteName').text(dataName);
+      }
+
+      if (dataUrl) {
+        $('#deleteUrl').attr('href', dataUrl);
+      }
+
+      $(deleteConfirmModal).modal('toggle');
+    });
+  };
+
   function initAdmin() {
     var latestUpdate = localStorage.getItem(STORAGE_KEY.LAST_UPDATE);
 
@@ -205,6 +224,7 @@ script(type="text/javascript").
     listenBtnSelect();
     listenBtnState();
     listenBtnRemove();
+    listenBtnDelete();
   };
 
   $(document).ready(function() {
