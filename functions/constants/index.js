@@ -1,4 +1,4 @@
-BASE_URL = 'https://authenticaftertaste.vn';
+BASE_URL = 'https://authenticaftertaste.com';
 BASE_URL_ADMIN = 'http://localhost:5000';
 BASE_URL_SITEMAP = 'https://authenticaftertaste.com';
 
