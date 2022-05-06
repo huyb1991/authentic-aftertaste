@@ -81,6 +81,19 @@ script(type='text/javascript').
       $('#seoTitle').val(seoTitleValue);
       $('#seoDesc').val(title);
     });
+    $('body').on('change', '#name', function(event) {
+      var title = event.target.value;
+      var seoTitleValue =  title;
+      var fullSeoTitle = seoTitleValue + ' | ' + SITE_TITLE;
+
+      if (fullSeoTitle.length <= SEO_TITLE_MAX) {
+        seoTitleValue = fullSeoTitle;
+      }
+
+      $('#slug').val(convertToSlug(title));
+      $('#seoTitle').val(seoTitleValue);
+      $('#seoDesc').val(title);
+    });
   };
 
   //- TODO

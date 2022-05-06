@@ -1,0 +1,30 @@
+//- Delete confirmation modal
+div#deleteConfirmModal.modal.fade(
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+)
+  div.modal-dialog(role="document")
+    div.modal-content
+      div.modal-header
+        h5#exampleModalLabel.modal-title Confirm Delete
+        button.close.btn-delete(
+          type="button"
+          data-dismiss="modal"
+          data-target="#deleteConfirmModal"
+          aria-label="Close"
+        )
+          span(aria-hidden="true") &times;
+
+      div.modal-footer.d-flex.justify-content-between
+        button.btn.btn-secondary.btn-delete(
+          type="button"
+          data-dismiss="modal"
+          data-target="#deleteConfirmModal"
+        )
+          i.fa.fa-times.fa-lg.mr-2
+          | Cancel
+        a#deleteUrl.btn.btn-danger(href="/")
+          i.fa.fa-exclamation-triangle.fa-lg.mr-2
+          | Confirm

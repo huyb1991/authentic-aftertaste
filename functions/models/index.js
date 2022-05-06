@@ -5,7 +5,8 @@ const {
   getCollectionOrderingWithConditions,
   getDocumentWithConditions,
   addDocument,
-  updateDocument
+  updateDocument,
+  deleteDocument,
 } = require('./helper');
 
 // Format document
@@ -13,6 +14,16 @@ const {
   formatDocumentBase,
   formatDocumentBlog
 } = require('./format');
+
+// COUNTRY
+const countryGetAll = (conditions = [], limit = 0) =>
+  getCollectionOrderingWithConditions(ENTITY.COUNTRY, 'name', conditions, limit);
+const countryGetDetailById = id => getDocument(`${ENTITY.COUNTRY}/${id}`);
+const countryAdd = data => addDocument(ENTITY.COUNTRY, formatDocumentBase(data));
+const countryUpdate = (id, data) => updateDocument(`${ENTITY.COUNTRY}/${id}`, formatDocumentBase(data));
+const countryDelete = id => deleteDocument(ENTITY.COUNTRY, id);
+
+
 
 // BLOG POST
 const blogGetAll = (conditions = [], limit = 0) =>
@@ -69,6 +80,12 @@ const updateSitemap = (id, data) =>
   updateDocument(`${ENTITY.SITEMAP}/${id}`, formatDocumentBase(data));
 
 module.exports.models = {
+  countryGetAll,
+  countryGetDetailById,
+  countryAdd,
+  countryUpdate,
+  countryDelete,
+
   // Blog
   blogGetAll,
   getBlogPostDetailById,

@@ -2,24 +2,9 @@ extends _default/base.pug
 
 block content
   h3= title
-  .row
+  .row.mb-2
     //- Pagination
     .col-6.mb-2
-      - if (entity === 'sitemap')
-        a(
-          href="sitemap-generate",
-          class="btn btn-warning mr-2"
-        )
-          i.fa.fa-sitemap.mr-2
-          | Generate from DB
-        //- Add data from Bank and Rate to DB Collection
-        a(
-          href="sitemap-seed-db",
-          class= `btn btn-danger mr-2 ${data && data.length ? 'disabled' : ''}`
-        )
-          i.fa.fa-refresh.mr-2
-          | Init DB
-
       -if (entity === 'blog')
         form(
           method="GET",
@@ -71,22 +56,6 @@ block content
                 //- Action column
                 if idx === headers.length - 1
                   td(style={'min-width': '120px'})
-                    -if (entity === 'sitemap')
-                      a(
-                        href=`sitemap-regenerate/${item.id}`,
-                        class="btn btn-success mr-2",
-                        role="button",
-                        aria-pressed="true"
-                      )
-                        i.fa.fa-cloud-download
-                    -if (entity === 'bank')
-                      a(
-                        href=`scraping-bank-rate/${item.slug}`,
-                        class= `btn btn-success mr-2 ${item.isAuto ? '' : 'disabled'}`,
-                        role="button",
-                        aria-pressed="true"
-                      )
-                        i.fa.fa-cloud-download
                     a(
                       href=`${entity}/${item.id}`,
                       class="btn btn-secondary",
@@ -95,16 +64,6 @@ block content
                     )
                       i.fa.fa-pencil
 
-                    //- Hide Delete btn
-                    //- button(
-                    //-   type="button",
-                    //-   class="btn btn-danger btn-delete ml-2",
-                    //-   data-id= item.id
-                    //-   data-name= item.title || item.name
-                    //-   data-toggle="modal",
-                    //-   data-target="#deleteConfirmModal"
-                    //- )
-                    //-   i.fa.fa-trash-o
                 else
                   if it.status
                     td.text-center

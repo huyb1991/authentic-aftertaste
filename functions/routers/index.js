@@ -24,6 +24,11 @@ router
   // ADMIN routers
   .get('/admin', isAdminGroup, (req, res) => admin.router.Dashboard(req, res))
   .get('/admin/api-all-data', isAdminGroup, (req, res) => admin.router.APIDataRefer(req, res))
+  // Country
+  .get('/admin/country', isAdminGroup, (req, res) => manage.router.CountryList(req, res))
+  .get('/admin/country/:id', isAdminGroup, (req, res) => manage.router.CountryDetail(req, res))
+  .post('/admin/country/:id', isAdminGroup, (req, res) => manage.router.CountryDetailUpdate(req, res))
+  .get('/admin/country/delete/:id', isAdminGroup, (req, res) => manage.router.CountryDetailDelete(req, res))
   // Blog
   .get('/admin/blog', isAdminGroup, (req, res) => manage.router.BlogPostList(req, res))
   .get('/admin/blog/:id', isAdminGroup, (req, res) => manage.router.BlogPostDetail(req, res))
