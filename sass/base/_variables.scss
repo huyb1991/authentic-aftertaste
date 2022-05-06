@@ -1,26 +1,35 @@
 /* Theme colors */
-$primary-color: #007aff;
-$primary-light-color: #66afff;
-$link-color: #007aff;
+// Primary
+$primary-color: #ff7629;
+$primary-light-color: #ffeadf;
+$primary-super-light-color: #fff7f2;
 
-$body-bg-color: #f4f4f4;
-$body-bg-color-dark: #242526;
-$section-bg-color: #f0f2f5;
-$section-bg-color-dark: #18191a;
-$text-color: #2f363d;
-$text-color-dark: #e4e6eb;
-$text-color-revert: $text-color-dark;
-$text-color-revert-dark: $text-color;
-$text-secondary-color: #959da5;
-$text-secondary-color-dark: #b0b3b8;
-$text-placeholder-color: #e1e1e1;
-$text-placeholder-color-dark: #181818;
-$divider-color: #ced0d4;
-$divider-color-dark: #3e4042;
-$shadow-color: #00000033;
-$shadow-color-dark: #ffffff33;
-$card-bg-color: #fff;
-$card-bg-color-dark: #fff; // TODO
+$white: #fff;
+
+$black-dark-color: #131313;
+$black-color: #4e4e4e;
+$black-light-color: #d0d0d0; 
+$black-super-color: #fafafa;
+
+/* Component colors */
+$body-bg-color: $black-super-color;
+$body-bg-color-dark: $black-super-color;
+
+// Text
+$text-color: $black-color; // Text Body
+$text-color-dark: $black-color;
+$text-title-color: $black-dark-color; // Title / Heading
+$text-title-color-dark: $black-dark-color;
+$text-secondary-color: $black-light-color; // Text-light / Border
+$text-secondary-color-dark: $black-light-color;
+
+// Border
+$divider-color: $black-light-color;
+$divider-color-dark: $black-light-color;
+
+// Card
+$card-bg-color: $white;
+$card-bg-color-dark: $white;
 
 /* Breakpoint */
 $mobileMax: 767px;
