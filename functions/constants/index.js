@@ -8,6 +8,10 @@ const ENTITY = {
   SITEMAP: 'sitemap'
 };
 
+const ENTITY_NAME = {
+  [ENTITY.COUNTRY]: 'Country',
+};
+
 const CATEGORY_SLUG = {
   [ENTITY.BLOG]: '',
 };
@@ -18,6 +22,7 @@ module.exports = {
   BASE_URL,
   BASE_URL_SITEMAP,
   ENTITY,
+  ENTITY_NAME,
   CATEGORY_SLUG,
-  MENUS
+  MENUS,
 };
