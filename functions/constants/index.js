@@ -1,5 +1,5 @@
-// BASE_URL = 'https://domain.com';
-BASE_URL = 'http://localhost:5000';
+BASE_URL = 'https://authenticaftertaste.vn';
+BASE_URL_ADMIN = 'http://localhost:5000';
 BASE_URL_SITEMAP = 'https://authenticaftertaste.com';
 
 const ENTITY = {
@@ -22,6 +22,7 @@ const MENUS = [];
 
 module.exports = {
   BASE_URL,
+  BASE_URL_ADMIN,
   BASE_URL_SITEMAP,
   ENTITY,
   ENTITY_NAME,
