@@ -7,25 +7,26 @@ $size-6: 0.8rem;
 
 .heading {
   margin: 0;
-  font-weight: $font-weight-bold;
+  font-family: $font-title-family;
+  font-weight: $font-weight-default;
 
   // Big Header like Homepage cover, Page Title
   &-extra {
     line-height: 1;
     font-size: $size-1;
-    font-weight: $font-weight-bold-super;
+    font-weight: $font-weight-bold;
   }
 
   // Heading on common pages
   &-page {
     line-height: 1;
-    font-weight: $font-weight-bold-light;
+    font-weight: $font-weight-bold;
 
-    @media screen and (max-width: $tablet) {
+    @media screen and (max-width: $mobileMax) {
       font-size: $size-3;
     }
 
-    @media screen and (min-width: $tablet) {
+    @media screen and (min-width: $tabletMin) {
       font-size: $size-2;
     }
   }
@@ -75,7 +76,7 @@ $size-6: 0.8rem;
   }
 
   &-link {
-    color: var(--link-color);
+    color: var(--primary-color);
   }
 
   &-light {

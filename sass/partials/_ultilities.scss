@@ -28,13 +28,13 @@
   display: none;
 
   &-mobile {
-    @media screen and (max-width: $tablet) {
+    @media screen and (max-width: $mobileMax) {
       display: none;
     }
   }
 
   &-tablet {
-    @media screen and (min-width: $tablet + 1px) {
+    @media screen and (min-width: $tabletMin) {
       display: none;
     }
   }
@@ -60,6 +60,9 @@
 }
 .mb20 {
   margin-bottom: 20px;
+}
+.ml10 {
+  margin-left: 10px;
 }
 .ml20 {
   margin-left: 20px;

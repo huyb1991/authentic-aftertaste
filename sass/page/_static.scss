@@ -4,26 +4,3 @@
   min-width: 320px;
   width: 100%;
 }
-
-// Calc form
-.calc-form {
-  max-width: $tablet;
-  margin: $space-normal auto $space-normal*3;
-
-  // This is flex section
-  // Only apply for mobile, tablet still keep desktop styles
-  @media screen and (max-width: $tablet - 2px) {
-    display: block;
-  }
-
-  &-result {
-    @media screen and (max-width: $tablet - 2px) {
-      padding-top: $space-super-large;
-    }
-
-    @media screen and (min-width: $tablet - 2px) {
-      border-left: 1px solid var(--divider-color);
-      padding-left: $space-super-large;
-    }
-  }
-}
