@@ -18,8 +18,6 @@ const CATEGORY_SLUG = {
   [ENTITY.BLOG]: '',
 };
 
-const MENUS = [];
-
 module.exports = {
   BASE_URL,
   BASE_URL_ADMIN,
@@ -27,5 +25,4 @@ module.exports = {
   ENTITY,
   ENTITY_NAME,
   CATEGORY_SLUG,
-  MENUS,
 };
