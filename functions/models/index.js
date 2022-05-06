@@ -5,7 +5,8 @@ const {
   getCollectionOrderingWithConditions,
   getDocumentWithConditions,
   addDocument,
-  updateDocument
+  updateDocument,
+  deleteDocument,
 } = require('./helper');
 
 // Format document
