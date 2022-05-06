@@ -13,7 +13,7 @@ app.set('view engine', 'pug');
 
 // Global variables
 app.locals.BASE_URL = BASE_URL;
-app.locals.SITE_NAME = 'SITE_NAME';
+app.locals.SITE_NAME = 'Authentic Aftertaste';
 app.locals.SITE_LOGO = 'img/logo.png';
 app.locals.SITE_TITLE = getSEOTitle();
 app.locals.SITE_DESC = getSEODesc();
