@@ -1,7 +1,8 @@
 :root {
   // Common colors use for both mode
   --primary-color: #{$primary-color};
-  --secondary-color: #{$primary-light-color};
+  --primary-light-color: #{$primary-light-color};
+  --primary-extra-light-color: #{$primary-extra-light-color};
 
   --body-bg-color: #{$body-bg-color};
   --text-color: #{$text-color};
