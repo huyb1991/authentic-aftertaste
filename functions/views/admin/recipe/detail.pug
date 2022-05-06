@@ -10,6 +10,7 @@ block content
       class="form-update",
       action=`${entity}/${data.id ? 'update' : 'create'}`
     )
+      //- Basic & SEO content
       .row
         .col-md-6
           .form-row
@@ -74,10 +75,25 @@ block content
             textarea(
               id="seoDesc",
               name="seoDesc",
-              rows="3"
+              rows="2"
               class="form-control",
               placeholder="SEO Description"
             ) #{data.seoDesc}
+
+      //- Detail content
+      .row
+        .col-md-8
+          .form-group
+            label(for="description") Short Description
+            textarea(
+              id="description",
+              name="description",
+              rows="4"
+              class="form-control",
+              placeholder="Short Description"
+            ) #{data.description}
+        .col-md-4
+          include _cooking-time.pug
 
       .row.mt-2.mb-5
         .col-12.d-flex.justify-content-between

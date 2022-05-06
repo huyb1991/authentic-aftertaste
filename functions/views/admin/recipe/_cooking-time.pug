@@ -1,0 +1,43 @@
+.row
+  .col
+    .form-group
+      label(for="timePrep") Prep (min)
+      input(
+        id="timePrep",
+        name="timePrep",
+        type="number",
+        value=data.timePrep,
+        class="form-control",
+        placeholder="Prep Time"
+      )
+    .form-group
+      label(for="timeAdditional") Additional (min)
+      input(
+        id="timeAdditional",
+        name="timeAdditional",
+        type="number",
+        value=data.timeAdditional,
+        class="form-control",
+        placeholder="Additional Time"
+      )
+  .col
+    .form-group
+      label(for="timeCook") Cook (min)
+      input(
+        id="timeCook",
+        name="timeCook",
+        type="number",
+        value=data.timeCook,
+        class="form-control",
+        placeholder="Cook Time"
+      )
+    .form-group
+      label(for="serving") Servings
+      input(
+        id="serving",
+        name="serving",
+        type="number",
+        value=data.serving,
+        class="form-control",
+        placeholder="Servings"
+      )
