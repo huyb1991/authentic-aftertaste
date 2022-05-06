@@ -4,12 +4,14 @@ BASE_URL_SITEMAP = 'https://authenticaftertaste.com';
 
 const ENTITY = {
   COUNTRY: 'country',
+  RECIPE: 'recipe',
   BLOG: 'blog',
   SITEMAP: 'sitemap'
 };
 
 const ENTITY_NAME = {
   [ENTITY.COUNTRY]: 'Country',
+  [ENTITY.RECIPE]: 'Recipe',
 };
 
 const CATEGORY_SLUG = {
