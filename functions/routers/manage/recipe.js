@@ -65,11 +65,13 @@ const RecipeDetailUpdate = (req, res) => {
   const actionUpdateMsg = `Update ${ENTITY_NAME[ENTITY.RECIPE]}`;
 
   // Format and validation data
-  const { ingredients = [], ...rest } = req.body;
+  const { ingredients = [], directions = [], ...rest } = req.body;
   const submitIngredients = ingredients.filter(it => it.ingredient);
+  const submitDirections = directions.filter(it => it.desc);
   const ingredientData = {
     ...rest,
     ingredients: submitIngredients,
+    directions: submitDirections,
   };
   // TODO: Update ordering
 
