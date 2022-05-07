@@ -45,24 +45,47 @@ block content
             )
 
         .col-md-6
+          .row
+            .col-md-6
+              .form-group
+                label(for="imgCover") Cover Image
+                input.form-control(
+                  id="imgCover",
+                  name="imgCover",
+                  type="text",
+                  value= data.imgCover,
+                  placeholder="Cover Image"
+                )
+            .col-md-6
+              .form-group
+                label(for="imgCoverWebP") Cover Image WebP
+                input.form-control(
+                  id="imgCoverWebP",
+                  name="imgCoverWebP",
+                  type="text",
+                  value= data.imgCover,
+                  placeholder="Cover Image WebP"
+                )
           .form-group
-            label(for="imgCover") Cover Image
-            input.form-control(
-              id="imgCover",
-              name="imgCover",
-              type="text",
-              value= data.imgCover,
-              placeholder="Cover Image"
-            )
-          .form-group
-            label(for="imgThumb") Thumbnail Image
-            input.form-control(
-              id="imgThumb",
-              name="imgThumb",
-              type="text",
-              value= data.imgThumb,
-              placeholder="Thumbnail Image"
-            )
+            .row
+              .col-md-6
+                label(for="imgThumb") Thumbnail Image
+                input.form-control(
+                  id="imgThumb",
+                  name="imgThumb",
+                  type="text",
+                  value= data.imgThumb,
+                  placeholder="Thumbnail Image"
+                )
+              .col-md-6
+                label(for="imgThumbWebP") Thumbnail Image WebP
+                input.form-control(
+                  id="imgThumbWebP",
+                  name="imgThumbWebP",
+                  type="text",
+                  value= data.imgThumbWebP,
+                  placeholder="Thumbnail Image WebP"
+                )
 
           .form-group
             label(for="seoTitle") SEO Title
