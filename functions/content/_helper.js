@@ -1,4 +1,4 @@
-const { readFile, writeFile, readdir } = require('fs').promises;
+const { readFile, writeFile, readdir, unlink } = require('fs').promises;
 const ENTITY = require('../constants').ENTITY;
 
 const currentDir = __dirname + '/';
@@ -38,6 +38,16 @@ const writeFileContent = (fileName, data) => {
     });
 };
 
+const removeFileContent = (fileName) => {
+  const filePath = currentDir + fileName + '.json';
+  return unlink(filePath)
+    .catch(err => {
+      console.log(`Remove file error: "${filePath}"; ${err.message}`);
+
+      return;
+    });
+};
+
 /**
  * Get list file name under folder
  * Remove ".json" at the and, and format "_" to "-"
@@ -54,5 +64,6 @@ module.exports.readContent = {
   FILE_NAME,
   getListFileInFolder,
   readFileContent,
-  writeFileContent
+  writeFileContent,
+  removeFileContent,
 };
