@@ -68,42 +68,19 @@ script(type="text/javascript").
   };
 
   function createDirectionRowTemplate(rIndex) {
-    var rowTemplate = `<div id="ingredient${rIndex}" class="row ingredient">`;
-    var rowOrder = `<input class="form-control" type="hidden" value="${rIndex}" name="ingredients[${rIndex}][order]" />`;
-    var rowQty = `
+    var rowTemplate = `<div id="direction${rIndex}" class="row direction">`;
+    var rowOrder = `
       <div class="col-md-1">
         <div class="form-group">
-          <label>Quantity</label>
-          <input class="form-control" type="number" value="1" name="ingredients[${rIndex}][quantity]" />
+          <label>Order</label>
+          <input class="form-control" type="text" value="${rIndex}" name="directions[${rIndex}][order]" />
         </div>
       </div>`;
-    var rowQtyExtra = `
-      <div class="col-md-1">
+    var rowDescription = `
+      <div class="col-md-9">
         <div class="form-group">
-          <label>Extra</label>
-          <input class="form-control" type="text" name="ingredients[${rIndex}][quantityExtra]" />
-        </div>
-      </div>`;
-    var rowSpace = '<div class="col-md-1"></div>';
-    var rowUnit = `
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Unit</label>
-          <input class="form-control" type="text" name="ingredients[${rIndex}][unit]" />
-        </div>
-      </div>`;
-    var rowIngredient = `
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>Ingredient</label>
-          <input class="form-control" type="text" name="ingredients[${rIndex}][ingredient]" />
-        </div>
-      </div>`;
-    var rowNote = `
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Note</label>
-          <input class="form-control" type="text" name="ingredients[${rIndex}][note]" />
+          <label>Description</label>
+          <textarea class="form-control" name="directions[${rIndex}][desc]" rows="2" placeholder="Description"></textarea>
         </div>
       </div>`;
     var rowAction = `
@@ -123,12 +100,7 @@ script(type="text/javascript").
       </div>`;
 
     rowTemplate += rowOrder;
-    rowTemplate += rowQty;
-    rowTemplate += rowQtyExtra;
-    rowTemplate += rowSpace;
-    rowTemplate += rowUnit;
-    rowTemplate += rowIngredient;
-    rowTemplate += rowNote;
+    rowTemplate += rowDescription;
     rowTemplate += rowAction;
     rowTemplate += '</div>';
 
