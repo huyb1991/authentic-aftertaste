@@ -5,7 +5,10 @@ const MODELS = require('../../models').models;
 
 // Helpers
 const CONTENT = require('../../content/_helper').readContent;
-const { createOrUpdateSitemapBySlugAndEntity } = require('../../helpers/sitemap');
+const {
+  updateSitemapUrl,
+  createOrUpdateSitemapBySlugAndEntity,
+} = require('../../helpers/sitemap');
 
 //--- HELPER ---//
 const createListLastestRecipe = () => {
@@ -24,7 +27,7 @@ const createListLastestRecipe = () => {
     });
 };
 
-const AutoUpdateRecipeContent = (recipeId, slug, prevSlug) => {
+const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
   return MODELS.recipeGetDetailById(recipeId)
     .then(recipe => {
       const sitemapSlug = `${recipe.slug}`;
@@ -35,10 +38,12 @@ const AutoUpdateRecipeContent = (recipeId, slug, prevSlug) => {
         ...recipe,
       })
       .then(() => {
-        if (slug.trim() !== prevSlug.trim()) {
-          console.log('diff sitemap');
+        // Change sitemap url after change slug
+        if (prevSlug.trim() && slug.trim() !== prevSlug.trim()) {
+          const oldUrl = `${BASE_URL_SITEMAP}/${ENTITY.RECIPE}/${prevSlug}`;
+          const newUrl = `${BASE_URL_SITEMAP}/${ENTITY.RECIPE}/${slug}`;
 
-          return;
+          return updateSitemapUrl(oldUrl, newUrl);
         }
 
         return createOrUpdateSitemapBySlugAndEntity(sitemapSlug, ENTITY.RECIPE)

@@ -34,10 +34,10 @@ const defaultItems = [
   }
 ];
 
-// Incase change slug
-const updateSitemapSlug = (slug, newSlug) => {
-  const currentUrlLoc= `<loc>${slug}</loc>`;
-  const newUrlLoc= `<loc>${newSlug}</loc>`;
+// Incase change sitemap url
+const updateSitemapUrl = (oldUrl, newUrl) => {
+  const currentUrlLoc= `<loc>${oldUrl}</loc>`;
+  const newUrlLoc= `<loc>${newUrl}</loc>`;
   const newUrlLocWithLastMod = `${newUrlLoc}<lastmod>`;
 
   return readFile(SITEMAP_PATH, 'utf8')
@@ -221,7 +221,7 @@ const generateSitemap = () => {
 
 module.exports = {
   generateSitemap,
-  updateSitemapSlug,
+  updateSitemapUrl,
   reGenerateSitemapHomepage,
   reGenerateSitemapItem,
   createOrUpdateSitemapBySlugAndEntity

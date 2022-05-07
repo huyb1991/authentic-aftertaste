@@ -77,6 +77,7 @@ const RecipeDetailUpdate = (req, res) => {
   const submitDirections = directions.filter(it => it.desc);
   const ingredientData = {
     ...rest,
+    slug,
     ingredients: submitIngredients,
     directions: submitDirections,
   };
