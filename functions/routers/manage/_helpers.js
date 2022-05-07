@@ -24,11 +24,10 @@ const createListLastestRecipe = () => {
     });
 };
 
-const AutoUpdateRecipeContent = (
-  recipeId,
-) => {
+const AutoUpdateRecipeContent = (recipeId, slug, prevSlug) => {
   return MODELS.recipeGetDetailById(recipeId)
     .then(recipe => {
+      const sitemapSlug = `${recipe.slug}`;
       const fileName = CONTENT.FILE_NAME.RECIPE_DETAIL(recipe.slug);
 
       createListLastestRecipe();
