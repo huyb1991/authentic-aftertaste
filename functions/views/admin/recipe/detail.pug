@@ -80,7 +80,7 @@ block content
               placeholder="SEO Description"
             ) #{data.seoDesc}
 
-      //- Detail content
+      //- Summary
       .row
         .col-md-8
           .form-group
@@ -94,6 +94,33 @@ block content
             ) #{data.description}
         .col-md-4
           include _cooking-time.pug
+
+      //- Ingredients
+      .row
+        .col-md-12
+          hr
+          h3 Ingredients
+        #listIngredient.col-md-12
+          include _ingredient-row.pug
+          -var ingredientCounting = 5
+          -if (data.id)
+            -ingredientCounting = (data.ingredients || []).length
+          //- Render Ingredient rows
+          input#ingredientCounting(type="hidden", value= ingredientCounting)
+          each _, index in Array(ingredientCounting)
+            +singleIngredientTemplate(index)
+        .col-md-12
+          .form-group
+            label &nbsp;
+            button#btnAddIngredient.form-control.btn.btn-info(
+              type="button",
+              data-counting= ingredientCounting
+            )
+              i.fa.fa-plus-circle.mr-1
+              | Ingredient
+
+      //- Directions / Prep-step
+      include _directions.pug
 
       .row.mt-2.mb-5
         .col-12.d-flex.justify-content-between
@@ -118,4 +145,5 @@ block content
             | Submit
 
 block scripts
+  include _js.pug
   include ../_default/_js-seo.pug

@@ -1,0 +1,76 @@
+mixin singleIngredientTemplate(index = 0)
+  -var rowOrder = ''
+  -var rowQuantity = 1
+  -var rowQuantityExtra = 0
+  -var rowUnit = ''
+  -var rowIngredient = ''
+  -var rowNote = ''
+
+  -if (data.ingredients && data.ingredients[index])
+    -var rowOrder = Number(data.ingredients[index].order)
+    -var rowQuantity = Number(data.ingredients[index].quantity)
+    -var rowQuantityExtra = Number(data.ingredients[index].quantityExtra)
+    -var rowUnit = data.ingredients[index].unit
+    -var rowIngredient = data.ingredients[index].ingredient
+    -var rowNote = data.ingredients[index].note
+
+  .row.ingredient(id= `ingredient${index}`)
+    .col-md-1
+      .form-group
+        label(for="order") #
+        input.form-control(
+          name="order",
+          type="number",
+          placeholder="Order",
+          readonly,
+          value= rowOrder
+        )
+    .col-md-2
+      .form-group
+        label(for="quantity") Quantity
+        input.form-control(
+          name="quantity",
+          type="number",
+          placeholder="Quantity",
+          value= rowQuantity
+        )
+    .col-md-2
+      .form-group
+        label(for="quantityExtra") Qty Extra
+        input.form-control(
+          id="quantityExtra",
+          name="quantityExtra",
+          type="number",
+          placeholder="Quantity Extra",
+          value= rowQuantityExtra
+        )
+    .col-md-2
+      .form-group
+        label(for="unit") Unit
+        input.form-control(
+          id="unit",
+          name="unit",
+          type="text",
+          placeholder="Unit",
+          value= rowUnit
+        )
+    .col-md-3
+      .form-group
+        label(for="ingredient") Ingredient
+        input.form-control(
+          id="ingredient",
+          name="ingredient",
+          type="text",
+          placeholder="Ingredient",
+          value= rowIngredient
+        )
+    .col-md-2
+      .form-group
+        label(for="note") Note
+        input.form-control(
+          id="note",
+          name="note",
+          type="text",
+          placeholder="Note",
+          value= rowNote
+        )
