@@ -71,6 +71,7 @@ const RecipeDetailUpdate = (req, res) => {
     ...rest,
     ingredients: submitIngredients,
   };
+  // TODO: Update ordering
 
   // Create new Recipe
   if (id === 'create') {
