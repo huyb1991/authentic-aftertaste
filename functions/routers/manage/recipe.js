@@ -5,6 +5,7 @@ const { ENTITY, ENTITY_NAME } = require('../../constants');
 // Helpers
 const { getFlashMessage } = require('../../helpers');
 const { AutoUpdateRecipeContent } = require('./_helpers');
+const CONTENT = require('../../content/_helper').readContent;
 
 const RecipeList = (req, res) => {
   const flashMessage = getFlashMessage(req.query);
@@ -101,6 +102,12 @@ const RecipeDetailUpdate = (req, res) => {
 
   return MODELS.recipeUpdate(recipeId, ingredientData)
     .then(() => {
+      // Change slug: Remove old file content
+      if (prevSlug.trim() && slug.trim() !== prevSlug.trim()) {
+        const fileName = `${ENTITY.RECIPE}/${prevSlug}`;
+        CONTENT.removeFileContent(fileName);
+      }
+
       AutoUpdateRecipeContent(recipeId, slug, prevSlug);
       const message = encodeURIComponent(`${actionUpdateMsg} successfully - id: ${recipeId}.`);
       return res.redirect(`/admin/${ENTITY.RECIPE}/${recipeId}/?success=true&message=${message}`);
