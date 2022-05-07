@@ -18,8 +18,8 @@ const createListLastestRecipe = () => {
   return MODELS.recipeGetAll(conditions, 10)
     .then(data => {
       const latestRecipes = data
-        .map(({ name, slug, imgThumb, updated, created }) => ({
-          name, slug, imgThumb, updated, created
+        .map(({ name, slug, description, imgThumb, updated, created }) => ({
+          name, slug, description, imgThumb, updated, created
         }))
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
 
