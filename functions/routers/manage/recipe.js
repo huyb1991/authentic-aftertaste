@@ -61,13 +61,20 @@ const RecipeDetail = (req, res) => {
 const RecipeDetailUpdate = (req, res) => {
   const { id } = req.params;
   const recipeId = req.body.id;
-  const recipeData = req.body;
   const actionAddMsg = `Create new ${ENTITY_NAME[ENTITY.RECIPE]}`;
   const actionUpdateMsg = `Update ${ENTITY_NAME[ENTITY.RECIPE]}`;
 
+  // Format and validation data
+  const { ingredients, ...rest } = req.body;
+  const submitIngredients = ingredients.filter(it => it.ingredient);
+  const ingredientData = {
+    ...rest,
+    ingredients: submitIngredients,
+  };
+
   // Create new Recipe
   if (id === 'create') {
-    return MODELS.recipeAdd(recipeData)
+    return MODELS.recipeAdd(ingredientData)
       .then(newId => {
         const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
         return res.redirect(`/admin/${ENTITY.RECIPE}/${newId}/?success=true&message=${message}`);
@@ -80,7 +87,7 @@ const RecipeDetailUpdate = (req, res) => {
       });
   }
 
-  return MODELS.recipeUpdate(recipeId, recipeData)
+  return MODELS.recipeUpdate(recipeId, ingredientData)
     .then(() => {
       const message = encodeURIComponent(`${actionUpdateMsg} successfully - id: ${recipeId}.`);
       return res.redirect(`/admin/${ENTITY.RECIPE}/${recipeId}/?success=true&message=${message}`);
