@@ -1,0 +1,70 @@
+script(type="text/javascript").
+  function createIngredientRowTemplate(rIndex) {
+    var rowTemplate = `<div id="ingredient${rIndex}" class="row ingredient">`;
+    var rowOrder = `
+      <div class="col-md-1">
+        <div class="form-group">
+          <label>#</label>
+          <input disabled class="form-control" type="number" value="${rIndex}" name="ingredients[${rIndex}][order]" />
+        </div>
+      </div>`;
+    var rowQty = `
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Quantity</label>
+          <input class="form-control" type="number" value="1" name="ingredients[${rIndex}][quantity]" />
+        </div>
+      </div>`;
+    var rowQtyExtra = `
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Qty Extra</label>
+          <input class="form-control" type="number" name="ingredients[${rIndex}][quantityExtra]" />
+        </div>
+      </div>`;
+    var rowUnit = `
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Unit</label>
+          <input class="form-control" type="text" name="ingredients[${rIndex}][unit]" />
+        </div>
+      </div>`;
+    var rowIngredient = `
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Ingredient</label>
+          <input class="form-control" type="text" name="ingredients[${rIndex}][ingredient]" />
+        </div>
+      </div>`;
+    var rowNote = `
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Note</label>
+          <input class="form-control" type="text" name="ingredients[${rIndex}][note]" />
+        </div>
+      </div>`;
+
+    rowTemplate += rowOrder;
+    rowTemplate += rowQty;
+    rowTemplate += rowQtyExtra;
+    rowTemplate += rowUnit;
+    rowTemplate += rowIngredient;
+    rowTemplate += rowNote;
+    rowTemplate += '</div>';
+
+    return rowTemplate;
+  };
+
+  function listenBtnAddNew() {
+    $('body').on('click', '#btnAddIngredient', function() {
+      var counting = $(this).data('counting');
+      var newRowTemplate = createIngredientRowTemplate(counting);
+
+      $('#listIngredient').append(newRowTemplate);
+      $(this).data('counting', counting + 1);
+    });
+  };
+
+  $(document).ready(function() {
+    listenBtnAddNew();
+  });
