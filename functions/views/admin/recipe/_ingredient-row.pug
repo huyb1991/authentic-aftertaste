@@ -1,7 +1,7 @@
 mixin singleIngredientTemplate(index = 0)
   -var rowOrder = ''
   -var rowQuantity = 1
-  -var rowQuantityExtra = 0
+  -var rowQuantityExtra = ''
   -var rowUnit = ''
   -var rowIngredient = ''
   -var rowNote = ''
@@ -9,23 +9,24 @@ mixin singleIngredientTemplate(index = 0)
   -if (data.ingredients && data.ingredients[index])
     -var rowOrder = Number(data.ingredients[index].order)
     -var rowQuantity = Number(data.ingredients[index].quantity)
-    -var rowQuantityExtra = Number(data.ingredients[index].quantityExtra)
+    -var rowQuantityExtra = data.ingredients[index].quantityExtra
     -var rowUnit = data.ingredients[index].unit
     -var rowIngredient = data.ingredients[index].ingredient
     -var rowNote = data.ingredients[index].note
 
   .row.ingredient(id= `ingredient${index}`)
     input.form-control(
-      name="order",
+      name= `ingredients[${index}][order]`,
       type="hidden",
       placeholder="Order",
+      readonly,
       value= rowOrder
     )
     .col-md-1
       .form-group
         label Quantity
         input.form-control(
-          name="quantity",
+          name= `ingredients[${index}][quantity]`,
           type="number",
           placeholder="Quantity",
           value= rowQuantity
@@ -34,8 +35,7 @@ mixin singleIngredientTemplate(index = 0)
       .form-group
         label Extra
         input.form-control(
-          id="quantityExtra",
-          name="quantityExtra",
+          name= `ingredients[${index}][quantityExtra]`,
           type="text",
           placeholder="Quantity Extra",
           value= rowQuantityExtra
@@ -45,8 +45,7 @@ mixin singleIngredientTemplate(index = 0)
       .form-group
         label Unit
         input.form-control(
-          id="unit",
-          name="unit",
+          name= `ingredients[${index}][unit]`,
           type="text",
           placeholder="Unit",
           value= rowUnit
@@ -55,8 +54,7 @@ mixin singleIngredientTemplate(index = 0)
       .form-group
         label Ingredient
         input.form-control(
-          id="ingredient",
-          name="ingredient",
+          name= `ingredients[${index}][ingredient]`,
           type="text",
           placeholder="Ingredient",
           value= rowIngredient
@@ -65,8 +63,7 @@ mixin singleIngredientTemplate(index = 0)
       .form-group
         label Note
         input.form-control(
-          id="note",
-          name="note",
+          name= `ingredients[${index}][note]`,
           type="text",
           placeholder="Note",
           value= rowNote
