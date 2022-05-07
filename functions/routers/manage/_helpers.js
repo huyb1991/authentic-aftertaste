@@ -8,6 +8,22 @@ const CONTENT = require('../../content/_helper').readContent;
 const { createOrUpdateSitemapBySlugAndEntity } = require('../../helpers/sitemap');
 
 //--- HELPER ---//
+const createListLastRecipe = () => {
+  const conditions = [];
+  let fileName = CONTENT.FILE_NAME.RECIPE_LATEST;
+
+  return MODELS.recipeGetAll(conditions, 10)
+    .then(data => {
+      const latestRecipes = data
+        .map(({ name, slug, imgThumb, updated, created }) => ({
+          name, slug, imgThumb, updated, created
+        }))
+        .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+
+      return CONTENT.writeFileContent(fileName, latestRecipes);
+    });
+};
+
 // Save BlogPost content
 const AutoUpdateBlogPostContent = (
   blogId,
@@ -63,6 +79,11 @@ const AutoUpdateBlogPostContent = (
     });
 };
 
+const AutoUpdateRecipeContent = () => {
+
+};
+
 module.exports = {
-  AutoUpdateBlogPostContent
+  AutoUpdateBlogPostContent,
+  AutoUpdateRecipeContent,
 };

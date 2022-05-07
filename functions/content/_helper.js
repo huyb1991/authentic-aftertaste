@@ -6,7 +6,8 @@ const getBlogPostFileName = (category, slug) =>
   `${ENTITY.BLOG}/${category}/${slug}`;
 
 const FILE_NAME = {
-  BLOG_POST: getBlogPostFileName
+  BLOG_POST: getBlogPostFileName,
+  RECIPE_LATEST: 'recipe-latest',
 };
 
 /**
