@@ -1,4 +1,75 @@
 .row
-  .col
+  .col-md-12
     hr
     h3 Directions
+  #listDirection.col-md-12
+    -var directionCounting = 5
+    -if (data.id)
+      -directionCounting = (data.directions || []).length
+    //- Render Direction rows
+    input#directionCounting(type="hidden", value= directionCounting)
+
+    //- Display Direction row
+    each _, index in Array(directionCounting)
+      -var rowOrder = 1
+      -var rowDesc = ''
+
+      -if (data.ingredients && data.directions[index])
+        -var rowOrder = Number(data.directions[index].order)
+        -var rowDesc = data.directions[index].desc
+
+      .row.ingredient(id= `ingredient${index}`)
+        .col-md-1
+          .form-group
+            label Order
+            input.form-control(
+              name= `directions[${index}][order]`,
+              type="text",
+              placeholder="Order",
+              readonly,
+              value= rowOrder
+            )
+        .col-md-9
+          .form-group
+            label Description
+            textarea.form-control(
+              name= `directions[${index}][desc]`,
+              rows="2"
+              placeholder="Description"
+            ) #{rowDesc}
+        .col-md-2.text-right
+          br
+          .btn-group.mt-2
+            button.btn-action.btn.btn-outline-secondary(
+              type="button",
+              data-type="direction",
+              data-action="remove",
+              data-index= index
+            )
+              i.fa.fa-minus-circle.text-danger
+            button.btn-action.btn.btn-outline-secondary(
+              type="button",
+              data-type="direction",
+              data-action="up",
+              data-index= index
+            )
+              i.fa.fa-arrow-up
+            button.btn-action.btn.btn-outline-secondary(
+              type="button",
+              data-type="direction"
+              data-action="down",
+              data-index= index
+            )
+              i.fa.fa-arrow-down
+
+  //- Add new button
+  .col-md-2.offset-md-10
+    .form-group
+      label &nbsp;
+      button.btn-add-new.form-control.btn.btn-info(
+        type="button",
+        data-type="direction",
+        data-counting= directionCounting
+      )
+        i.fa.fa-plus-circle.mr-2
+        | Direction

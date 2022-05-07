@@ -5,9 +5,53 @@ const MODELS = require('../../models').models;
 
 // Helpers
 const CONTENT = require('../../content/_helper').readContent;
-const { createOrUpdateSitemapBySlugAndEntity } = require('../../helpers/sitemap');
+const {
+  updateSitemapUrl,
+  createOrUpdateSitemapBySlugAndEntity,
+} = require('../../helpers/sitemap');
 
 //--- HELPER ---//
+const createListLastestRecipe = () => {
+  const conditions = [];
+  let fileName = CONTENT.FILE_NAME.RECIPE_LATEST;
+
+  return MODELS.recipeGetAll(conditions, 10)
+    .then(data => {
+      const latestRecipes = data
+        .map(({ name, slug, imgThumb, updated, created }) => ({
+          name, slug, imgThumb, updated, created
+        }))
+        .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+
+      return CONTENT.writeFileContent(fileName, latestRecipes);
+    });
+};
+
+const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
+  return MODELS.recipeGetDetailById(recipeId)
+    .then(recipe => {
+      const sitemapSlug = `${recipe.slug}`;
+      const fileName = CONTENT.FILE_NAME.RECIPE_DETAIL(recipe.slug);
+
+      createListLastestRecipe();
+      return CONTENT.writeFileContent(fileName, {
+        ...recipe,
+      })
+      .then(() => {
+        // Change sitemap url after change slug
+        if (prevSlug.trim() && slug.trim() !== prevSlug.trim()) {
+          const oldUrl = `${BASE_URL_SITEMAP}/${ENTITY.RECIPE}/${prevSlug}`;
+          const newUrl = `${BASE_URL_SITEMAP}/${ENTITY.RECIPE}/${slug}`;
+
+          return updateSitemapUrl(oldUrl, newUrl);
+        }
+
+        return createOrUpdateSitemapBySlugAndEntity(sitemapSlug, ENTITY.RECIPE)
+          .then(() => recipe.id);
+      });
+    });
+};
+
 // Save BlogPost content
 const AutoUpdateBlogPostContent = (
   blogId,
@@ -64,5 +108,6 @@ const AutoUpdateBlogPostContent = (
 };
 
 module.exports = {
-  AutoUpdateBlogPostContent
+  AutoUpdateBlogPostContent,
+  AutoUpdateRecipeContent,
 };

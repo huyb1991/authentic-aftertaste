@@ -16,6 +16,7 @@ const ENTITY_NAME = {
 
 const CATEGORY_SLUG = {
   [ENTITY.BLOG]: '',
+  [ENTITY.RECIPE]: 'recipe',
 };
 
 module.exports = {

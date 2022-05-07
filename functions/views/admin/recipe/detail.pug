@@ -16,67 +16,99 @@ block content
           .form-row
             .form-group.col-md-6
               label(for="id") ID
-              input(
+              input.form-control(
                 id="id",
                 name="id",
                 type="text",
                 value= data.id,
-                class="form-control",
                 readonly
               )
 
           .form-group
             label(for="name") Name
-            input(
+            input.form-control(
               id="name",
               name="name",
               type="text",
               value= data.name,
-              class="form-control",
               placeholder="Name"
             )
 
           .form-group
             label(for="slug") Slug
-            input(
+            input.form-control(
               id="slug",
               name="slug",
               type="text",
               value= data.slug,
-              class="form-control",
               placeholder="Slug"
+            )
+            input.form-control(
+              name="prevSlug",
+              type="hidden",
+              value= data.slug,
+              placeholder="prevSlug"
             )
 
         .col-md-6
+          .row
+            .col-md-6
+              .form-group
+                label(for="imgCover") Cover Image
+                input.form-control(
+                  id="imgCover",
+                  name="imgCover",
+                  type="text",
+                  value= data.imgCover,
+                  placeholder="Cover Image"
+                )
+            .col-md-6
+              .form-group
+                label(for="imgCoverWebP") Cover Image WebP
+                input.form-control(
+                  id="imgCoverWebP",
+                  name="imgCoverWebP",
+                  type="text",
+                  value= data.imgCover,
+                  placeholder="Cover Image WebP"
+                )
           .form-group
-            label(for="imgCover") Cover Image
-            input(
-              id="imgCover",
-              name="imgCover",
-              type="text",
-              value= data.imgCover,
-              class="form-control",
-              placeholder="Cover Image"
-            )
+            .row
+              .col-md-6
+                label(for="imgThumb") Thumbnail Image
+                input.form-control(
+                  id="imgThumb",
+                  name="imgThumb",
+                  type="text",
+                  value= data.imgThumb,
+                  placeholder="Thumbnail Image"
+                )
+              .col-md-6
+                label(for="imgThumbWebP") Thumbnail Image WebP
+                input.form-control(
+                  id="imgThumbWebP",
+                  name="imgThumbWebP",
+                  type="text",
+                  value= data.imgThumbWebP,
+                  placeholder="Thumbnail Image WebP"
+                )
 
           .form-group
             label(for="seoTitle") SEO Title
-            input(
+            input.form-control(
               id="seoTitle",
               name="seoTitle",
               type="text",
               value=data.seoTitle,
-              class="form-control",
               placeholder="SEO Title"
             )
 
           .form-group
             label(for="seoDesc") SEO Description
-            textarea(
+            textarea.form-control(
               id="seoDesc",
               name="seoDesc",
               rows="2"
-              class="form-control",
               placeholder="SEO Description"
             ) #{data.seoDesc}
 
@@ -96,28 +128,7 @@ block content
           include _cooking-time.pug
 
       //- Ingredients
-      .row
-        .col-md-12
-          hr
-          h3 Ingredients
-        #listIngredient.col-md-12
-          include _ingredient-row.pug
-          -var ingredientCounting = 5
-          -if (data.id)
-            -ingredientCounting = (data.ingredients || []).length
-          //- Render Ingredient rows
-          input#ingredientCounting(type="hidden", value= ingredientCounting)
-          each _, index in Array(ingredientCounting)
-            +singleIngredientTemplate(index)
-        .col-md-12
-          .form-group
-            label &nbsp;
-            button#btnAddIngredient.form-control.btn.btn-info(
-              type="button",
-              data-counting= ingredientCounting
-            )
-              i.fa.fa-plus-circle.mr-1
-              | Ingredient
+      include _ingredients.pug
 
       //- Directions / Prep-step
       include _directions.pug

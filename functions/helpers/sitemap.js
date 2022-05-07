@@ -19,7 +19,8 @@ const CHANGE_FREQ = {
 
 const PRIORITY = {
   HOMEPAGE: '1.0',
-  BLOG: '0.6',
+  RECIPE: '0.6',
+  BLOG: '0.4',
   STATIC_PAGE: '0.2'
 };
 
@@ -27,16 +28,16 @@ const PRIORITY = {
 const defaultItems = [
   {
     url: `${BASE_URL_SITEMAP}`,
-    lastmod: '2022-11-01',
+    lastmod: '2022-05-05',
     changefreq: CHANGE_FREQ.WEEKLY,
     priority: PRIORITY.HOMEPAGE,
   }
 ];
 
-// Incase change slug
-const updateSitemapSlug = (slug, newSlug) => {
-  const currentUrlLoc= `<loc>${slug}</loc>`;
-  const newUrlLoc= `<loc>${newSlug}</loc>`;
+// Incase change sitemap url
+const updateSitemapUrl = (oldUrl, newUrl) => {
+  const currentUrlLoc= `<loc>${oldUrl}</loc>`;
+  const newUrlLoc= `<loc>${newUrl}</loc>`;
   const newUrlLocWithLastMod = `${newUrlLoc}<lastmod>`;
 
   return readFile(SITEMAP_PATH, 'utf8')
@@ -87,6 +88,10 @@ const createSitemapItem = (
   let changefreq = CHANGE_FREQ.YEARLY;
   let priority = PRIORITY.HOMEPAGE;
 
+  if (entity === ENTITY.RECIPE) {
+    changefreq = CHANGE_FREQ.MONTHLY;
+    priority = PRIORITY.RECIPE;
+  }
   if (entity === ENTITY.BLOG) {
     changefreq = CHANGE_FREQ.MONTHLY;
     priority = PRIORITY.BLOG;
@@ -159,7 +164,7 @@ const reGenerateSitemapHomepage = () => {
   }
 };
 
-const createOrUpdateSitemapBySlugAndEntity = (slug, entity = ENTITY.BANK) => {
+const createOrUpdateSitemapBySlugAndEntity = (slug, entity = ENTITY.RECIPE) => {
   return MODELS.getSitemapDetailBySlugAndEntity(slug, entity)
     .then(sitemap => {
       if (sitemap) {
@@ -216,7 +221,7 @@ const generateSitemap = () => {
 
 module.exports = {
   generateSitemap,
-  updateSitemapSlug,
+  updateSitemapUrl,
   reGenerateSitemapHomepage,
   reGenerateSitemapItem,
   createOrUpdateSitemapBySlugAndEntity
