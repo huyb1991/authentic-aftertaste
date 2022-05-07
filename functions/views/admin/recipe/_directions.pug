@@ -1,4 +1,118 @@
 .row
-  .col
+  .col-md-12
     hr
     h3 Directions
+  #listDirection.col-md-12
+    -var directionCounting = 5
+    -if (data.id)
+      -directionCounting = (data.directions || []).length
+    //- Render Direction rows
+    input#directionCounting(type="hidden", value= directionCounting)
+
+    //- Display Direction row
+    each _, index in Array(directionCounting)
+      -var rowOrder = ''
+      -var rowQuantity = 1
+      -var rowQuantityExtra = ''
+      -var rowUnit = ''
+      -var rowIngredient = ''
+      -var rowNote = ''
+
+      -if (data.ingredients && data.ingredients[index])
+        -var rowOrder = Number(data.ingredients[index].order)
+        -var rowQuantity = Number(data.ingredients[index].quantity)
+        -var rowQuantityExtra = data.ingredients[index].quantityExtra
+        -var rowUnit = data.ingredients[index].unit
+        -var rowIngredient = data.ingredients[index].ingredient
+        -var rowNote = data.ingredients[index].note
+
+      .row.ingredient(id= `ingredient${index}`)
+        input.form-control(
+          name= `ingredients[${index}][order]`,
+          type="hidden",
+          placeholder="Order",
+          readonly,
+          value= rowOrder
+        )
+        .col-md-1
+          .form-group
+            label Quantity
+            input.form-control(
+              name= `ingredients[${index}][quantity]`,
+              type="number",
+              placeholder="Quantity",
+              value= rowQuantity
+            )
+        .col-md-1
+          .form-group
+            label Extra
+            input.form-control(
+              name= `ingredients[${index}][quantityExtra]`,
+              type="text",
+              placeholder="Quantity Extra",
+              value= rowQuantityExtra
+            )
+        .col-md-1
+        .col-md-2
+          .form-group
+            label Unit
+            input.form-control(
+              name= `ingredients[${index}][unit]`,
+              type="text",
+              placeholder="Unit",
+              value= rowUnit
+            )
+        .col-md-3
+          .form-group
+            label Ingredient
+            input.form-control(
+              name= `ingredients[${index}][ingredient]`,
+              type="text",
+              placeholder="Ingredient",
+              value= rowIngredient
+            )
+        .col-md-2
+          .form-group
+            label Note
+            input.form-control(
+              name= `ingredients[${index}][note]`,
+              type="text",
+              placeholder="Note",
+              value= rowNote
+            )
+        .col-md-2.text-right
+          br
+          .btn-group.mt-2
+            button.btn-action.btn.btn-outline-secondary(
+              type="button",
+              data-type="ingredient",
+              data-action="remove",
+              data-index= index
+            )
+              i.fa.fa-minus-circle.text-danger
+            button.btn-action.btn.btn-outline-secondary(
+              type="button",
+              data-type="ingredient",
+              data-action="up",
+              data-index= index
+            )
+              i.fa.fa-arrow-up
+            button.btn-action.btn.btn-outline-secondary(
+              type="button",
+              data-type="ingredient"
+              data-action="down",
+              data-index= index
+            )
+              i.fa.fa-arrow-down
+
+  //- Add new button
+  .col-md-12
+    .form-group
+      label &nbsp;
+      button.btn-add-new.form-control.btn.btn-info(
+        type="button",
+        data-type="direction",
+        data-counting= directionCounting
+      )
+        i.fa.fa-plus-circle.mr-1
+        | Direction

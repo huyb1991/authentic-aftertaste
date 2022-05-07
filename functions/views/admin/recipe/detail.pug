@@ -112,8 +112,9 @@ block content
         .col-md-12
           .form-group
             label &nbsp;
-            button#btnAddIngredient.form-control.btn.btn-info(
+            button.btn-add-new.form-control.btn.btn-info(
               type="button",
+              data-type="ingredient",
               data-counting= ingredientCounting
             )
               i.fa.fa-plus-circle.mr-1
