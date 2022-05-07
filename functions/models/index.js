@@ -23,6 +23,14 @@ const countryAdd = data => addDocument(ENTITY.COUNTRY, formatDocumentBase(data))
 const countryUpdate = (id, data) => updateDocument(`${ENTITY.COUNTRY}/${id}`, formatDocumentBase(data));
 const countryDelete = id => deleteDocument(ENTITY.COUNTRY, id);
 
+// RECIPE
+const recipeGetAll = (conditions = [], limit = 0) =>
+  getCollectionOrderingWithConditions(ENTITY.RECIPE, 'name', conditions, limit);
+const recipeGetDetailById = id => getDocument(`${ENTITY.RECIPE}/${id}`);
+const recipeAdd = data => addDocument(ENTITY.RECIPE, formatDocumentBase(data));
+const recipeUpdate = (id, data) => updateDocument(`${ENTITY.RECIPE}/${id}`, formatDocumentBase(data));
+const recipeDelete = id => deleteDocument(ENTITY.RECIPE, id);
+
 
 
 // BLOG POST
@@ -80,11 +88,19 @@ const updateSitemap = (id, data) =>
   updateDocument(`${ENTITY.SITEMAP}/${id}`, formatDocumentBase(data));
 
 module.exports.models = {
+  // Country
   countryGetAll,
   countryGetDetailById,
   countryAdd,
   countryUpdate,
   countryDelete,
+
+  // Recipe
+  recipeGetAll,
+  recipeGetDetailById,
+  recipeAdd,
+  recipeUpdate,
+  recipeDelete,
 
   // Blog
   blogGetAll,

@@ -14,8 +14,6 @@ const CountryList = (req, res) => {
 
   return MODELS.countryGetAll()
     .then(data => {
-      // const dataOrdering = data.sort((a, b) => b.name.localeCompare(a.name));
-
       return res.render(
         'admin/list',
         {
