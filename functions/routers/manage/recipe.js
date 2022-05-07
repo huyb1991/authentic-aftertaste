@@ -4,6 +4,7 @@ const { ENTITY, ENTITY_NAME } = require('../../constants');
 
 // Helpers
 const { getFlashMessage } = require('../../helpers');
+const { AutoUpdateRecipeContent } = require('./_helpers');
 
 const RecipeList = (req, res) => {
   const flashMessage = getFlashMessage(req.query);
@@ -79,6 +80,7 @@ const RecipeDetailUpdate = (req, res) => {
   if (id === 'create') {
     return MODELS.recipeAdd(ingredientData)
       .then(newId => {
+        AutoUpdateRecipeContent(newId);
         const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
         return res.redirect(`/admin/${ENTITY.RECIPE}/${newId}/?success=true&message=${message}`);
       })
@@ -92,6 +94,7 @@ const RecipeDetailUpdate = (req, res) => {
 
   return MODELS.recipeUpdate(recipeId, ingredientData)
     .then(() => {
+      AutoUpdateRecipeContent(recipeId);
       const message = encodeURIComponent(`${actionUpdateMsg} successfully - id: ${recipeId}.`);
       return res.redirect(`/admin/${ENTITY.RECIPE}/${recipeId}/?success=true&message=${message}`);
     })
