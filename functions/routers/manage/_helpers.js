@@ -8,7 +8,7 @@ const CONTENT = require('../../content/_helper').readContent;
 const { createOrUpdateSitemapBySlugAndEntity } = require('../../helpers/sitemap');
 
 //--- HELPER ---//
-const createListLastRecipe = () => {
+const createListLastestRecipe = () => {
   const conditions = [];
   let fileName = CONTENT.FILE_NAME.RECIPE_LATEST;
 
@@ -21,6 +21,30 @@ const createListLastRecipe = () => {
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
 
       return CONTENT.writeFileContent(fileName, latestRecipes);
+    });
+};
+
+const AutoUpdateRecipeContent = (
+  recipeId,
+) => {
+  return MODELS.recipeGetDetailById(recipeId)
+    .then(recipe => {
+      const fileName = CONTENT.FILE_NAME.RECIPE_DETAIL(recipe.slug);
+
+      createListLastestRecipe();
+      return CONTENT.writeFileContent(fileName, {
+        ...recipe,
+      })
+      .then(() => {
+        if (slug.trim() !== prevSlug.trim()) {
+          console.log('diff sitemap');
+
+          return;
+        }
+
+        return createOrUpdateSitemapBySlugAndEntity(sitemapSlug, ENTITY.RECIPE)
+          .then(() => recipe.id);
+      });
     });
 };
 
@@ -77,10 +101,6 @@ const AutoUpdateBlogPostContent = (
           });
         });
     });
-};
-
-const AutoUpdateRecipeContent = () => {
-
 };
 
 module.exports = {
