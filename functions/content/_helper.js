@@ -4,10 +4,13 @@ const ENTITY = require('../constants').ENTITY;
 const currentDir = __dirname + '/';
 const getBlogPostFileName = (category, slug) =>
   `${ENTITY.BLOG}/${category}/${slug}`;
+const getRecipeFileName = (slug) =>
+  `${ENTITY.RECIPE}/${slug}`;
 
 const FILE_NAME = {
   BLOG_POST: getBlogPostFileName,
   RECIPE_LATEST: 'recipe-latest',
+  RECIPE_DETAIL: getRecipeFileName,
 };
 
 /**
