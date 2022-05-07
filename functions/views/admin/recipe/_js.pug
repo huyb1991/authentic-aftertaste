@@ -73,7 +73,7 @@ script(type="text/javascript").
       <div class="col-md-1">
         <div class="form-group">
           <label>Order</label>
-          <input class="form-control" type="text" value="${rIndex}" name="directions[${rIndex}][order]" />
+          <input readonly class="form-control" type="text" value="${rIndex}" name="directions[${rIndex}][order]" />
         </div>
       </div>`;
     var rowDescription = `
@@ -117,7 +117,7 @@ script(type="text/javascript").
         $('#listIngredient').append(newRowTemplate);
       }
       if (type === 'direction') {
-        var newRowTemplate = createDirectionRowTemplate(counting);
+        var newRowTemplate = createDirectionRowTemplate(counting + 1);
         $('#listDirection').append(newRowTemplate);
       }
 
