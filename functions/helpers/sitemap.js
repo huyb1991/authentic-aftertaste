@@ -19,7 +19,8 @@ const CHANGE_FREQ = {
 
 const PRIORITY = {
   HOMEPAGE: '1.0',
-  BLOG: '0.6',
+  RECIPE: '0.6',
+  BLOG: '0.4',
   STATIC_PAGE: '0.2'
 };
 
@@ -27,7 +28,7 @@ const PRIORITY = {
 const defaultItems = [
   {
     url: `${BASE_URL_SITEMAP}`,
-    lastmod: '2022-11-01',
+    lastmod: '2022-05-05',
     changefreq: CHANGE_FREQ.WEEKLY,
     priority: PRIORITY.HOMEPAGE,
   }
@@ -87,6 +88,10 @@ const createSitemapItem = (
   let changefreq = CHANGE_FREQ.YEARLY;
   let priority = PRIORITY.HOMEPAGE;
 
+  if (entity === ENTITY.RECIPE) {
+    changefreq = CHANGE_FREQ.MONTHLY;
+    priority = PRIORITY.RECIPE;
+  }
   if (entity === ENTITY.BLOG) {
     changefreq = CHANGE_FREQ.MONTHLY;
     priority = PRIORITY.BLOG;
@@ -159,7 +164,7 @@ const reGenerateSitemapHomepage = () => {
   }
 };
 
-const createOrUpdateSitemapBySlugAndEntity = (slug, entity = ENTITY.BANK) => {
+const createOrUpdateSitemapBySlugAndEntity = (slug, entity = ENTITY.RECIPE) => {
   return MODELS.getSitemapDetailBySlugAndEntity(slug, entity)
     .then(sitemap => {
       if (sitemap) {
