@@ -65,7 +65,7 @@ const RecipeDetailUpdate = (req, res) => {
   const actionUpdateMsg = `Update ${ENTITY_NAME[ENTITY.RECIPE]}`;
 
   // Format and validation data
-  const { ingredients, ...rest } = req.body;
+  const { ingredients = [], ...rest } = req.body;
   const submitIngredients = ingredients.filter(it => it.ingredient);
   const ingredientData = {
     ...rest,
