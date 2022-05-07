@@ -1,27 +1,22 @@
 script(type="text/javascript").
   function createIngredientRowTemplate(rIndex) {
     var rowTemplate = `<div id="ingredient${rIndex}" class="row ingredient">`;
-    var rowOrder = `
-      <div class="col-md-1">
-        <div class="form-group">
-          <label>#</label>
-          <input readonly class="form-control" type="number" value="${rIndex}" name="ingredients[${rIndex}][order]" />
-        </div>
-      </div>`;
+    var rowOrder = `<input class="form-control" type="hidden" value="${rIndex}" name="ingredients[${rIndex}][order]" />`;
     var rowQty = `
-      <div class="col-md-2">
+      <div class="col-md-1">
         <div class="form-group">
           <label>Quantity</label>
           <input class="form-control" type="number" value="1" name="ingredients[${rIndex}][quantity]" />
         </div>
       </div>`;
     var rowQtyExtra = `
-      <div class="col-md-2">
+      <div class="col-md-1">
         <div class="form-group">
-          <label>Qty Extra</label>
+          <label>Extra</label>
           <input class="form-control" type="number" name="ingredients[${rIndex}][quantityExtra]" />
         </div>
       </div>`;
+    var rowSpace = '<div class="col-md-1"></div>';
     var rowUnit = `
       <div class="col-md-2">
         <div class="form-group">
@@ -47,6 +42,7 @@ script(type="text/javascript").
     rowTemplate += rowOrder;
     rowTemplate += rowQty;
     rowTemplate += rowQtyExtra;
+    rowTemplate += rowSpace;
     rowTemplate += rowUnit;
     rowTemplate += rowIngredient;
     rowTemplate += rowNote;
