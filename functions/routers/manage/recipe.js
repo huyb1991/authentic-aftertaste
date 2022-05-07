@@ -66,7 +66,13 @@ const RecipeDetailUpdate = (req, res) => {
   const actionUpdateMsg = `Update ${ENTITY_NAME[ENTITY.RECIPE]}`;
 
   // Format and validation data
-  const { ingredients = [], directions = [], ...rest } = req.body;
+  const {
+    ingredients = [],
+    directions = [],
+    slug,
+    prevSlug,
+    ...rest
+  } = req.body;
   const submitIngredients = ingredients.filter(it => it.ingredient);
   const submitDirections = directions.filter(it => it.desc);
   const ingredientData = {
@@ -80,7 +86,7 @@ const RecipeDetailUpdate = (req, res) => {
   if (id === 'create') {
     return MODELS.recipeAdd(ingredientData)
       .then(newId => {
-        AutoUpdateRecipeContent(newId);
+        AutoUpdateRecipeContent(newId, slug, prevSlug);
         const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
         return res.redirect(`/admin/${ENTITY.RECIPE}/${newId}/?success=true&message=${message}`);
       })
@@ -94,7 +100,7 @@ const RecipeDetailUpdate = (req, res) => {
 
   return MODELS.recipeUpdate(recipeId, ingredientData)
     .then(() => {
-      AutoUpdateRecipeContent(recipeId);
+      AutoUpdateRecipeContent(recipeId, slug, prevSlug);
       const message = encodeURIComponent(`${actionUpdateMsg} successfully - id: ${recipeId}.`);
       return res.redirect(`/admin/${ENTITY.RECIPE}/${recipeId}/?success=true&message=${message}`);
     })
