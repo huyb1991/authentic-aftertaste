@@ -24,8 +24,8 @@ const countryUpdate = (id, data) => updateDocument(`${ENTITY.COUNTRY}/${id}`, fo
 const countryDelete = id => deleteDocument(ENTITY.COUNTRY, id);
 
 // RECIPE
-const recipeGetAll = (conditions = [], limit = 0) =>
-  getCollectionOrderingWithConditions(ENTITY.RECIPE, 'name', conditions, limit);
+const recipeGetAll = (conditions = [], limit = 0, orderBy = 'created') =>
+  getCollectionOrderingWithConditions(ENTITY.RECIPE, orderBy, conditions, limit);
 const recipeGetDetailById = id => getDocument(`${ENTITY.RECIPE}/${id}`);
 const recipeAdd = data => addDocument(ENTITY.RECIPE, formatDocumentBase(data));
 const recipeUpdate = (id, data) => updateDocument(`${ENTITY.RECIPE}/${id}`, formatDocumentBase(data));
