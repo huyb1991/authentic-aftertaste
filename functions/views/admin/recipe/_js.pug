@@ -38,6 +38,21 @@ script(type="text/javascript").
           <input class="form-control" type="text" name="ingredients[${rIndex}][note]" />
         </div>
       </div>`;
+    var rowAction = `
+      <div class="col-md-2 text-right">
+        <br>
+        <div class="btn-group mt-2">
+          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="ingredient" data-action="remove">
+            <i class="fa fa-minus-circle text-danger"></i>
+          </button>
+          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="ingredient" data-action="up">
+            <i class="fa fa-arrow-up"></i>
+          </button>
+          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="ingredient" data-action="down">
+            <i class="fa fa-arrow-down"></i>
+          </button>
+        </div>
+      </div>`;
 
     rowTemplate += rowOrder;
     rowTemplate += rowQty;
@@ -46,6 +61,7 @@ script(type="text/javascript").
     rowTemplate += rowUnit;
     rowTemplate += rowIngredient;
     rowTemplate += rowNote;
+    rowTemplate += rowAction;
     rowTemplate += '</div>';
 
     return rowTemplate;
@@ -61,6 +77,26 @@ script(type="text/javascript").
     });
   };
 
+  function listenBtnAction() {
+    $('body').on('click', '.btn-action', function() {
+      var type = $(this).data('type');
+      var action = $(this).data('action');
+      var index = $(this).data('index');
+      var rowId = `${type}${index}`;
+
+      if (action === 'remove') {
+        $(`#${rowId}`).remove();
+      }
+      //- if (action === 'up') {
+      //-   console.log('up this row');
+      //- }
+      //- if (action === 'down') {
+      //-   console.log('down this row');
+      //- }
+    });
+  };
+
   $(document).ready(function() {
     listenBtnAddNew();
+    listenBtnAction();
   });
