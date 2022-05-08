@@ -1,3 +1,17 @@
-mixin ratingTemplate(score = 2, rating = {}, isRatingPage = false)
+mixin ratingTemplate(score = 4, count = 1)
   -var i = 1;
-  -var maxScore = 5;
+  -var MAX_SCORE = 5;
+
+  div(class= `flex rating text-primary flex-center}`)
+    .flex
+      -if (score >= 0)
+        while i <= MAX_SCORE
+          svg.icon
+            -if (i <= score)
+              use(xlink:href=`#icon-star`)
+            -else
+              -if (score > i-1)
+                use(xlink:href=`#icon-star-half`)
+              -else
+                use(xlink:href=`#icon-star-empty`)
+          - i++
