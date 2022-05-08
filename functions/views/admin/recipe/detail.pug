@@ -50,6 +50,19 @@ block content
               placeholder="prevSlug"
             )
 
+          //- Rating
+          .row
+            each ratingValue, index in (data.ratings || [0, 0, 0, 0, 0])
+              .col
+                .form-group
+                  label #{index+1} star
+                  input.form-control(
+                    name= `ratings[${index}]`,
+                    type="number",
+                    readOnly,
+                    value= ratingValue
+                  )
+
         .col-md-6
           .row
             .col-md-6
