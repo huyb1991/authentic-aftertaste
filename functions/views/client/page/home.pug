@@ -1,4 +1,14 @@
-mixin blogPostTemplate(isAmp=false)
-  .container
-    h1.heading.heading-page Newest Recipes
-    
+mixin homeTemplate(isAmp=false)
+  .container.pb40
+    .card.card-border.pt60.pb60.pl60.pb60
+      .text-center
+        h1.heading.heading-page Newest Recipes
+        p Lorem ipsum dolor sit amet consectetur adipiscing eli sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet consectetur adipiscing eli sed do eiusmod tempor incididunt ut labore et dolore.
+
+      each recipe in recipes
+        a.list-recipe(href= `recipe/${recipe.slug}`, title= recipe.name)
+          img.list-recipe-thumb.img.img-radius(src= recipe.imgThumb, alt= recipe.name)
+          .list-recipe-summary
+            h3.heading.heading-section= recipe.name
+            p.m0= recipe.desc
+          p.list-recipe-time.m0= recipe.time
