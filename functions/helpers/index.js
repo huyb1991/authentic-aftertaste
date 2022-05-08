@@ -1,6 +1,3 @@
-// Constants
-const { RATING_SCORE } = require('../constants');
-
 // Define constants
 const today = new Date().getDate();
 const currentMonth = new Date().getMonth() + 1;
@@ -68,7 +65,7 @@ const getRatingValue = (ratings = [0, 0, 0, 0, 0]) => {
     totalValue += Number(count) * Number(idx + 1);
   });
 
-  const ratingAVG = Number((totalValue / totalCount) * RATING_SCORE.MAX).toFixed(2);
+  const ratingAVG = Number((totalValue / totalCount)).toFixed(2);
 
   return {
     avg: ratingAVG,
