@@ -17,10 +17,10 @@
   //   }
   // }
 
-  @media screen and (max-width: $mobileMax) {
+  @media screen and (max-width: $tabletMax) {
     padding: $space-small;
   }
-  @media screen and (min-width: $tabletMin) {
+  @media screen and (min-width: $desktopMin) {
     padding: $space-small $space-normal;
     border-radius: $radius-large;
   }
