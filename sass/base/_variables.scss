@@ -7,6 +7,7 @@ $primary-extra-light-color: #fff7f2;
 $white: #fff;
 
 $black-dark-color: #131313;
+$black-dark-opacity-color: #1313130f; // For Box-shadow
 $black-color: #4e4e4e;
 $black-light-color: #d0d0d0;
 $black-extra-light-color: #e7e7e7;
@@ -27,6 +28,8 @@ $text-secondary-color-dark: $black-light-color;
 // Border
 $divider-color: $black-extra-light-color;
 $divider-color-dark: $black-extra-light-color;
+$box-shadow-color: $black-dark-opacity-color;
+$box-shadow-color-dark: $black-dark-opacity-color;
 
 // Card
 $card-bg-color: $white;
@@ -75,9 +78,9 @@ $icon-size-normal: 24px;
 $icon-size-large: 48px;
 
 /* Radius */
-$radius-small: 4px;
-$radius-normal: 8px;
-$radius-large: 16px;
+$radius-small: 5px;
+$radius-normal: 10px;
+$radius-large: 20px;
 
 /* Animation */
 $easing: ease-out;

@@ -4,12 +4,7 @@ img {
 
 .img {
   &-radius {
-    border-radius: $radius-normal;
-  }
-
-  &-banner {
-    width: 100%;
-    border-radius: $radius-normal $radius-normal 0 0;
+    border-radius: $radius-large;
   }
 }
 

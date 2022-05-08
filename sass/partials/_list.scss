@@ -1,0 +1,30 @@
+.list {
+  &-recipe {
+    @media screen and (min-width: $tabletMin) {
+      display: grid;
+      grid-gap: $space-normal;
+      grid-template-areas:
+        "recipethumb recipesummary"
+        "recipethumb recipetime";
+      grid-template-columns: 320px 1fr;
+      grid-template-rows: 160px 20px;
+
+      padding: 0 60px;
+    }
+
+    // Grid layout:
+    &-thumb {
+      grid-area: recipethumb;
+      width: 320px;
+      height: 200px;
+      object-fit: cover;
+    }
+    &-summary {
+      grid-area: recipesummary;
+    }
+    &-time {
+      grid-area: recipetime;
+      line-height: 1;
+    }
+  }
+}

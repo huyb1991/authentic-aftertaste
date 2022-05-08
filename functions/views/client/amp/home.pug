@@ -9,8 +9,8 @@ block metadata
   -var metaAMPLink = `${BASE_URL}/amp`
 
 block schemaMarkup
-  //- include schema/blog.pug
+  //- include ../schema/blog.pug
 
 block main
-  include page/home.pug
-  +homeTemplate(false)
+  include ../page/home.pug
+  +homeTemplate(true)

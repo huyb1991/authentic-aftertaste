@@ -60,7 +60,7 @@ const getListFileInFolder = (entity = ENTITY.BANK) => {
     );
 };
 
-module.exports.readContent = {
+module.exports = {
   FILE_NAME,
   getListFileInFolder,
   readFileContent,

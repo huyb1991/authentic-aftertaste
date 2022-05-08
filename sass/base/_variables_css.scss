@@ -10,6 +10,7 @@
   --text-secondary-color: #{$text-secondary-color};
   --divider-color: #{$divider-color};
   --card-bg-color: #{$card-bg-color};
+  --box-shadow-color: #{$box-shadow-color};
 }
 
 .dark:root {
@@ -18,5 +19,6 @@
   --text-title-color: #{$text-title-color-dark};
   --text-secondary-color: #{$text-secondary-color-dark};
   --divider-color: #{$divider-color-dark};
-  --card-bg-color-dark: #{$card-bg-color-dark};
+  --card-bg-color: #{$card-bg-color-dark};
+  --box-shadow-color: #{$box-shadow-color-dark};
 }

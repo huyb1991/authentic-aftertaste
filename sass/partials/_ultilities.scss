@@ -46,6 +46,7 @@
   text-decoration: none;
 }
 
+// Margin
 .m0 {
   margin: 0;
 }
@@ -61,12 +62,16 @@
 .mb20 {
   margin-bottom: 20px;
 }
+.ml5 {
+  margin-left: 5px;
+}
 .ml10 {
   margin-left: 10px;
 }
 .ml20 {
   margin-left: 20px;
 }
+// Padding
 .p0 {
   padding: 0;
 }
@@ -75,6 +80,24 @@
 }
 .pb20 {
   padding-bottom: 20px;
+}
+.pt40 {
+  padding-top: 40px;
+}
+.pb40 {
+  padding-bottom: 40px;
+}
+.pt60 {
+  padding-top: 60px;
+}
+.pb60 {
+  padding-bottom: 60px;
+}
+.pr60 {
+  padding-right: 60px;
+}
+.pl60 {
+  padding-left: 60px;
 }
 
 #overlay {
