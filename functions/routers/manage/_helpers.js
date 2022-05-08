@@ -54,7 +54,7 @@ const createListLatestRecipe = () => {
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
         .map(recipe => {
           const {
-            name, slug, description, imgThumb, serving,
+            name, slug, description, imgThumb, imgThumbWebP, serving,
             time = {}, ratings = [0, 0, 0, 0, 0],
           } = recipe;
           const totalTime = Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
@@ -65,6 +65,7 @@ const createListLatestRecipe = () => {
             serving,
             description,
             imgThumb,
+            imgThumbWebP,
             time: getCookingTimeText(totalTime),
             ratings: getRatingValue(ratings),
           };
