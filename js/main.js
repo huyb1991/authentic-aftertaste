@@ -14,9 +14,9 @@
 // };
 
 function loadGtag() {
-  var gtagm = document.createElement('script');
-  gtagm.src = 'https://www.googletagmanager.com/gtag/js?id=G-8BLXZ1QYMW';
-  document.body.appendChild(gtagm);
+  var gTag = document.createElement('script');
+  gTag.src = 'https://www.googletagmanager.com/gtag/js?id=G-8BLXZ1QYMW';
+  document.body.appendChild(gTag);
 
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
