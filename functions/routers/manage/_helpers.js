@@ -55,7 +55,7 @@ const createListLastestRecipe = () => {
         .map(recipe => {
           const {
             name, slug, description, imgThumb, serving,
-            rating = [0, 0, 0, 0, 0],
+            ratings = [0, 0, 0, 0, 0],
             timePrep = 0, timeAdditional = 0, timeCook = 0,
           } = recipe;
           const totalTime = Number(timePrep) + Number(timeAdditional) + Number(timeCook);
@@ -67,7 +67,7 @@ const createListLastestRecipe = () => {
             description,
             imgThumb,
             time: getCookingTimeText(totalTime),
-            rating: getRatingValue(rating),
+            ratings: getRatingValue(ratings),
           };
         })
 

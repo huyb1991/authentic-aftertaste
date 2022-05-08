@@ -70,17 +70,20 @@ const RecipeDetailUpdate = (req, res) => {
   const {
     ingredients = [],
     directions = [],
+    ratings,
     slug,
     prevSlug,
     ...rest
   } = req.body;
   const submitIngredients = ingredients.filter(it => it.ingredient);
   const submitDirections = directions.filter(it => it.desc);
+  const ratingArr = ratings.map(it => Number(it));
   const recipeData = {
     ...rest,
     slug,
     ingredients: submitIngredients,
     directions: submitDirections,
+    ratings: ratingArr,
   };
   // TODO: Update ordering
 
@@ -89,9 +92,9 @@ const RecipeDetailUpdate = (req, res) => {
     // Set 4 or 5 star rating for new Recipe
     const radomRatingValue = getRandomNumber(RATING_SCORE.MAX - 1, RATING_SCORE.MAX);
     if (radomRatingValue === 4) {
-      recipeData[rating] = [0, 0, 0, 1, 0];
+      recipeData[ratings] = [0, 0, 0, 1, 0];
     } else {
-      recipeData[rating] = [0, 0, 0, 0, 1];
+      recipeData[ratings] = [0, 0, 0, 0, 1];
     }
 
     return MODELS.recipeAdd(recipeData)
