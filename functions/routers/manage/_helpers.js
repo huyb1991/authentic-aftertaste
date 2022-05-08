@@ -44,7 +44,7 @@ const getCookingTimeText = (totalTime = 0) => {
 };
 
 //--- HELPER ---//
-const createListLastestRecipe = () => {
+const createListLatestRecipe = () => {
   const conditions = [];
   let fileName = CONTENT.FILE_NAME.RECIPE_LATEST;
 
@@ -55,10 +55,9 @@ const createListLastestRecipe = () => {
         .map(recipe => {
           const {
             name, slug, description, imgThumb, serving,
-            ratings = [0, 0, 0, 0, 0],
-            timePrep = 0, timeAdditional = 0, timeCook = 0,
+            time = {}, ratings = [0, 0, 0, 0, 0],
           } = recipe;
-          const totalTime = Number(timePrep) + Number(timeAdditional) + Number(timeCook);
+          const totalTime = Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
 
           return {
             name,
@@ -81,7 +80,7 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
       const sitemapSlug = `${recipe.slug}`;
       const fileName = CONTENT.FILE_NAME.RECIPE_DETAIL(recipe.slug);
 
-      createListLastestRecipe();
+      createListLatestRecipe();
       return CONTENT.writeFileContent(fileName, {
         ...recipe,
       })

@@ -73,6 +73,9 @@ const RecipeDetailUpdate = (req, res) => {
     ratings,
     slug,
     prevSlug,
+    timePrep,
+    timeCook,
+    timeAdditional,
     ...rest
   } = req.body;
   const submitIngredients = ingredients.filter(it => it.ingredient);
@@ -84,6 +87,11 @@ const RecipeDetailUpdate = (req, res) => {
     ingredients: submitIngredients,
     directions: submitDirections,
     ratings: ratingArr,
+    time: {
+      prep: timePrep,
+      cook: timeCook,
+      additional: timeAdditional,
+    }
   };
   // TODO: Update ordering
 
