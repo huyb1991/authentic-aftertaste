@@ -51,6 +51,10 @@ const convertToSlug = (text) =>
     .replace(/[^\w-]+/g, '')
     .replace(/--+/g, '-');
 
+const getRandomNumber = (min = 1, max = 10) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 const render404Page = (res) => {
   return res.render(
     'client/404',
@@ -70,6 +74,7 @@ module.exports = {
   getSEOTitle,
   getSEODesc,
   getFlashMessage,
+  getRandomNumber,
   convertToSlug,
-  render404Page
+  render404Page,
 };
