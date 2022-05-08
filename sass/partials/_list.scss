@@ -31,10 +31,24 @@
 
     &-summary {
       @media screen and (min-width: $tabletMin) {
-        padding: $space-normal 0;
+        padding: $space-small 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+      }
+    }
+
+    &-desc {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+
+      @media screen and (min-width: $mobileMax) {
+        -webkit-line-clamp: 3;
+      }
+      @media screen and (min-width: $tabletMin) {
+        -webkit-line-clamp: 2;
       }
     }
   }

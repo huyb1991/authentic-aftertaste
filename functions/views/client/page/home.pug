@@ -1,7 +1,7 @@
 mixin homeTemplate(isAmp=false)
   .container.pb40
     .card.card-border.list-recipe-wrapper
-      .text-center.pb60
+      .text-center
         h1.heading.heading-page Newest Recipes
         p Lorem ipsum dolor sit amet consectetur adipiscing eli sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet consectetur adipiscing eli sed do eiusmod tempor incididunt ut labore et dolore.
 
@@ -10,8 +10,8 @@ mixin homeTemplate(isAmp=false)
           img.list-recipe-thumb.img.img-radius(src= recipe.imgThumb, alt= recipe.name)
           .list-recipe-summary
             div
-              h3.heading.heading-section.mb20= recipe.name
-              p.m0= recipe.description
+              h3.heading.heading-section= recipe.name
+              p.list-recipe-desc= recipe.description
             .list-recipe-time
               span
                 svg(fill="currentColor", width="20", height="20")
