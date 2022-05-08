@@ -4,6 +4,7 @@ const { BLOG_TAGS } = require('../../constants/blog');
 const MODELS = require('../../models').models;
 
 // Helpers
+const { getRatingValue } = require('../../helpers');
 const CONTENT = require('../../content/_helpers');
 const {
   updateSitemapUrl,
@@ -43,7 +44,7 @@ const getCookingTimeText = (totalTime = 0) => {
 };
 
 //--- HELPER ---//
-const createListLastestRecipe = () => {
+const createListLatestRecipe = () => {
   const conditions = [];
   let fileName = CONTENT.FILE_NAME.RECIPE_LATEST;
 
@@ -53,10 +54,10 @@ const createListLastestRecipe = () => {
         .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
         .map(recipe => {
           const {
-            name, slug, description, imgThumb, serving,
-            timePrep = 0, timeAdditional = 0, timeCook = 0,
+            name, slug, description, imgThumb, imgThumbWebP, serving,
+            time = {}, ratings = [0, 0, 0, 0, 0],
           } = recipe;
-          const totalTime = Number(timePrep) + Number(timeAdditional) + Number(timeCook);
+          const totalTime = Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
 
           return {
             name,
@@ -64,11 +65,33 @@ const createListLastestRecipe = () => {
             serving,
             description,
             imgThumb,
+            imgThumbWebP,
             time: getCookingTimeText(totalTime),
+            ratings: getRatingValue(ratings),
           };
         })
 
       return CONTENT.writeFileContent(fileName, latestRecipes);
+    });
+};
+
+// List all Recipes for search
+const updateListAllRecipe = (name= '', slug = '', prevSlug = '') => {
+  const fileName = CONTENT.FILE_NAME.RECIPE_ALL;
+
+  return CONTENT.readFileContent(fileName)
+    .then((allRecipes = []) => {
+      let newList = allRecipes;
+
+      // Change slug, remove old item by prevSlug
+      if (prevSlug.trim()) {
+        newList = allRecipes.filter(recipe => recipe.slug !== prevSlug);
+      }
+
+      // Add this recipe to the list
+      newList.push({ name, slug });
+
+      return CONTENT.writeFileContent(fileName, newList);
     });
 };
 
@@ -78,7 +101,13 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
       const sitemapSlug = `${recipe.slug}`;
       const fileName = CONTENT.FILE_NAME.RECIPE_DETAIL(recipe.slug);
 
-      createListLastestRecipe();
+      // Update listing data
+      createListLatestRecipe();
+      // Update list all recipes if adding new or change slug
+      if (slug !== prevSlug) {
+        updateListAllRecipe(recipe.name, slug, prevSlug);
+      }
+
       return CONTENT.writeFileContent(fileName, {
         ...recipe,
       })

@@ -1,9 +1,9 @@
 // Constants
 const MODELS = require('../../models').models;
-const { ENTITY, ENTITY_NAME } = require('../../constants');
+const { ENTITY, ENTITY_NAME, RATING_SCORE } = require('../../constants');
 
 // Helpers
-const { getFlashMessage } = require('../../helpers');
+const { getFlashMessage, getRandomNumber } = require('../../helpers');
 const { AutoUpdateRecipeContent } = require('./_helpers');
 const CONTENT = require('../../content/_helpers');
 
@@ -70,23 +70,42 @@ const RecipeDetailUpdate = (req, res) => {
   const {
     ingredients = [],
     directions = [],
+    ratings,
     slug,
     prevSlug,
+    timePrep,
+    timeCook,
+    timeAdditional,
     ...rest
   } = req.body;
   const submitIngredients = ingredients.filter(it => it.ingredient);
   const submitDirections = directions.filter(it => it.desc);
-  const ingredientData = {
+  const ratingArr = ratings.map(it => Number(it));
+  const recipeData = {
     ...rest,
     slug,
     ingredients: submitIngredients,
     directions: submitDirections,
+    ratings: ratingArr,
+    time: {
+      prep: Number(timePrep || 0),
+      cook: Number(timeCook || 0),
+      additional: Number(timeAdditional || 0),
+    }
   };
   // TODO: Update ordering
 
   // Create new Recipe
   if (id === 'create') {
-    return MODELS.recipeAdd(ingredientData)
+    // Set 4 or 5 star rating for new Recipe
+    const radomRatingValue = getRandomNumber(RATING_SCORE.MAX - 1, RATING_SCORE.MAX);
+    if (radomRatingValue === 4) {
+      recipeData[ratings] = [0, 0, 0, 1, 0];
+    } else {
+      recipeData[ratings] = [0, 0, 0, 0, 1];
+    }
+
+    return MODELS.recipeAdd(recipeData)
       .then(newId => {
         AutoUpdateRecipeContent(newId, slug, prevSlug);
         const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
@@ -100,7 +119,7 @@ const RecipeDetailUpdate = (req, res) => {
       });
   }
 
-  return MODELS.recipeUpdate(recipeId, ingredientData)
+  return MODELS.recipeUpdate(recipeId, recipeData)
     .then(() => {
       // Change slug: Remove old file content
       if (prevSlug.trim() && slug.trim() !== prevSlug.trim()) {

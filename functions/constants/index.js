@@ -19,6 +19,11 @@ const CATEGORY_SLUG = {
   [ENTITY.RECIPE]: 'recipe',
 };
 
+const RATING_SCORE = {
+  MIN: 1,
+  MAX: 5,
+};
+
 module.exports = {
   BASE_URL,
   BASE_URL_ADMIN,
@@ -26,4 +31,5 @@ module.exports = {
   ENTITY,
   ENTITY_NAME,
   CATEGORY_SLUG,
+  RATING_SCORE,
 };

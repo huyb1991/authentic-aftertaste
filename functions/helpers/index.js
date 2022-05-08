@@ -51,6 +51,28 @@ const convertToSlug = (text) =>
     .replace(/[^\w-]+/g, '')
     .replace(/--+/g, '-');
 
+const getRandomNumber = (min = 1, max = 10) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+// Rating array https://stackoverflow.com/a/64807037/5456204
+const getRatingValue = (ratings = [0, 0, 0, 0, 0]) => {
+  let totalValue = 0;
+  let totalCount = 0;
+
+  ratings.forEach((count, idx) => {
+    totalCount += Number(count);
+    totalValue += Number(count) * Number(idx + 1);
+  });
+
+  const ratingAVG = Number((totalValue / totalCount)).toFixed(2);
+
+  return {
+    avg: ratingAVG,
+    count: totalCount,
+  };
+};
+
 const render404Page = (res) => {
   return res.render(
     'client/404',
@@ -70,6 +92,8 @@ module.exports = {
   getSEOTitle,
   getSEODesc,
   getFlashMessage,
+  getRandomNumber,
+  getRatingValue,
   convertToSlug,
-  render404Page
+  render404Page,
 };
