@@ -1,4 +1,13 @@
 .list {
+  &-recipe-wrapper {
+    @media screen and (max-width: $mobileMax) {
+      padding: 60px 0;
+    }
+    @media screen and (min-width: $tabletMin) {
+      padding: 60px;
+    }
+  }
+
   &-recipe {
     margin-bottom: $space-super-large;
 
@@ -6,7 +15,6 @@
       display: grid;
       grid-gap: $space-normal;
       grid-template-columns: 320px 1fr;
-      padding: 0 60px;
     }
 
     // Grid layout:

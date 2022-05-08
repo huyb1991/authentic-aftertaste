@@ -1,5 +1,4 @@
 .card {
-  border-radius: $radius-large;
   background-color: var(--card-bg-color);
   transition: all 0.2s ease-in-out;
   // border: 1px solid var(--divider-color);
@@ -23,5 +22,6 @@
   }
   @media screen and (min-width: $tabletMin) {
     padding: $space-small $space-normal;
+    border-radius: $radius-large;
   }
 }
