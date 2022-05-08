@@ -9,6 +9,7 @@ $size-6: 0.8rem;
   margin: 0;
   font-family: $font-title-family;
   font-weight: $font-weight-default;
+  color: var(--text-title-color);
 
   // Big Header like Homepage cover, Page Title
   &-extra {
@@ -87,14 +88,5 @@ $size-6: 0.8rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  // Text buying ad slot
-  &-bid {
-    max-width: 728px;
-    margin: -5px auto 0;
-    text-align: right;
-    font-style: italic;
-    font-size: $size-6;
   }
 }
