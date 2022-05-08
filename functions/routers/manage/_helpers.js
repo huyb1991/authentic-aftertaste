@@ -4,7 +4,7 @@ const { BLOG_TAGS } = require('../../constants/blog');
 const MODELS = require('../../models').models;
 
 // Helpers
-const CONTENT = require('../../content/_helper').readContent;
+const CONTENT = require('../../content/_helper');
 const {
   updateSitemapUrl,
   createOrUpdateSitemapBySlugAndEntity,

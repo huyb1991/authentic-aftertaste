@@ -5,7 +5,7 @@ const { ENTITY, ENTITY_NAME } = require('../../constants');
 // Helpers
 const { getFlashMessage } = require('../../helpers');
 const { AutoUpdateRecipeContent } = require('./_helpers');
-const CONTENT = require('../../content/_helper').readContent;
+const CONTENT = require('../../content/_helper');
 
 const RecipeList = (req, res) => {
   const flashMessage = getFlashMessage(req.query);

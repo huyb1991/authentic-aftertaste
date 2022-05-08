@@ -1,6 +1,9 @@
 // Constant
 const { PAGE_NAME } = require('./_constants');
 
+// Helper
+const CONTENT = require('../../content/_helpers');
+
 const HomeController = (req, res, isAMP = false) => {
   const order = req.query.sort;
   return res.render(

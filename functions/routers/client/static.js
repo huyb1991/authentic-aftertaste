@@ -1,6 +1,3 @@
-// Helper
-const CONTENT = require('../../content/_helper').readContent;
-
 // STATIC PAGES
 const ContactPage = (req, res) => {
   return res.render(
@@ -36,18 +33,15 @@ const TermOfUsePage = (req, res) => {
 };
 
 const DisclaimerPage = (req, res) => {
-  return CONTENT.readFileContent(CONTENT.FILE_NAME.BANK_LIST)
-    .then(banks => {
-      return res.render(
-        'client/static-page/disclaimer',
-        {
-          title: 'Miễn Trừ Trách Nhiệm',
-          banks,
-          metaPageTitle: 'Miễn Trừ Trách Nhiệm',
-          metaPageDesc: 'Miễn Trừ Trách Nhiệm!',
-        },
-      );
-    });
+  return res.render(
+    'client/static-page/disclaimer',
+    {
+      title: 'Miễn Trừ Trách Nhiệm',
+      banks,
+      metaPageTitle: 'Miễn Trừ Trách Nhiệm',
+      metaPageDesc: 'Miễn Trừ Trách Nhiệm!',
+    },
+  );
 };
 
 
