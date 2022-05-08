@@ -1,5 +1,5 @@
 // Constant
-const { PAGE_NAME } = require('./constants');
+const { PAGE_NAME } = require('./_constants');
 
 const HomeController = (req, res, isAMP = false) => {
   const order = req.query.sort;
