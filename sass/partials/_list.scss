@@ -12,6 +12,13 @@
     display: block;
     margin-bottom: $space-super-large;
 
+    &:hover {
+      .heading {
+        transition: all .2s ease-in-out;
+        color: var(--primary-color);
+      }
+    }
+
     @media screen and (min-width: $tabletMin) {
       display: grid;
       grid-gap: $space-normal;
