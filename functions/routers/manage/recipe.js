@@ -88,9 +88,9 @@ const RecipeDetailUpdate = (req, res) => {
     directions: submitDirections,
     ratings: ratingArr,
     time: {
-      prep: timePrep,
-      cook: timeCook,
-      additional: timeAdditional,
+      prep: Number(timePrep || 0),
+      cook: Number(timeCook || 0),
+      additional: Number(timeAdditional || 0),
     }
   };
   // TODO: Update ordering
