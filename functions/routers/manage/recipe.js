@@ -3,7 +3,7 @@ const MODELS = require('../../models').models;
 const { ENTITY, ENTITY_NAME } = require('../../constants');
 
 // Helpers
-const { getFlashMessage } = require('../../helpers');
+const { getFlashMessage, getRandomNumber } = require('../../helpers');
 const { AutoUpdateRecipeContent } = require('./_helpers');
 const CONTENT = require('../../content/_helpers');
 
@@ -86,8 +86,13 @@ const RecipeDetailUpdate = (req, res) => {
 
   // Create new Recipe
   if (id === 'create') {
-    // Set 5 star rating for new recipe
-    recipeData[rating] = [0, 0, 0, 0, 1];
+    // Set 4 or 5 star rating for new Recipe
+    const ratingValue = getRandomNumber(4, 5);
+    if (ratingValue === 4) {
+      recipeData[rating] = [0, 0, 0, 1, 0];
+    } else {
+      recipeData[rating] = [0, 0, 0, 0, 1];
+    }
 
     return MODELS.recipeAdd(recipeData)
       .then(newId => {
