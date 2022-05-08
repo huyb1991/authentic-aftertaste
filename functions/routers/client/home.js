@@ -5,16 +5,17 @@ const { PAGE_NAME } = require('./_constants');
 const CONTENT = require('../../content/_helpers');
 
 const HomeController = (req, res, isAMP = false) => {
-  const latestRecipe = CONTENT.readFileContent(CONTENT.FILE_NAME.RECIPE_LATEST);
-
-  return res.render(
-    `client${isAMP ? '/amp' : ''}/home`,
-    {
-      isHomePage: true,
-      pageName: PAGE_NAME.HOME,
-      recipes: latestRecipe,
-    },
-  );
+  return CONTENT.readFileContent(CONTENT.FILE_NAME.RECIPE_LATEST)
+    .then(latestRecipe => {
+      return res.render(
+        `client${isAMP ? '/amp' : ''}/home`,
+        {
+          isHomePage: true,
+          pageName: PAGE_NAME.HOME,
+          recipes: latestRecipe,
+        },
+      );
+    });
 };
 
 
