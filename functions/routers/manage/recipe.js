@@ -76,7 +76,7 @@ const RecipeDetailUpdate = (req, res) => {
   } = req.body;
   const submitIngredients = ingredients.filter(it => it.ingredient);
   const submitDirections = directions.filter(it => it.desc);
-  const ingredientData = {
+  const recipeData = {
     ...rest,
     slug,
     ingredients: submitIngredients,
@@ -87,9 +87,9 @@ const RecipeDetailUpdate = (req, res) => {
   // Create new Recipe
   if (id === 'create') {
     // Set 5 star rating for new recipe
-    ingredientData[rating] = [0, 0, 0, 0, 1];
+    recipeData[rating] = [0, 0, 0, 0, 1];
 
-    return MODELS.recipeAdd(ingredientData)
+    return MODELS.recipeAdd(recipeData)
       .then(newId => {
         AutoUpdateRecipeContent(newId, slug, prevSlug);
         const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
@@ -103,7 +103,7 @@ const RecipeDetailUpdate = (req, res) => {
       });
   }
 
-  return MODELS.recipeUpdate(recipeId, ingredientData)
+  return MODELS.recipeUpdate(recipeId, recipeData)
     .then(() => {
       // Change slug: Remove old file content
       if (prevSlug.trim() && slug.trim() !== prevSlug.trim()) {
