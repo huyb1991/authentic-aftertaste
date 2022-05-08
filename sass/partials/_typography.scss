@@ -9,18 +9,17 @@ $size-6: 0.8rem;
   margin: 0;
   font-family: $font-title-family;
   font-weight: $font-weight-default;
+  line-height: 1;
   color: var(--text-title-color);
 
   // Big Header like Homepage cover, Page Title
   &-extra {
-    line-height: 1;
     font-size: $size-1;
     font-weight: $font-weight-bold;
   }
 
   // Heading on common pages
   &-page {
-    line-height: 1;
     font-weight: $font-weight-bold;
 
     @media screen and (max-width: $mobileMax) {
@@ -39,11 +38,6 @@ $size-6: 0.8rem;
   // Widget title
   &-item {
     font-size: $size-4;
-  }
-
-  &-widget {
-    border-left: 4px solid var(--primary-color);
-    padding-left: $space-small;
   }
 }
 
