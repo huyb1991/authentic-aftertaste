@@ -75,13 +75,39 @@ const createListLatestRecipe = () => {
     });
 };
 
+// List all Recipes for search
+const updateListAllRecipe = (name= '', slug = '', prevSlug = '') => {
+  const fileName = CONTENT.FILE_NAME.RECIPE_ALL;
+
+  return CONTENT.readFileContent(fileName)
+    .then((allRecipes = []) => {
+      let newList = allRecipes;
+
+      // Change slug, remove old item by prevSlug
+      if (prevSlug.trim()) {
+        newList = allRecipes.filter(recipe => recipe.slug !== prevSlug);
+      }
+
+      // Add this recipe to the list
+      newList.push({ name, slug });
+
+      return CONTENT.writeFileContent(fileName, newList);
+    });
+};
+
 const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
   return MODELS.recipeGetDetailById(recipeId)
     .then(recipe => {
       const sitemapSlug = `${recipe.slug}`;
       const fileName = CONTENT.FILE_NAME.RECIPE_DETAIL(recipe.slug);
 
+      // Update listing data
       createListLatestRecipe();
+      // Update list all recipes if adding new or change slug
+      if (slug !== prevSlug) {
+        updateListAllRecipe(recipe.name, slug, prevSlug);
+      }
+
       return CONTENT.writeFileContent(fileName, {
         ...recipe,
       })
