@@ -86,6 +86,9 @@ const RecipeDetailUpdate = (req, res) => {
 
   // Create new Recipe
   if (id === 'create') {
+    // Set 5 star rating for new recipe
+    ingredientData[rating] = [0, 0, 0, 0, 1];
+
     return MODELS.recipeAdd(ingredientData)
       .then(newId => {
         AutoUpdateRecipeContent(newId, slug, prevSlug);
