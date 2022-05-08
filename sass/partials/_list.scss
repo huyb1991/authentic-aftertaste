@@ -1,0 +1,7 @@
+.list {
+  &-recipe {
+    @media screen and (min-width: $tabletMin) {
+      display: flex;
+    }
+  }
+}
