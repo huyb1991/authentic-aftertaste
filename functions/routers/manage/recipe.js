@@ -87,8 +87,8 @@ const RecipeDetailUpdate = (req, res) => {
   // Create new Recipe
   if (id === 'create') {
     // Set 4 or 5 star rating for new Recipe
-    const ratingValue = getRandomNumber(RATING_SCORE.MAX - 1, RATING_SCORE.MAX);
-    if (ratingValue === 4) {
+    const radomRatingValue = getRandomNumber(RATING_SCORE.MAX - 1, RATING_SCORE.MAX);
+    if (radomRatingValue === 4) {
       recipeData[rating] = [0, 0, 0, 1, 0];
     } else {
       recipeData[rating] = [0, 0, 0, 0, 1];
