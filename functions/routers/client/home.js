@@ -5,12 +5,14 @@ const { PAGE_NAME } = require('./_constants');
 const CONTENT = require('../../content/_helpers');
 
 const HomeController = (req, res, isAMP = false) => {
-  const order = req.query.sort;
+  const latestRecipe = CONTENT.readFileContent(CONTENT.FILE_NAME.RECIPE_LATEST);
+
   return res.render(
     `client${isAMP ? '/amp' : ''}/home`,
     {
       isHomePage: true,
-      pageName: PAGE_NAME.HOME
+      pageName: PAGE_NAME.HOME,
+      recipes: latestRecipe,
     },
   );
 };
