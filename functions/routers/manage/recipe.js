@@ -1,6 +1,6 @@
 // Constants
 const MODELS = require('../../models').models;
-const { ENTITY, ENTITY_NAME } = require('../../constants');
+const { ENTITY, ENTITY_NAME, RATING_SCORE } = require('../../constants');
 
 // Helpers
 const { getFlashMessage, getRandomNumber } = require('../../helpers');
@@ -87,7 +87,7 @@ const RecipeDetailUpdate = (req, res) => {
   // Create new Recipe
   if (id === 'create') {
     // Set 4 or 5 star rating for new Recipe
-    const ratingValue = getRandomNumber(4, 5);
+    const ratingValue = getRandomNumber(RATING_SCORE.MAX - 1, RATING_SCORE.MAX);
     if (ratingValue === 4) {
       recipeData[rating] = [0, 0, 0, 1, 0];
     } else {
