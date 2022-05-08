@@ -1,6 +1,6 @@
 // Constants
 const MODELS = require('../../models').models;
-const CONTENT = require('../../content/_helper');
+const CONTENT = require('../../content/_helpers');
 const {
   ENTITY,
   BASE_URL_SITEMAP,
