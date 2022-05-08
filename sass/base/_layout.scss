@@ -11,10 +11,10 @@ html {
     max-width: $container-max-w;
   }
   @media screen and (max-width: $tabletMax) {
-    padding: 0 $space-large;
+    max-width: calc(100vw - $space-large);
   }
   @media screen and (max-width: $mobileMax) {
-    padding: 0 $space-normal;
+    max-width: calc(100vw - $space-normal);
   }
 
   &-small {
