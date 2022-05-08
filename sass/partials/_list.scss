@@ -37,8 +37,11 @@
     }
 
     &-summary {
+      @media screen and (min-width: $mobileMax) {
+        margin-top: $space-normal;
+      }
       @media screen and (min-width: $tabletMin) {
-        padding: $space-small 0;
+        padding: $space-normal 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
