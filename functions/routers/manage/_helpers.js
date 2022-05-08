@@ -10,6 +10,38 @@ const {
   createOrUpdateSitemapBySlugAndEntity,
 } = require('../../helpers/sitemap');
 
+/**
+ * Format time to hours and min, eg:
+ * 30m = 30 mins | 80m = 1 hr 20 mins | 140m = 2 hrs 20 mins
+ * @param {number} totalTime
+ * @returns Time as text
+ */
+const getCookingTimeText = (totalTime = 0) => {
+  const totalHour = parseInt(totalTime/60);
+  const totalMin = parseInt(totalTime%60);
+
+  // Format time as string
+  let time = '';
+  if (totalHour) {
+    time += `${totalHour} hr`;
+
+    if (totalHour > 1) {
+      time += 's';
+    }
+
+    time += ' ';
+  }
+  if (totalMin) {
+    time += `${totalMin} min`;
+
+    if (totalMin > 1) {
+      time += 's';
+    }
+  }
+
+  return time.trim();
+};
+
 //--- HELPER ---//
 const createListLastestRecipe = () => {
   const conditions = [];
@@ -18,10 +50,23 @@ const createListLastestRecipe = () => {
   return MODELS.recipeGetAll(conditions, 10)
     .then(data => {
       const latestRecipes = data
-        .map(({ name, slug, description, imgThumb, updated, created }) => ({
-          name, slug, description, imgThumb, updated, created
-        }))
-        .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+        .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+        .map(recipe => {
+          const {
+            name, slug, description, imgThumb, serving,
+            timePrep = 0, timeAdditional = 0, timeCook = 0,
+          } = recipe;
+          const totalTime = Number(timePrep) + Number(timeAdditional) + Number(timeCook);
+
+          return {
+            name,
+            slug,
+            serving,
+            description,
+            imgThumb,
+            time: getCookingTimeText(totalTime),
+          };
+        })
 
       return CONTENT.writeFileContent(fileName, latestRecipes);
     });
