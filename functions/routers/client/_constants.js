@@ -4,10 +4,9 @@ const BLOG_NEW_URLS = [];
 
 const PAGE_NAME = {
   HOME: 'home',
-  BLOG: 'blog'
+  RECIPE: 'recipe',
+  BLOG: 'blog',
 };
-
-const ADS = [];
 
 module.exports = {
   PAGE_NAME,
@@ -15,7 +14,4 @@ module.exports = {
   // Blog Redirect
   BLOG_OLD_URLS,
   BLOG_NEW_URLS,
-
-  // Ads
-  ADS
 };
