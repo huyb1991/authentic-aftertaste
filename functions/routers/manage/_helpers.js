@@ -4,6 +4,7 @@ const { BLOG_TAGS } = require('../../constants/blog');
 const MODELS = require('../../models').models;
 
 // Helpers
+const { getRatingValue } = require('../../helpers');
 const CONTENT = require('../../content/_helpers');
 const {
   updateSitemapUrl,
@@ -54,6 +55,7 @@ const createListLastestRecipe = () => {
         .map(recipe => {
           const {
             name, slug, description, imgThumb, serving,
+            rating = [0, 0, 0, 0, 0],
             timePrep = 0, timeAdditional = 0, timeCook = 0,
           } = recipe;
           const totalTime = Number(timePrep) + Number(timeAdditional) + Number(timeCook);
@@ -65,6 +67,7 @@ const createListLastestRecipe = () => {
             description,
             imgThumb,
             time: getCookingTimeText(totalTime),
+            rating: getRatingValue(rating),
           };
         })
 
