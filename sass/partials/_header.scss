@@ -11,7 +11,7 @@
 
 .header {
   @media screen and (max-width: $mobileMax) {
-    padding: $space-small 0;
+    padding: $space-normal 0;
   }
   @media screen and (min-width: $tabletMin) {
     padding: $space-super-large 0;

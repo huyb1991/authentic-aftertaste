@@ -1,7 +1,7 @@
 .list {
   &-recipe-wrapper {
     @media screen and (max-width: $mobileMax) {
-      padding: 60px 0;
+      padding: $space-normal $space-small;
     }
     @media screen and (min-width: $tabletMin) {
       padding: 60px;
