@@ -10,6 +10,7 @@ const getRecipeFileName = (slug) =>
 const FILE_NAME = {
   BLOG_POST: getBlogPostFileName,
   RECIPE_LATEST: 'recipe-latest',
+  RECIPE_ALL: 'recipe-all',
   RECIPE_DETAIL: getRecipeFileName,
 };
 
