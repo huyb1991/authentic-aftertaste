@@ -5,7 +5,7 @@ const { PAGE_NAME } = require('./_constants');
 const { render404Page } = require('../../helpers');
 const CONTENT = require('../../content/_helpers');
 
-const RecipeController = (req, res, isAMP = false) => {
+const RecipeDetailController = (req, res, isAMP = false) => {
   const { slug } = req.params;
 
   return CONTENT.readFileContent(CONTENT.FILE_NAME.RECIPE_DETAIL(slug))
@@ -26,5 +26,5 @@ const RecipeController = (req, res, isAMP = false) => {
 
 
 module.exports = {
-  RecipeController,
+  RecipeDetailController,
 };

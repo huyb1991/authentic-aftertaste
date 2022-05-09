@@ -1,6 +1,6 @@
 // Routing
 const { HomeController } = require('./home');
-const { RecipeController } = require('./recipe');
+const { RecipeDetailController } = require('./recipe');
 const {
   ContactPage,
   AboutUsPage,
@@ -10,7 +10,7 @@ const {
 
 module.exports.router = {
   HomeController,
-  RecipeController,
+  RecipeDetailController,
 
   // Static pages
   ContactPage,
