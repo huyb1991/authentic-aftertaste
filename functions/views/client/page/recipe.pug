@@ -1,6 +1,38 @@
-mixin homeTemplate(isAmp=false)
+mixin recipeTemplate(isAmp=false)
   .container.pb40
-    .card.card-border
-      .text-center
+    .card.card-border.recipe-wrapper
+      img.img.img-recipe.img-recipe-cover(src= recipe.imgCover, alt= recipe.name)
+      .content
         h1.heading.heading-page= recipe.name
-        p Lorem ipsum dolor sit amet consectetur adipiscing eli sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet consectetur adipiscing eli sed do eiusmod tempor incididunt ut labore et dolore.
+        .flex.flex-between.recipe-section(data-target="information")
+          .flex
+            h2.heading.heading-section Dish Information
+            svg.ml10(fill="currentColor", width="50", height="40")
+              use(xlink:href="#icon-dish-info")
+          svg.recipe-section-icon(fill="currentColor", width="40", height="40")
+            use(xlink:href="#icon-arrow")
+        #information.recipe-section-content
+          p= recipe.description
+
+        //- Ingredients
+        .flex.flex-between.recipe-section(data-target="ingredient")
+          .flex
+            h2.heading.heading-section Ingredients
+            svg.ml10(fill="currentColor", width="40", height="40")
+              use(xlink:href="#icon-ingredient")
+          svg.recipe-section-icon(fill="currentColor", width="40", height="40")
+            use(xlink:href="#icon-arrow")
+        #ingredient.recipe-section-content
+          p Ingredient list
+
+        //- Directions
+        .flex.flex-between.recipe-section(data-target="direction")
+          .flex
+            h2.heading.heading-section Directions
+            svg.ml10(fill="currentColor", width="40", height="40")
+              use(xlink:href="#icon-cooking")
+          svg.recipe-section-icon(fill="currentColor", width="40", height="40")
+            use(xlink:href="#icon-arrow")
+        #direction.recipe-section-content
+          p Direction list
+

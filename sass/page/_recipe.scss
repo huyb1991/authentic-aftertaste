@@ -4,4 +4,29 @@
       border-radius: 20px 20px 0 0;
     }
   }
+
+  &-section {
+    border-top: 1px solid var(--divider-color);
+    margin-top: 20px;
+    padding-top: 10px;
+    cursor: pointer;
+
+    &-icon {
+      transition: all .2s ease-in-out;
+      transform: rotate(90deg);
+
+      &.collapse {
+        transform: none;
+      }
+    }
+
+    &-content {
+      transition: all .2s ease-in-out;
+      overflow: hidden;
+
+      &.collapse {
+        max-height: 0;
+      }
+    }
+  }
 }
