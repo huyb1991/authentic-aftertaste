@@ -42,6 +42,7 @@
   }
 
   &-checkbox {
+    transition: all .2s ease-in-out;
     border: 1px solid var(--text-secondary-color);
     border-radius: 50%;
     width: 40px;
@@ -72,6 +73,7 @@
   }
 
   &-label {
+    transition: all .2s ease-in-out;
     margin: 0;
 
     &.done {
