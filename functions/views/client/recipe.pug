@@ -1,0 +1,16 @@
+extends _default/base.pug
+
+block metadata
+  -var metaContentType = "Article"
+  -var metaPageTitle = recipe.seoTitle
+  -var metaPageDesc = recipe.seoDesc
+  -var metaPageImage = recipe.imgCover
+  -var metaCanonical = `${BASE_URL}/recipe/${recipe.slug}`
+  -var metaAMPLink = `${BASE_URL}/amp/recipe/${recipe.slug}`
+
+block schemaMarkup
+  include schema/recipe.pug
+
+block main
+  include page/recipe.pug
+  +recipeTemplate(false)

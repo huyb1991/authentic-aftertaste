@@ -1,13 +1,4 @@
 .list {
-  &-recipe-wrapper {
-    @media screen and (max-width: $mobileMax) {
-      padding: $space-normal $space-small;
-    }
-    @media screen and (min-width: $tabletMin) {
-      padding: 60px;
-    }
-  }
-
   &-recipe {
     display: block;
     margin-bottom: $space-super-large;
@@ -25,19 +16,8 @@
       grid-template-columns: 320px 1fr;
     }
 
-    // Grid layout:
-    &-thumb {
-      object-fit: cover;
-      width: 100%;
-      height: 200px;
-
-      @media screen and (min-width: $tabletMin) {
-        max-width: 320px;
-      }
-    }
-
     &-summary {
-      @media screen and (min-width: $mobileMax) {
+      @media screen and (max-width: $mobileMax) {
         margin-top: $space-normal;
       }
       @media screen and (min-width: $tabletMin) {

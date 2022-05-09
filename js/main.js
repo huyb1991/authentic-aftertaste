@@ -1,17 +1,26 @@
-// var btnToggleClass = document.getElementsByClassName('btn-toggle');
+var btnRecipeSection = document.getElementsByClassName('recipe-section');
 
-// function listenToggle() {
-//   Array.from(btnToggleClass).forEach(function(element) {
-//     element.addEventListener('click', function() {
-//       var targetId = element.getAttribute('data-target');
-//       var targetEl = document.getElementById(targetId);
-//       var iconEl = element.querySelector('.icon');
+function listenToggle() {
+  Array.from(btnRecipeSection).forEach(function(element) {
+    element.addEventListener('click', function() {
+      var targetId = element.getAttribute('data-target');
+      var targetEl = document.getElementById(targetId);
+      var iconEl = element.querySelector('.recipe-section-icon');
+      var toggleClass = 'collapse';
 
-//       targetEl.classList.toggle('portfolio-hidden');
-//       iconEl.classList.toggle('icon-rotate');
-//     });
-//   });
-// };
+      // Toggle class
+      iconEl.classList.toggle(toggleClass);
+      targetEl.classList.toggle(toggleClass);
+
+      // Set/remove max height based on toggleClass
+      if (targetEl.classList.contains(toggleClass)){
+        targetEl.style.maxHeight = 0;
+      } else {
+        targetEl.style.maxHeight = targetEl.scrollHeight + 'px';
+      }
+    });
+  });
+};
 
 function loadGtag() {
   var gTag = document.createElement('script');
@@ -39,5 +48,5 @@ function deferLoad() {
   }
 };
 
-// listenToggle();
+listenToggle();
 deferLoad();
