@@ -1,6 +1,7 @@
 mixin headerTemplate(isAmp=false)
   header.header.container
-    a.brand-link.flex.flex-center.text-primary(href= '/', title= SITE_NAME)
+    .brand-link.flex.flex-center.text-primary
       svg(fill="currentColor", width="40", height="40")
         use(xlink:href="#icon-brand")
-      h2.brand-name.heading.text-primary.ml10= SITE_NAME
+      h2.brand-name.heading.text-primary.ml10
+        a(href= '/', title= SITE_NAME)= SITE_NAME
