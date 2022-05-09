@@ -37,3 +37,13 @@ html {
     }
   }
 }
+
+// Content page container
+.content {
+  @media screen and (max-width: $mobileMax) {
+    padding: $space-normal $space-small;
+  }
+  @media screen and (min-width: $tabletMin) {
+    padding: 60px;
+  }
+}
