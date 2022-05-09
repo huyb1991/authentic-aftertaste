@@ -8,20 +8,6 @@ const getTodayFormat = () => {
   return new Date().toISOString().slice(0, 10);
 };
 
-const getSEOTitle = (
-  month = currentMonth,
-  year = currentYear
-) => {
-  return `SEO Title tháng ${month} năm ${year}?`;
-};
-
-const getSEODesc = (
-  month = currentMonth,
-  year = currentYear
-) => {
-  return `SEO Description tháng ${month} năm ${year}`;
-};
-
 const getFlashMessage = ({
   error,
   success,
@@ -77,9 +63,9 @@ const render404Page = (res) => {
   return res.render(
     'client/404',
     {
-      title: 'Không Tìm Thấy Trang',
-      metaPageTitle: 'Không Tìm Thấy Trang',
-      metaPageDesc: 'Không Tìm Thấy Trang',
+      title: 'Page Not Found - Authentic Aftertaste',
+      metaPageTitle: 'Page Not Found - Authentic Aftertaste',
+      metaPageDesc: 'Page Not Found - Authentic Aftertaste',
     },
   );
 };
@@ -89,8 +75,6 @@ module.exports = {
   currentMonth,
   currentYear,
   getTodayFormat,
-  getSEOTitle,
-  getSEODesc,
   getFlashMessage,
   getRandomNumber,
   getRatingValue,
