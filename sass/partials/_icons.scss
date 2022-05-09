@@ -2,9 +2,9 @@
   font-style: normal;
   display: inline-block;
   text-decoration: inherit;
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
+  width: 1.1em; // 20px
+  height: 1.1em;
+  line-height: 1.1em;
   text-align: center;
   fill: currentColor;
   font-variant: normal;
@@ -14,31 +14,31 @@
     cursor: pointer;
   }
 
-  &-social {
-    border-radius: 50%;
-    padding: $space-small;
-    color: #fff;
-    margin: 0 $space-tiny;
-  }
-
-  &-web {
-    background-color: var(--primary-light-color);
-  }
-  &-fb {
-    background-color: #1877f2;
-  }
-  &-ytb {
-    background-color: #cd201f;
-  }
-  // &-ig {
-  //   background-color: #e4405f;
+  // &-social {
+  //   border-radius: 50%;
+  //   padding: $space-small;
+  //   color: #fff;
+  //   margin: 0 $space-tiny;
   // }
-  &-linkedin {
-    background-color: #0a66c2;
-  }
-  &-telegram {
-    background-color: #41b0e1;
-  }
+
+  // &-web {
+  //   background-color: var(--primary-light-color);
+  // }
+  // &-fb {
+  //   background-color: #1877f2;
+  // }
+  // &-ytb {
+  //   background-color: #cd201f;
+  // }
+  // // &-ig {
+  // //   background-color: #e4405f;
+  // // }
+  // &-linkedin {
+  //   background-color: #0a66c2;
+  // }
+  // &-telegram {
+  //   background-color: #41b0e1;
+  // }
 }
 
 .rating {

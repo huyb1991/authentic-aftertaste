@@ -5,6 +5,12 @@
     }
   }
 
+  &-rating {
+    &-count {
+      margin-top: 3px;
+    }
+  }
+
   &-section {
     border-top: 1px solid var(--divider-color);
     margin-top: 20px;
