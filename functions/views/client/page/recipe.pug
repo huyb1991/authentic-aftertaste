@@ -23,12 +23,15 @@ mixin recipeTemplate(isAmp=false)
           svg.recipe-section-icon(fill="currentColor", width="40", height="40")
             use(xlink:href="#icon-arrow")
         #ingredient.recipe-section-content
-          each ingredient in (recipe.ingredients || [])
+          each ingredient, idx in (recipe.ingredients || [])
+            -var iCheckboxId = `iCkb${idx}`
             div
-              span.qty= ingredient.quantity
-              span.unit= ingredient.unit
-              span.ingredient= ingredient.ingredient
-              span= ingredient.note
+              input(type="checkbox", id= iCheckboxId)
+              label(for= iCheckboxId)
+                span.qty= ingredient.quantity
+                span.unit= ingredient.unit
+                span.ingredient= ingredient.ingredient
+                span= ingredient.note
 
         //- Directions
         .flex.flex-between.recipe-section(data-target="direction")
