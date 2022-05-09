@@ -3,7 +3,9 @@ mixin recipeTemplate(isAmp=false)
     .card.card-border.recipe-wrapper
       img.img.img-recipe.img-recipe-cover(src= recipe.imgCover, alt= recipe.name)
       .content
-        h1.heading.heading-page= recipe.name
+        .flex
+          h1.heading.heading-page= recipe.name
+          +ratingTemplate(recipe.ratings)
         .flex.flex-between.recipe-section(data-target="information")
           .flex
             h2.heading.heading-section Dish Information
