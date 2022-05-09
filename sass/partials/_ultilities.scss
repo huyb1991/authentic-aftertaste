@@ -3,10 +3,12 @@
   justify-items: center;
   align-items: center;
 
-  &-default {
+  &-item-default {
     align-items: unset;
   }
-
+  &-item-start {
+    justify-items: start;
+  }
   &-item-end {
     align-items: flex-end;
   }
@@ -18,7 +20,6 @@
   &-center {
     justify-content: center;
   }
-
   &-end {
     justify-content: flex-end;
   }

@@ -1,6 +1,8 @@
 var btnRecipeSection = document.getElementsByClassName('recipe-section');
+var btnRecipeItem = document.getElementsByClassName('recipe-item');
 
 function listenToggle() {
+  // Toggle to expand/collapse section content
   Array.from(btnRecipeSection).forEach(function(element) {
     element.addEventListener('click', function() {
       var targetId = element.getAttribute('data-target');
@@ -18,6 +20,18 @@ function listenToggle() {
       } else {
         targetEl.style.maxHeight = targetEl.scrollHeight + 'px';
       }
+    });
+  });
+
+  // Toggle to mark done on checkbox list
+  Array.from(btnRecipeItem).forEach(function(element) {
+    element.addEventListener('click', function() {
+      var checkboxEl = element.querySelector('.recipe-checkbox');
+      var labelEl = element.querySelector('.recipe-label');
+      var toggleClass = 'done';
+
+      checkboxEl.classList.toggle(toggleClass);
+      labelEl.classList.toggle(toggleClass);
     });
   });
 };
