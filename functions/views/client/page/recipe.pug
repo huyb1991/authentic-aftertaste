@@ -23,7 +23,12 @@ mixin recipeTemplate(isAmp=false)
           svg.recipe-section-icon(fill="currentColor", width="40", height="40")
             use(xlink:href="#icon-arrow")
         #ingredient.recipe-section-content
-          p Ingredient list
+          each ingredient in (recipe.ingredients || [])
+            div
+              span.qty= ingredient.quantity
+              span.unit= ingredient.unit
+              span.ingredient= ingredient.ingredient
+              span= ingredient.note
 
         //- Directions
         .flex.flex-between.recipe-section(data-target="direction")
@@ -34,5 +39,8 @@ mixin recipeTemplate(isAmp=false)
           svg.recipe-section-icon(fill="currentColor", width="40", height="40")
             use(xlink:href="#icon-arrow")
         #direction.recipe-section-content
-          p Direction list
-
+          each direction, idx in (recipe.directions || [])
+            .recipe-direction
+              .recipe-direction-order.flex.flex-center
+                | #{idx+1}
+              p.m0= direction.desc
