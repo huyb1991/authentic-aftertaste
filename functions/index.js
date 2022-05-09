@@ -1,7 +1,11 @@
 const functions = require('firebase-functions');
 const express = require('express');
-const { getSEOTitle, getSEODesc, render404Page } = require('./helpers');
+
+// Constants
 const { BASE_URL, BASE_URL_ADMIN } = require('./constants');
+
+// Helpers
+const { render404Page } = require('./helpers');
 
 // Config APP
 const app = express();
