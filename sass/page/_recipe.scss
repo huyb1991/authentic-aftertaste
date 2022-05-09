@@ -23,7 +23,8 @@
     &-content {
       transition: all .2s ease-in-out;
       overflow: hidden;
-      padding: $space-super-large;
+      margin-top: $space-super-large;
+      padding: 0 $space-super-large;
 
       &.collapse {
         max-height: 0;
