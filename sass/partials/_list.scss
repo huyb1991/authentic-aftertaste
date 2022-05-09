@@ -17,7 +17,7 @@
     }
 
     &-summary {
-      @media screen and (min-width: $mobileMax) {
+      @media screen and (max-width: $mobileMax) {
         margin-top: $space-normal;
       }
       @media screen and (min-width: $tabletMin) {
