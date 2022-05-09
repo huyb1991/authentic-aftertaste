@@ -2,6 +2,7 @@
 const { PAGE_NAME } = require('./_constants');
 
 // Helper
+const { render404Page } = require('../../helpers');
 const CONTENT = require('../../content/_helpers');
 
 const RecipeController = (req, res, isAMP = false) => {
@@ -9,6 +10,10 @@ const RecipeController = (req, res, isAMP = false) => {
 
   return CONTENT.readFileContent(CONTENT.FILE_NAME.RECIPE_DETAIL(slug))
     .then(recipe => {
+      if (!recipe) {
+        return render404Page(res);
+      }
+
       return res.render(
         `client${isAMP ? '/amp' : ''}/recipe`,
         {
