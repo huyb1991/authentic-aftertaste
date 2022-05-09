@@ -15,9 +15,11 @@ router.use((req, res, next) => next());
 router
   // CLIENT routers
   .get('/', (req, res) => client.router.HomeController(req, res))
+  .get('/recipe/:slug', (req, res) => client.router.RecipeDetailController(req, res))
   .get('/blog/:category/:slug', (req, res) => client.router.BlogPostController(req, res))
   // AMP Pages
   .get('/amp', (req, res) => client.router.HomeController(req, res, true))
+  .get('/amp/recipe/:slug', (req, res) => client.router.RecipeDetailController(req, res, true))
   .get('/amp/blog/:category/:slug', (req, res) =>
     client.router.BlogPostController(req, res, true))
 
