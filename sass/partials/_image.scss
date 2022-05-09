@@ -3,6 +3,19 @@ img {
 }
 
 .img {
+  &-recipe {
+    object-fit: cover;
+    width: 100%;
+
+    &-thumb {
+      height: 200px;
+
+      @media screen and (min-width: $tabletMin) {
+        max-width: 320px;
+      }
+    }
+  }
+
   &-radius {
     border-radius: $radius-large;
   }
