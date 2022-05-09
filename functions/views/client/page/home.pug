@@ -7,7 +7,7 @@ mixin homeTemplate(isAmp=false)
 
       each recipe in recipes
         a.list-recipe(href= `recipe/${recipe.slug}`, title= recipe.name)
-          img.img-recipe-thumb.img.img-radius(src= recipe.imgThumb, alt= recipe.name)
+          img.img.img-radius.img-recipe.img-recipe-thumb(src= recipe.imgThumb, alt= recipe.name)
           .list-recipe-summary
             div
               h3.heading.heading-section= recipe.name
