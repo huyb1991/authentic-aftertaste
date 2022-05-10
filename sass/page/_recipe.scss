@@ -141,6 +141,10 @@ $summary-width: 240px;
     transition: all .2s ease-in-out;
     margin: 0;
 
+    span {
+      margin-right: $space-tiny;
+    }
+
     &.done {
       color: var(--text-secondary-color);
     }

@@ -45,10 +45,14 @@ mixin recipeTemplate(isAmp=false)
             .recipe-item
               .recipe-checkbox
               p.recipe-label.flex
-                span.qty= ingredient.quantity
-                span.unit= ingredient.unit
-                span.ingredient= ingredient.ingredient
-                span= ingredient.note
+                -if (ingredient.quantity)
+                  span.qty= ingredient.quantity
+                -if (ingredient.unit)
+                  span.unit= ingredient.unit
+                -if (ingredient.ingredient)
+                  span.ingredient= ingredient.ingredient
+                -if (ingredient.note)
+                  |(#{ingredient.note})
 
         //- Directions
         .flex.flex-between.recipe-section(data-target="direction")
