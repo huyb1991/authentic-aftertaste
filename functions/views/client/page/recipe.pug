@@ -47,6 +47,8 @@ mixin recipeTemplate(isAmp=false)
               p.recipe-label.flex
                 -if (ingredient.quantity)
                   span.qty= ingredient.quantity
+                -if (ingredient.quantityExtra)
+                  span.qtyExtra= ingredient.quantityExtra
                 -if (ingredient.unit)
                   span.unit= ingredient.unit
                 -if (ingredient.ingredient)
