@@ -108,8 +108,18 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
         updateListAllRecipe(recipe.name, slug, prevSlug);
       }
 
+      // Format time
+      const totalTime = Number(recipe.time.prep || 0) + Number(recipe.time.cook || 0) + Number(recipe.time.additional || 0);
+      const formatTime = {
+        prep: getCookingTimeText(recipe.time.prep),
+        additional: getCookingTimeText(recipe.time.additional),
+        cook: getCookingTimeText(recipe.time.cook),
+        total: getCookingTimeText(totalTime),
+      };
+
       return CONTENT.writeFileContent(fileName, {
         ...recipe,
+        time: formatTime,
       })
       .then(() => {
         // Change sitemap url after change slug
