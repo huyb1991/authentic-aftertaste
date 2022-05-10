@@ -1,4 +1,4 @@
-$summary-width: 300px;
+$summary-width: 240px;
 
 .recipe {
   &-wrapper {
@@ -24,15 +24,23 @@ $summary-width: 300px;
   }
 
   &-info {
-    max-width: 640px;
+    @media screen and (min-width: $desktopMin) {
+      max-width: 660px;
+    }
   }
 
   &-summary {
-    position: absolute;
-    top: -40px;
-    right: 60px;
-    width: $summary-width;
-    padding: $space-super-large $space-large;
+    @media screen and (min-width: $desktopMin) {
+      position: absolute;
+      top: -40px;
+      right: 60px;
+      width: $summary-width;
+      padding: $space-super-large $space-large;
+    }
+
+    &-item {
+      margin: 0 0 $space-small 0;
+    }
   }
 
   &-rating {
