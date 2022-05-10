@@ -1,7 +1,63 @@
+$summary-width: 240px;
+
 .recipe {
   &-wrapper {
     @media screen and (max-width: $desktopMin) {
       border-radius: 20px 20px 0 0;
+    }
+  }
+
+  &-cover {
+    display: block;
+    border-radius: 20px 20px 0 0; // Clear card border
+
+    @media screen and (max-width: $mobileMax) {
+      height: 220px;
+    }
+    @media screen and (min-width: $tabletMin) {
+      height: 480px;
+    }
+  }
+
+  &-content {
+    position: relative;
+  }
+
+  &-info {
+    @media screen and (min-width: $desktopMin) {
+      max-width: calc(100% - 340px);
+    }
+  }
+
+  &-summary {
+    @media screen and (min-width: $desktopMin) {
+      position: absolute;
+      top: -40px;
+      right: 60px;
+      width: $summary-width;
+      padding: $space-super-large $space-normal;
+    }
+
+    @media only screen and (min-width: $tabletMin) and (max-width: $tabletMax) {
+      display: flex;
+      flex-wrap: wrap;
+      padding: $space-normal;
+      margin: $space-normal 0;
+      border-radius: $radius-large;
+    }
+
+    @media screen and (max-width: $mobileMax) {
+      margin-top: $space-normal;
+      border: none;
+      box-shadow: none;
+    }
+
+    &-item {
+      margin: 0 0 $space-small 0;
+
+      @media screen and (max-width: $tabletMax) {
+        flex: 50%;
+      }
     }
   }
 
@@ -30,7 +86,10 @@
       transition: all .2s ease-in-out;
       overflow: hidden;
       margin-top: $space-super-large;
-      padding: 0 $space-super-large;
+
+      @media screen and (min-width: $desktopMin) {
+        padding: 0 $space-super-large;
+      }
 
       &.collapse {
         max-height: 0;
@@ -81,6 +140,10 @@
   &-label {
     transition: all .2s ease-in-out;
     margin: 0;
+
+    span {
+      margin-right: $space-tiny;
+    }
 
     &.done {
       color: var(--text-secondary-color);

@@ -56,6 +56,9 @@ $size-6: 0.8rem;
   &-uppercase {
     text-transform: uppercase;
   }
+  &-capitalize {
+    text-transform: capitalize;
+  }
 
   &-primary {
     color: var(--primary-color);
