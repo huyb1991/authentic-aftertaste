@@ -6,6 +6,22 @@ mixin recipeTemplate(isAmp=false)
         .flex
           h1.heading.heading-page= recipe.name
           +ratingTemplate(recipe.ratings)
+
+        //- Summary
+        .recipe-summary.card.card-border
+          each timeItem in ['prep', 'cook', 'additional', 'total']
+            .recipe-summary-item.flex
+              svg.icon(fill="currentColor", width="20", height="20")
+                use(xlink:href="#icon-mark")
+              span.ml10.text-capitalize #{timeItem}:
+              span.ml10= recipe.time[timeItem] || '0 min'
+          p.recipe-summary-item.flex
+            svg.icon(fill="currentColor", width="20", height="20")
+              use(xlink:href="#icon-mark")
+            span.ml10.text-capitalize Servings:
+            span.ml10= recipe.serving
+
+        //- Information
         .recipe-info.flex.flex-between.recipe-section(data-target="information")
           .flex
             h2.heading.heading-section Dish Information
@@ -15,12 +31,6 @@ mixin recipeTemplate(isAmp=false)
             use(xlink:href="#icon-arrow")
         #information.recipe-info.recipe-section-content
           p= recipe.description
-
-        .recipe-summary.card.card-border
-          ul
-            li Prep time: 20 mins
-            li Cook time: 20 mins
-            li Additional time: 20 mins
 
         //- Ingredients
         .flex.flex-between.recipe-section(data-target="ingredient")
