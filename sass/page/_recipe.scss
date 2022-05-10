@@ -12,10 +12,10 @@ $summary-width: 300px;
     border-radius: 20px 20px 0 0; // Clear card border
 
     @media screen and (max-width: $mobileMax) {
-      height: 210px;
+      height: 220px;
     }
     @media screen and (min-width: $tabletMin) {
-      height: 360px;
+      height: 480px;
     }
   }
 
