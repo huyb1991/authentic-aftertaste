@@ -1,3 +1,49 @@
+-var ingredientList = []
+each ingredient in recipe.ingredients
+  -var ingredientItem = '';
+  -if (ingredient.quantity)
+    -ingredientItem += ingredient.quantity + ' ';
+  -if (ingredient.quantityExtra)
+    -ingredientItem += ingredient.quantityExtra + ' ';
+  -if (ingredient.unit)
+    -ingredientItem += ingredient.unit + ' ';
+  -if (ingredient.ingredient)
+    -ingredientItem += ingredient.ingredient + ' ';
+  -if (ingredient.note)
+    -ingredientItem += ingredient.note + ' ';
+
+  -ingredientList.push(`"${ingredientItem.trim()}"`)
+
+-var directionList = []
+each direction in recipe.directions
+  -directionList.push(JSON.stringify({ '@type': 'HowToStep', text: direction.desc }))
+
 script(type="application/ld+json").
   {
+    "@context": "https://schema.org/",
+    "@type": "Recipe",
+    "name": "#{recipe.name}",
+    "image": [
+      "#{recipe.imgCover}"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Mary Stone"
+    },
+    "datePublished": "#{recipe.created}",
+    "description": "#{recipe.description}",
+    "prepTime": "#{recipe.timeSchema.prep}",
+    "cookTime": "#{recipe.timeSchema.cook}",
+    "totalTime": "#{recipe.timeSchema.total}",
+    "recipeIngredient": [
+      !{ingredientList.join(',').split(',')}
+    ],
+    "recipeInstructions": [
+      !{directionList.join(',')}
+    ]
   }
+
+//- "recipeCuisine": "American", Country
+//- keywords": "non-alcoholic",
+//- "recipeYield": "1 serving",
+//- "recipeCategory": "Drink",
