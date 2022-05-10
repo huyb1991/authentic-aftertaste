@@ -1,20 +1,26 @@
 mixin recipeTemplate(isAmp=false)
   .container.pb40
     .card.card-border.recipe-wrapper
-      img.img.img-recipe.img-recipe-cover(src= recipe.imgCover, alt= recipe.name)
-      .content
+      img.img.img-recipe.recipe-cover(src= recipe.imgCover, alt= recipe.name)
+      .recipe-content.content
         .flex
           h1.heading.heading-page= recipe.name
           +ratingTemplate(recipe.ratings)
-        .flex.flex-between.recipe-section(data-target="information")
+        .recipe-info.flex.flex-between.recipe-section(data-target="information")
           .flex
             h2.heading.heading-section Dish Information
             svg.ml10(fill="currentColor", width="50", height="40")
               use(xlink:href="#icon-dish-info")
           svg.recipe-section-icon(fill="currentColor", width="40", height="40")
             use(xlink:href="#icon-arrow")
-        #information.recipe-section-content
+        #information.recipe-info.recipe-section-content
           p= recipe.description
+
+        .recipe-summary.card.card-border
+          ul
+            li Prep time: 20 mins
+            li Cook time: 20 mins
+            li Additional time: 20 mins
 
         //- Ingredients
         .flex.flex-between.recipe-section(data-target="ingredient")

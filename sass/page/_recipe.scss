@@ -1,8 +1,38 @@
+$summary-width: 300px;
+
 .recipe {
   &-wrapper {
     @media screen and (max-width: $desktopMin) {
       border-radius: 20px 20px 0 0;
     }
+  }
+
+  &-cover {
+    display: block;
+    border-radius: 20px 20px 0 0; // Clear card border
+
+    @media screen and (max-width: $mobileMax) {
+      height: 210px;
+    }
+    @media screen and (min-width: $tabletMin) {
+      height: 360px;
+    }
+  }
+
+  &-content {
+    position: relative;
+  }
+
+  &-info {
+    max-width: 640px;
+  }
+
+  &-summary {
+    position: absolute;
+    top: -40px;
+    right: 60px;
+    width: $summary-width;
+    padding: $space-super-large $space-large;
   }
 
   &-rating {
