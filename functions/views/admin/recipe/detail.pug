@@ -145,19 +145,41 @@ block content
           .form-row
             .form-group.col-md-3
               label(for="category") Category
-              input.form-control(
+              .dropdown
+                button(
+                  class="btn btn-secondary btn-block dropdown-toggle",
+                  type="button",
+                  id="ddCategory",
+                  data-toggle="dropdown",
+                  aria-haspopup="true",
+                  aria-expanded="false"
+                ) Category
+                div(id="ddCategory-menu", class="dropdown-menu", aria-labelledby="ddCategory")
+                  //- List Category Option
+              input(
                 id="category",
                 name="category",
-                type="text",
+                type="hidden",
                 value= data.category,
                 placeholder="Category"
               )
             .form-group.col-md-3
               label(for="cuisine") Cuisine
-              input.form-control(
+              .dropdown
+                button(
+                  class="btn btn-secondary btn-block dropdown-toggle",
+                  type="button",
+                  id="ddCuisine",
+                  data-toggle="dropdown",
+                  aria-haspopup="true",
+                  aria-expanded="false"
+                ) Cuisine
+                div(id="ddCuisine-menu", class="dropdown-menu", aria-labelledby="ddCuisine")
+                  //- List Cuisine Option
+              input(
                 id="cuisine",
                 name="cuisine",
-                type="text",
+                type="hidden",
                 value= data.cuisine,
                 placeholder="Cuisine"
               )
