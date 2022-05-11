@@ -3,9 +3,10 @@ const MODELS = require('../../models').models;
 const CONTENT = require('../../content/_helpers');
 const {
   ENTITY,
+  RECIPE_CATEGORY,
   BASE_URL_SITEMAP,
 } = require('../../constants');
-const { BLOG_CATEGORY, BLOG_TAGS } = require('../../constants/blog');
+// const { BLOG_CATEGORY, BLOG_TAGS } = require('../../constants/blog');
 
 // Helpers
 const {
@@ -37,17 +38,17 @@ const APIDataRefer = (req, res) => {
       name: value,
       value,
     }));
-  const categories = Object.entries(BLOG_CATEGORY)
+  const categories = Object.entries(RECIPE_CATEGORY)
     .map(([key, value]) => ({
-      name: value.title,
+      name: value.name,
       value: value.slug,
     }));
-  const tags = BLOG_TAGS;
+  // const tags = BLOG_TAGS;
 
   return res.json({
     entities,
     categories,
-    tags
+    // tags
   });
 };
 
