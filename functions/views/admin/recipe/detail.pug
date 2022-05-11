@@ -50,6 +50,35 @@ block content
               placeholder="prevSlug"
             )
 
+          .form-group
+            label(for="category") Category
+            input.form-control(
+              id="category",
+              name="category",
+              type="text",
+              value= data.category,
+              placeholder="Category"
+            )
+          .form-group
+            label(for="cuisine") Cuisine
+            input.form-control(
+              id="cuisine",
+              name="cuisine",
+              type="text",
+              value= data.cuisine,
+              placeholder="Cuisine"
+            )
+          .form-group
+            label(for="keywords") Keywords
+            input.form-control(
+              id="keywords",
+              name="keywords",
+              type="text",
+              value= data.keywords,
+              placeholder="Keywords"
+            )
+            .form-text E.g: winter apple pie, nutmeg crust
+
           //- Rating
           .row
             each ratingValue, index in (data.ratings || [0, 0, 0, 0, 0])
