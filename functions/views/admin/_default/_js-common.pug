@@ -74,6 +74,7 @@ script(type="text/javascript").
     }).done(function() {
       localStorage.setItem(STORAGE_KEY.LAST_UPDATE, TODAY_STR);
       displayToast(true, 'Successfully updated all refer data.');
+      window.location.reload();
     })
     .fail(function() {
       displayToast(false, 'Error updated all refer data!!!');
@@ -225,6 +226,12 @@ script(type="text/javascript").
     });
   };
 
+  function listenBtnRefresh() {
+    $('body').on('click', '#btnRefresh', function() {
+      getAllDataLookup();
+    });
+  };
+
   function initAdmin() {
     var latestUpdate = localStorage.getItem(STORAGE_KEY.LAST_UPDATE);
 
@@ -232,9 +239,7 @@ script(type="text/javascript").
       getAllDataLookup();
     }
 
-    renderEntitySlugDropdown();
-    renderCategoryDropdown();
-    renderTagDropdown();
+    listenBtnRefresh();
     listenBtnSelect();
     listenBtnState();
     listenBtnRemove();
