@@ -40,6 +40,8 @@ script(type="text/javascript").
     });
     var itemSelectorTemplate = '';
 
+    console.log('selectedItem: ', selectedItem);
+
     if (selectedItem) {
       $("#" + ddWrapperId).html(selectedItem.name);
     }
@@ -96,7 +98,7 @@ script(type="text/javascript").
     var listCategory = getLocalStorageData(STORAGE_KEY.CATEGORY) || [];
 
     var formatList = listCategory.map(it => ({
-      id: it.slug,
+      id: it.value,
       name: it.name,
     }));
 
@@ -107,7 +109,7 @@ script(type="text/javascript").
     var listCuisine = getLocalStorageData(STORAGE_KEY.CUISINE) || [];
 
     var formatList = listCuisine.map(it => ({
-      id: it.slug,
+      id: it.value,
       name: it.name,
     }));
 
