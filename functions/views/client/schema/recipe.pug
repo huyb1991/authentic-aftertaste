@@ -29,7 +29,7 @@ script(type="application/ld+json").
     ],
     "author": {
       "@type": "Person",
-      "name": "Mary Stone"
+      "name": "#{recipe.author || 'Jennifer Miller'}"
     },
     "datePublished": "#{recipe.created}",
     "description": "#{recipe.description}",
@@ -54,7 +54,3 @@ script(type="application/ld+json").
 
 //- nutrition
 //- video
-
-//- Category:
-//- https://www.csmonitor.com/The-Culture/Food/Stir-It-Up/Topics
-//- https://www.recipetineats.com/categories/

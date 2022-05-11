@@ -24,6 +24,15 @@ const RATING_SCORE = {
   MAX: 5,
 };
 
+const DEFAULT_CHEFS = [
+  'Jennifer Miller',
+  'Richard Williams',
+  'Susan Jones',
+  'Michael Brown',
+  'Patricia Miller',
+  'Robert Wilson',
+];
+
 module.exports = {
   BASE_URL,
   BASE_URL_ADMIN,
@@ -32,4 +41,5 @@ module.exports = {
   ENTITY_NAME,
   CATEGORY_SLUG,
   RATING_SCORE,
+  DEFAULT_CHEFS,
 };

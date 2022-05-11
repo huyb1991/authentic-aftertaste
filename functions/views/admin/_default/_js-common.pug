@@ -5,7 +5,8 @@ script(type="text/javascript").
     LAST_UPDATE: 'last_update',
     ENTITY: 'entities',
     CATEGORY: 'category',
-    TAG: 'tag',
+    CUISINE: 'cuisine',
+    //- TAG: 'tag',
   };
 
   function getLocalStorageData(key) {
@@ -39,6 +40,8 @@ script(type="text/javascript").
     });
     var itemSelectorTemplate = '';
 
+    console.log('selectedItem: ', selectedItem);
+
     if (selectedItem) {
       $("#" + ddWrapperId).html(selectedItem.name);
     }
@@ -63,14 +66,17 @@ script(type="text/javascript").
     $.get(apiUrl, function(data) {
       var entities = data.entities;
       var categories = data.categories;
-      var tags = data.tags;
+      var cuisines = data.cuisines;
+      //- var tags = data.tags;
 
       localStorage.setItem(STORAGE_KEY.ENTITY, JSON.stringify(entities || []));
       localStorage.setItem(STORAGE_KEY.CATEGORY, JSON.stringify(categories || []));
-      localStorage.setItem(STORAGE_KEY.TAG, JSON.stringify(tags || []));
+      localStorage.setItem(STORAGE_KEY.CUISINE, JSON.stringify(cuisines || []));
+      //- localStorage.setItem(STORAGE_KEY.TAG, JSON.stringify(tags || []));
     }).done(function() {
       localStorage.setItem(STORAGE_KEY.LAST_UPDATE, TODAY_STR);
       displayToast(true, 'Successfully updated all refer data.');
+      window.location.reload();
     })
     .fail(function() {
       displayToast(false, 'Error updated all refer data!!!');
@@ -88,7 +94,7 @@ script(type="text/javascript").
     renderDropdownOptions(formatList, 'ddEntity', 'sitemapEntity', '');
   };
 
-  function renderCategorySlugDropdown() {
+  function renderCategoryDropdown() {
     var listCategory = getLocalStorageData(STORAGE_KEY.CATEGORY) || [];
 
     var formatList = listCategory.map(it => ({
@@ -97,6 +103,17 @@ script(type="text/javascript").
     }));
 
     renderDropdownOptions(formatList, 'ddCategory', 'category', '');
+  };
+
+  function renderCuisineDropdown() {
+    var listCuisine = getLocalStorageData(STORAGE_KEY.CUISINE) || [];
+
+    var formatList = listCuisine.map(it => ({
+      id: it.value,
+      name: it.name,
+    }));
+
+    renderDropdownOptions(formatList, 'ddCuisine', 'cuisine', '');
   };
 
   function renderTagDropdown() {
@@ -211,6 +228,12 @@ script(type="text/javascript").
     });
   };
 
+  function listenBtnRefresh() {
+    $('body').on('click', '#btnRefresh', function() {
+      getAllDataLookup();
+    });
+  };
+
   function initAdmin() {
     var latestUpdate = localStorage.getItem(STORAGE_KEY.LAST_UPDATE);
 
@@ -218,9 +241,7 @@ script(type="text/javascript").
       getAllDataLookup();
     }
 
-    renderEntitySlugDropdown();
-    renderCategorySlugDropdown();
-    renderTagDropdown();
+    listenBtnRefresh();
     listenBtnSelect();
     listenBtnState();
     listenBtnRemove();

@@ -1,6 +1,11 @@
 // Constants
 const MODELS = require('../../models').models;
-const { ENTITY, ENTITY_NAME, RATING_SCORE } = require('../../constants');
+const {
+  ENTITY,
+  ENTITY_NAME,
+  DEFAULT_CHEFS,
+  RATING_SCORE,
+} = require('../../constants');
 
 // Helpers
 const { getFlashMessage, getRandomNumber } = require('../../helpers');
@@ -35,12 +40,18 @@ const RecipeDetail = (req, res) => {
 
   // Create new Recipe
   if (id === 'create') {
+    const randomIndex = getRandomNumber(0, DEFAULT_CHEFS.length);
+    const randomAuthor = DEFAULT_CHEFS[randomIndex];
+
     return res.render(
       `admin/${ENTITY.RECIPE}/detail`,
       {
         title: `Create new ${ENTITY_NAME[ENTITY.RECIPE]}`,
         entity: ENTITY.RECIPE,
-        data: {},
+        data: {
+          author: randomAuthor,
+          time: {},
+        },
         ...flashMessage
       },
     );

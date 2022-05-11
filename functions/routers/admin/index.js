@@ -5,7 +5,8 @@ const {
   ENTITY,
   BASE_URL_SITEMAP,
 } = require('../../constants');
-const { BLOG_CATEGORY, BLOG_TAGS } = require('../../constants/blog');
+const { RECIPE_CATEGORY, RECIPE_CUISINE } = require('../../constants/recipe');
+// const { BLOG_CATEGORY, BLOG_TAGS } = require('../../constants/blog');
 
 // Helpers
 const {
@@ -37,17 +38,23 @@ const APIDataRefer = (req, res) => {
       name: value,
       value,
     }));
-  const categories = Object.entries(BLOG_CATEGORY)
+  const categories = Object.entries(RECIPE_CATEGORY)
     .map(([key, value]) => ({
-      name: value.title,
+      name: value.name,
       value: value.slug,
     }));
-  const tags = BLOG_TAGS;
+  const cuisines = Object.entries(RECIPE_CUISINE)
+    .map(([key, value]) => ({
+      name: value.name,
+      value: value.slug,
+    }));
+  // const tags = BLOG_TAGS;
 
   return res.json({
     entities,
     categories,
-    tags
+    cuisines,
+    // tags
   });
 };
 

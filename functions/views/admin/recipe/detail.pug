@@ -50,6 +50,26 @@ block content
               placeholder="prevSlug"
             )
 
+          .form-row
+            .form-group.col-md-4
+              label(for="author") Author Name
+              input.form-control(
+                id="author",
+                name="author",
+                type="text",
+                value= data.author,
+                placeholder="Author"
+              )
+            .form-group.col-md-8
+              label(for="authorLink") Author Link
+              input.form-control(
+                id="authorLink",
+                name="authorLink",
+                type="text",
+                value= data.authorLink,
+                placeholder="Author Link"
+              )
+
           //- Rating
           .row
             each ratingValue, index in (data.ratings || [0, 0, 0, 0, 0])
@@ -64,47 +84,44 @@ block content
                   )
 
         .col-md-6
-          .row
-            .col-md-6
-              .form-group
-                label(for="imgCover") Cover Image
-                input.form-control(
-                  id="imgCover",
-                  name="imgCover",
-                  type="text",
-                  value= data.imgCover,
-                  placeholder="Cover Image"
-                )
-            .col-md-6
-              .form-group
-                label(for="imgCoverWebP") Cover Image WebP
-                input.form-control(
-                  id="imgCoverWebP",
-                  name="imgCoverWebP",
-                  type="text",
-                  value= data.imgCover,
-                  placeholder="Cover Image WebP"
-                )
-          .form-group
-            .row
-              .col-md-6
-                label(for="imgThumb") Thumbnail Image
-                input.form-control(
-                  id="imgThumb",
-                  name="imgThumb",
-                  type="text",
-                  value= data.imgThumb,
-                  placeholder="Thumbnail Image"
-                )
-              .col-md-6
-                label(for="imgThumbWebP") Thumbnail Image WebP
-                input.form-control(
-                  id="imgThumbWebP",
-                  name="imgThumbWebP",
-                  type="text",
-                  value= data.imgThumbWebP,
-                  placeholder="Thumbnail Image WebP"
-                )
+          .form-row
+            .form-group.col-md-6
+              label(for="imgCover") Cover Image
+              input.form-control(
+                id="imgCover",
+                name="imgCover",
+                type="text",
+                value= data.imgCover,
+                placeholder="Cover Image"
+              )
+            .form-group.col-md-6
+              label(for="imgCoverWebP") Cover Image WebP
+              input.form-control(
+                id="imgCoverWebP",
+                name="imgCoverWebP",
+                type="text",
+                value= data.imgCover,
+                placeholder="Cover Image WebP"
+              )
+          .form-row
+            .form-group.col-md-6
+              label(for="imgThumb") Thumbnail Image
+              input.form-control(
+                id="imgThumb",
+                name="imgThumb",
+                type="text",
+                value= data.imgThumb,
+                placeholder="Thumbnail Image"
+              )
+            .form-group.col-md-6
+              label(for="imgThumbWebP") Thumbnail Image WebP
+              input.form-control(
+                id="imgThumbWebP",
+                name="imgThumbWebP",
+                type="text",
+                value= data.imgThumbWebP,
+                placeholder="Thumbnail Image WebP"
+              )
 
           .form-group
             label(for="seoTitle") SEO Title
@@ -124,6 +141,58 @@ block content
               rows="2"
               placeholder="SEO Description"
             ) #{data.seoDesc}
+
+          .form-row
+            .form-group.col-md-3
+              label(for="category") Category
+              .dropdown
+                button(
+                  class="btn btn-secondary btn-block dropdown-toggle",
+                  type="button",
+                  id="ddCategory",
+                  data-toggle="dropdown",
+                  aria-haspopup="true",
+                  aria-expanded="false"
+                ) Category
+                div(id="ddCategory-menu", class="dropdown-menu", aria-labelledby="ddCategory")
+                  //- List Category Option
+              input(
+                id="category",
+                name="category",
+                type="hidden",
+                value= data.category || 'main-course',
+                placeholder="Category"
+              )
+            .form-group.col-md-3
+              label(for="cuisine") Cuisine
+              .dropdown
+                button(
+                  class="btn btn-secondary btn-block dropdown-toggle",
+                  type="button",
+                  id="ddCuisine",
+                  data-toggle="dropdown",
+                  aria-haspopup="true",
+                  aria-expanded="false"
+                ) Cuisine
+                div(id="ddCuisine-menu", class="dropdown-menu", aria-labelledby="ddCuisine")
+                  //- List Cuisine Option
+              input(
+                id="cuisine",
+                name="cuisine",
+                type="hidden",
+                value= data.cuisine,
+                placeholder="Cuisine"
+              )
+            .form-group.col-md-6
+              label(for="keywords") Keywords
+              input.form-control(
+                id="keywords",
+                name="keywords",
+                type="text",
+                value= data.keywords,
+                placeholder="Keywords"
+              )
+              small.form-text E.g: winter apple pie, nutmeg crust
 
       //- Summary
       .row
