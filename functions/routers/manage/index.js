@@ -1,10 +1,10 @@
 // Routers
 const {
-  CountryList,
-  CountryDetail,
-  CountryDetailUpdate,
-  CountryDetailDelete,
-} = require('./country');
+  CuisineList,
+  CuisineDetail,
+  CuisineDetailUpdate,
+  CuisineDetailDelete,
+} = require('./cuisine');
 const {
   RecipeList,
   RecipeDetail,
@@ -13,10 +13,10 @@ const {
 } = require('./recipe');
 
 module.exports.router = {
-  CountryList,
-  CountryDetail,
-  CountryDetailUpdate,
-  CountryDetailDelete,
+  CuisineList,
+  CuisineDetail,
+  CuisineDetailUpdate,
+  CuisineDetailDelete,
   RecipeList,
   RecipeDetail,
   RecipeDetailUpdate,

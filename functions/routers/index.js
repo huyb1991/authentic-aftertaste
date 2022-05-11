@@ -31,11 +31,11 @@ router
   .get('/admin/recipe/:id', isAdminGroup, (req, res) => manage.router.RecipeDetail(req, res))
   .post('/admin/recipe/:id', isAdminGroup, (req, res) => manage.router.RecipeDetailUpdate(req, res))
   .get('/admin/recipe/delete/:id', isAdminGroup, (req, res) => manage.router.RecipeDetailDelete(req, res))
-  // Country
-  .get('/admin/country', isAdminGroup, (req, res) => manage.router.CountryList(req, res))
-  .get('/admin/country/:id', isAdminGroup, (req, res) => manage.router.CountryDetail(req, res))
-  .post('/admin/country/:id', isAdminGroup, (req, res) => manage.router.CountryDetailUpdate(req, res))
-  .get('/admin/country/delete/:id', isAdminGroup, (req, res) => manage.router.CountryDetailDelete(req, res))
+  // Cuisine
+  .get('/admin/cuisine', isAdminGroup, (req, res) => manage.router.CuisineList(req, res))
+  .get('/admin/cuisine/:id', isAdminGroup, (req, res) => manage.router.CuisineDetail(req, res))
+  .post('/admin/cuisine/:id', isAdminGroup, (req, res) => manage.router.CuisineDetailUpdate(req, res))
+  .get('/admin/cuisine/delete/:id', isAdminGroup, (req, res) => manage.router.CuisineDetailDelete(req, res))
   // Blog
   .get('/admin/blog', isAdminGroup, (req, res) => manage.router.BlogPostList(req, res))
   .get('/admin/blog/:id', isAdminGroup, (req, res) => manage.router.BlogPostDetail(req, res))
