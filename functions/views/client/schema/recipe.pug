@@ -23,6 +23,7 @@ script(type="application/ld+json").
     "@context": "https://schema.org/",
     "@type": "Recipe",
     "name": "#{recipe.name}",
+    "recipeCuisine": "#{recipe.cuisine || 'Worldwide'}",
     "image": [
       "#{recipe.imgCover}"
     ],
@@ -32,6 +33,9 @@ script(type="application/ld+json").
     },
     "datePublished": "#{recipe.created}",
     "description": "#{recipe.description}",
+    "keywords": "#{recipe.keywords || recipe.slug}",
+    "recipeCategory": "#{recipe.category || 'Main-course'}",
+    "recipeYield": "#{recipe.serving || 1}",
     "prepTime": "#{recipe.timeSchema.prep}",
     "cookTime": "#{recipe.timeSchema.cook}",
     "totalTime": "#{recipe.timeSchema.total}",
@@ -40,10 +44,18 @@ script(type="application/ld+json").
     ],
     "recipeInstructions": [
       !{directionList.join(',')}
-    ]
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "#{recipe.ratings.avg || 4.5}",
+      "ratingCount": "#{recipe.ratings.count || 1}"
+    }
   }
 
-//- "recipeCuisine": "American", Country
-//- keywords": "non-alcoholic",
-//- "recipeYield": "1 serving",
-//- "recipeCategory": "Drink",
+//- nutrition
+//- aggregateRating
+//- video
+
+//- Category:
+//- https://www.csmonitor.com/The-Culture/Food/Stir-It-Up/Topics
+//- https://www.recipetineats.com/categories/
