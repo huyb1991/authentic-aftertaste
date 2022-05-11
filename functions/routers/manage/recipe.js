@@ -42,8 +42,6 @@ const RecipeDetail = (req, res) => {
   if (id === 'create') {
     const randomIndex = getRandomNumber(0, DEFAULT_CHEFS.length);
     const randomAuthor = DEFAULT_CHEFS[randomIndex];
-    console.log('randomIndex: ' , randomIndex);
-    console.log('randomAuthor: ' , randomAuthor);
 
     return res.render(
       `admin/${ENTITY.RECIPE}/detail`,
