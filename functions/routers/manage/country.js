@@ -5,20 +5,20 @@ const { ENTITY, ENTITY_NAME } = require('../../constants');
 // Helpers
 const { getFlashMessage } = require('../../helpers');
 
-const CountryList = (req, res) => {
+const CuisineList = (req, res) => {
   const flashMessage = getFlashMessage(req.query);
   const headers = [
-    { name: 'Country', field: 'name' },
+    { name: 'Cuisine', field: 'name' },
     { name: 'Operator', field: '_' },
   ];
 
-  return MODELS.countryGetAll()
+  return MODELS.cuisineGetAll()
     .then(data => {
       return res.render(
         'admin/list',
         {
-          title: `List ${ENTITY_NAME[ENTITY.COUNTRY]}`,
-          entity: ENTITY.COUNTRY,
+          title: `List ${ENTITY_NAME[ENTITY.CUISINE]}`,
+          entity: ENTITY.CUISINE,
           headers,
           data,
           ...flashMessage
@@ -27,30 +27,30 @@ const CountryList = (req, res) => {
     })
 };
 
-const CountryDetail = (req, res) => {
+const CuisineDetail = (req, res) => {
   const flashMessage = getFlashMessage(req.query);
   const { id } = req.params;
 
-  // Create new Country
+  // Create new Cuisine
   if (id === 'create') {
     return res.render(
       `admin/detail`,
       {
-        title: `Create new ${ENTITY_NAME[ENTITY.COUNTRY]}`,
-        entity: ENTITY.COUNTRY,
+        title: `Create new ${ENTITY_NAME[ENTITY.CUISINE]}`,
+        entity: ENTITY.CUISINE,
         data: {},
         ...flashMessage
       },
     );
   }
 
-  return MODELS.countryGetDetailById(id)
+  return MODELS.cuisineGetDetailById(id)
     .then(data => {
       return res.render(
         `admin/detail`,
         {
-          title: `Detail ${ENTITY_NAME[ENTITY.COUNTRY]}`,
-          entity: ENTITY.COUNTRY,
+          title: `Detail ${ENTITY_NAME[ENTITY.CUISINE]}`,
+          entity: ENTITY.CUISINE,
           data,
           ...flashMessage
         },
@@ -58,61 +58,61 @@ const CountryDetail = (req, res) => {
     });
 };
 
-const CountryDetailUpdate = (req, res) => {
+const CuisineDetailUpdate = (req, res) => {
   const { id } = req.params;
-  const countryId = req.body.id;
-  const countryData = req.body;
-  const actionAddMsg = `Create new ${ENTITY_NAME[ENTITY.COUNTRY]}`;
-  const actionUpdateMsg = `Update ${ENTITY_NAME[ENTITY.COUNTRY]}`;
+  const cuisineId = req.body.id;
+  const cuisineData = req.body;
+  const actionAddMsg = `Create new ${ENTITY_NAME[ENTITY.CUISINE]}`;
+  const actionUpdateMsg = `Update ${ENTITY_NAME[ENTITY.CUISINE]}`;
 
-  // Create new Country
+  // Create new Cuisine
   if (id === 'create') {
-    return MODELS.countryAdd(countryData)
+    return MODELS.cuisineAdd(cuisineData)
       .then(newId => {
         const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
-        return res.redirect(`/admin/${ENTITY.COUNTRY}/${newId}/?success=true&message=${message}`);
+        return res.redirect(`/admin/${ENTITY.CUISINE}/${newId}/?success=true&message=${message}`);
       })
       .catch(err => {
         console.log(`${actionAddMsg} error: ${err.message}`);
         const message = encodeURIComponent(`${actionAddMsg} error!!!`);
 
-        return res.redirect(`/admin/${ENTITY.COUNTRY}/?error=true&message=${message}`);
+        return res.redirect(`/admin/${ENTITY.CUISINE}/?error=true&message=${message}`);
       });
   }
 
-  return MODELS.countryUpdate(countryId, countryData)
+  return MODELS.cuisineUpdate(cuisineId, cuisineData)
     .then(() => {
-      const message = encodeURIComponent(`${actionUpdateMsg} successfully - id: ${countryId}.`);
-      return res.redirect(`/admin/${ENTITY.COUNTRY}/${countryId}/?success=true&message=${message}`);
+      const message = encodeURIComponent(`${actionUpdateMsg} successfully - id: ${cuisineId}.`);
+      return res.redirect(`/admin/${ENTITY.CUISINE}/${cuisineId}/?success=true&message=${message}`);
     })
     .catch(err => {
       console.log(`${actionUpdateMsg} error: ${err.message}`);
       const message = encodeURIComponent(`${actionUpdateMsg } error!!!`);
 
-      return res.redirect(`/admin/${ENTITY.COUNTRY}/?error=true&message=${message}`);
+      return res.redirect(`/admin/${ENTITY.CUISINE}/?error=true&message=${message}`);
     });
 };
 
-const CountryDetailDelete = (req, res) => {
+const CuisineDetailDelete = (req, res) => {
   const { id } = req.params;
-  const actionAddMsg = `Delete ${ENTITY_NAME[ENTITY.COUNTRY]}`;
+  const actionAddMsg = `Delete ${ENTITY_NAME[ENTITY.CUISINE]}`;
 
-  return MODELS.countryDelete(id)
+  return MODELS.cuisineDelete(id)
     .then(() => {
       const message = encodeURIComponent(`${actionAddMsg} successfully!`);
-      return res.redirect(`/admin/${ENTITY.COUNTRY}/?success=true&message=${message}`);
+      return res.redirect(`/admin/${ENTITY.CUISINE}/?success=true&message=${message}`);
     })
     .catch(err => {
       console.log(`${actionAddMsg} error: ${err.message}`);
       const message = encodeURIComponent(`${actionAddMsg } error!!!`);
 
-      return res.redirect(`/admin/${ENTITY.COUNTRY}/?error=true&message=${message}`);
+      return res.redirect(`/admin/${ENTITY.CUISINE}/?error=true&message=${message}`);
     });
 };
 
 module.exports = {
-  CountryList,
-  CountryDetail,
-  CountryDetailUpdate,
-  CountryDetailDelete,
+  CuisineList,
+  CuisineDetail,
+  CuisineDetailUpdate,
+  CuisineDetailDelete,
 };
