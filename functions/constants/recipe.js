@@ -27,168 +27,168 @@ const RECIPE_CUISINE = [
   },
   {
     name: 'American',
-    slug: 'American',
+    slug: 'american',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Asian',
-    slug: 'Asian',
+    slug: 'asian',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Caribbean',
-    slug: 'Caribbean',
+    slug: 'caribbean',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Chinese',
-    slug: 'Chinese',
+    slug: 'chinese',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Continental',
-    slug: 'Continental',
+    slug: 'continental',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Cuban',
-    slug: 'Cuban',
+    slug: 'cuban',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'European',
-    slug: 'European',
+    slug: 'european',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'French',
-    slug: 'French',
+    slug: 'french',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Greek',
-    slug: 'Greek',
+    slug: 'greek',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Indian',
-    slug: 'Indian',
+    slug: 'indian',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Indonesian',
-    slug: 'Indonesian',
+    slug: 'indonesian',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Italian',
-    slug: 'Italian',
+    slug: 'italian',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Japanese',
-    slug: 'Japanese',
+    slug: 'japanese',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Korean',
-    slug: 'Korean',
+    slug: 'korean',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Lebanese',
-    slug: 'Lebanese',
+    slug: 'lebanese',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Malaysian',
-    slug: 'Malaysian',
+    slug: 'malaysian',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Mexican',
-    slug: 'Mexican',
+    slug: 'mexican',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Pakistani',
-    slug: 'Pakistani',
+    slug: 'pakistani',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Russian',
-    slug: 'Russian',
+    slug: 'russian',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Singapore',
-    slug: 'Singapore',
+    slug: 'singapore',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Spanish',
-    slug: 'Spanish',
+    slug: 'spanish',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Thai',
-    slug: 'Thai',
+    slug: 'thai',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Tibetan',
-    slug: 'Tibetan',
+    slug: 'tibetan',
     img: '',
     seoTitle: '',
     seoDesc: ''
   },
   {
     name: 'Vietnamese',
-    slug: 'Vietnamese',
+    slug: 'vietnamese',
     img: '',
     seoTitle: '',
     seoDesc: ''
