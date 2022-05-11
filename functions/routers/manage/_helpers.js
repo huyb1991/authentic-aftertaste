@@ -136,6 +136,7 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
         ...recipe,
         time: formatTime,
         timeSchema: formatTimeSchema,
+        ratings: getRatingValue(recipe.ratings),
       })
       .then(() => {
         // Change sitemap url after change slug
