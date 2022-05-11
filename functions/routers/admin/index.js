@@ -3,9 +3,9 @@ const MODELS = require('../../models').models;
 const CONTENT = require('../../content/_helpers');
 const {
   ENTITY,
-  RECIPE_CATEGORY,
   BASE_URL_SITEMAP,
 } = require('../../constants');
+const { RECIPE_CATEGORY } = require('../../constants/recipe');
 // const { BLOG_CATEGORY, BLOG_TAGS } = require('../../constants/blog');
 
 // Helpers
