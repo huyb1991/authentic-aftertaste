@@ -15,13 +15,13 @@ const {
   formatDocumentBlog
 } = require('./format');
 
-// COUNTRY
-const countryGetAll = (conditions = [], limit = 0) =>
-  getCollectionOrderingWithConditions(ENTITY.COUNTRY, 'name', conditions, limit);
-const countryGetDetailById = id => getDocument(`${ENTITY.COUNTRY}/${id}`);
-const countryAdd = data => addDocument(ENTITY.COUNTRY, formatDocumentBase(data));
-const countryUpdate = (id, data) => updateDocument(`${ENTITY.COUNTRY}/${id}`, formatDocumentBase(data));
-const countryDelete = id => deleteDocument(ENTITY.COUNTRY, id);
+// CUISINE
+const cuisineGetAll = (conditions = [], limit = 0) =>
+  getCollectionOrderingWithConditions(ENTITY.CUISINE, 'name', conditions, limit);
+const cuisineGetDetailById = id => getDocument(`${ENTITY.CUISINE}/${id}`);
+const cuisineAdd = data => addDocument(ENTITY.CUISINE, formatDocumentBase(data));
+const cuisineUpdate = (id, data) => updateDocument(`${ENTITY.CUISINE}/${id}`, formatDocumentBase(data));
+const cuisineDelete = id => deleteDocument(ENTITY.CUISINE, id);
 
 // RECIPE
 const recipeGetAll = (conditions = [], limit = 0, orderBy = 'created') =>
@@ -88,12 +88,12 @@ const updateSitemap = (id, data) =>
   updateDocument(`${ENTITY.SITEMAP}/${id}`, formatDocumentBase(data));
 
 module.exports.models = {
-  // Country
-  countryGetAll,
-  countryGetDetailById,
-  countryAdd,
-  countryUpdate,
-  countryDelete,
+  // Cuisine
+  cuisineGetAll,
+  cuisineGetDetailById,
+  cuisineAdd,
+  cuisineUpdate,
+  cuisineDelete,
 
   // Recipe
   recipeGetAll,
