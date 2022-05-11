@@ -27,7 +27,7 @@ mixin recipeTemplate(isAmp=false)
             h2.heading.heading-section Dish Information
             svg.ml10(fill="currentColor", width="50", height="40")
               use(xlink:href="#icon-dish-info")
-          svg.recipe-section-icon(fill="currentColor", width="40", height="40")
+          svg.recipe-section-icon(fill="currentColor", width="32", height="32")
             use(xlink:href="#icon-arrow")
         #information.recipe-info.recipe-section-content
           p= recipe.description
@@ -38,7 +38,7 @@ mixin recipeTemplate(isAmp=false)
             h2.heading.heading-section Ingredients
             svg.ml10(fill="currentColor", width="40", height="40")
               use(xlink:href="#icon-ingredient")
-          svg.recipe-section-icon(fill="currentColor", width="40", height="40")
+          svg.recipe-section-icon(fill="currentColor", width="32", height="32")
             use(xlink:href="#icon-arrow")
         #ingredient.recipe-section-content
           each ingredient, idx in (recipe.ingredients || [])
@@ -47,6 +47,8 @@ mixin recipeTemplate(isAmp=false)
               p.recipe-label.flex
                 -if (ingredient.quantity)
                   span.qty= ingredient.quantity
+                -if (ingredient.quantityExtra)
+                  span.qtyExtra= ingredient.quantityExtra
                 -if (ingredient.unit)
                   span.unit= ingredient.unit
                 -if (ingredient.ingredient)
@@ -60,7 +62,7 @@ mixin recipeTemplate(isAmp=false)
             h2.heading.heading-section Directions
             svg.ml10(fill="currentColor", width="40", height="40")
               use(xlink:href="#icon-cooking")
-          svg.recipe-section-icon(fill="currentColor", width="40", height="40")
+          svg.recipe-section-icon(fill="currentColor", width="32", height="32")
             use(xlink:href="#icon-arrow")
         #direction.recipe-section-content
           each direction, idx in (recipe.directions || [])

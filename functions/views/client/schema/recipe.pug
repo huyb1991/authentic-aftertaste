@@ -1,3 +1,60 @@
+-var ingredientList = []
+each ingredient in recipe.ingredients
+  -var ingredientItem = '';
+  -if (ingredient.quantity)
+    -ingredientItem += ingredient.quantity + ' ';
+  -if (ingredient.quantityExtra)
+    -ingredientItem += ingredient.quantityExtra + ' ';
+  -if (ingredient.unit)
+    -ingredientItem += ingredient.unit + ' ';
+  -if (ingredient.ingredient)
+    -ingredientItem += ingredient.ingredient + ' ';
+  -if (ingredient.note)
+    -ingredientItem += ingredient.note + ' ';
+
+  -ingredientList.push(`"${ingredientItem.trim()}"`)
+
+-var directionList = []
+each direction in recipe.directions
+  -directionList.push(JSON.stringify({ '@type': 'HowToStep', text: direction.desc }))
+
 script(type="application/ld+json").
   {
+    "@context": "https://schema.org/",
+    "@type": "Recipe",
+    "name": "#{recipe.name}",
+    "recipeCuisine": "#{recipe.cuisine || 'Worldwide'}",
+    "image": [
+      "#{recipe.imgCover}"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Mary Stone"
+    },
+    "datePublished": "#{recipe.created}",
+    "description": "#{recipe.description}",
+    "keywords": "#{recipe.keywords || recipe.slug}",
+    "recipeCategory": "#{recipe.category || 'Main-course'}",
+    "recipeYield": "#{recipe.serving || 1}",
+    "prepTime": "#{recipe.timeSchema.prep}",
+    "cookTime": "#{recipe.timeSchema.cook}",
+    "totalTime": "#{recipe.timeSchema.total}",
+    "recipeIngredient": [
+      !{ingredientList.join(',').split(',')}
+    ],
+    "recipeInstructions": [
+      !{directionList.join(',')}
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "#{recipe.ratings.avg || 4.5}",
+      "ratingCount": "#{recipe.ratings.count || 1}"
+    }
   }
+
+//- nutrition
+//- video
+
+//- Category:
+//- https://www.csmonitor.com/The-Culture/Food/Stir-It-Up/Topics
+//- https://www.recipetineats.com/categories/

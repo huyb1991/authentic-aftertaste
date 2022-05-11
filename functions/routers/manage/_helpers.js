@@ -43,6 +43,15 @@ const getCookingTimeText = (totalTime = 0) => {
   return time.trim();
 };
 
+// Get cooking time (duration) for schema markup
+// Format: P0DT2H30M = 2 hrs 30 mins
+const getCookingTimeSchema = (totalTime = 0) => {
+  const totalHour = parseInt(totalTime/60);
+  const totalMin = parseInt(totalTime%60);
+
+  return `P0DT${totalHour}H${totalMin}M`;
+};
+
 //--- HELPER ---//
 const createListLatestRecipe = () => {
   const conditions = [];
@@ -116,10 +125,18 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
         cook: getCookingTimeText(recipe.time.cook),
         total: getCookingTimeText(totalTime),
       };
+      const formatTimeSchema = {
+        prep: getCookingTimeSchema(recipe.time.prep),
+        additional: getCookingTimeSchema(recipe.time.additional),
+        cook: getCookingTimeSchema(recipe.time.cook),
+        total: getCookingTimeSchema(totalTime),
+      }
 
       return CONTENT.writeFileContent(fileName, {
         ...recipe,
         time: formatTime,
+        timeSchema: formatTimeSchema,
+        ratings: getRatingValue(recipe.ratings),
       })
       .then(() => {
         // Change sitemap url after change slug
