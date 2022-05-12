@@ -107,6 +107,48 @@ script(type="text/javascript").
     return rowTemplate;
   };
 
+  function createNutritionRowTemplate(rIndex) {
+    var rowTemplate = `<div id="nutrition${rIndex}" class="row nutrition">`;
+    var rowOrder = `
+      <div class="col-md-1">
+        <div class="form-group">
+          <label>Order</label>
+          <input readonly class="form-control" type="text" value="${rIndex}" name="nutritions[${rIndex}][order]" />
+        </div>
+      </div>`;
+    var rowName = `
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Name</label>
+          <input class="form-control" type="text" value="${rIndex}" name="nutritions[${rIndex}][name]" />
+        </div>
+      </div>`;
+    var rowValue = `
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Value</label>
+          <input class="form-control" type="text" value="${rIndex}" name="nutritions[${rIndex}][value]" />
+        </div>
+      </div>`;
+    var rowAction = `
+      <div class="col-md-3">
+        <br>
+        <div class="btn-group mt-2">
+          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="ingredient" data-action="remove">
+            <i class="fa fa-minus-circle text-danger"></i>
+          </button>
+        </div>
+      </div>`;
+
+    rowTemplate += rowOrder;
+    rowTemplate += rowName;
+    rowTemplate += rowValue;
+    rowTemplate += rowAction;
+    rowTemplate += '</div>';
+
+    return rowTemplate;
+  };
+
   function listenBtnAddNew() {
     $('body').on('click', '.btn-add-new', function() {
       var type = $(this).data('type');
@@ -119,6 +161,10 @@ script(type="text/javascript").
       if (type === 'direction') {
         var newRowTemplate = createDirectionRowTemplate(counting + 1);
         $('#listDirection').append(newRowTemplate);
+      }
+      if (type === 'nutrition') {
+        var newRowTemplate = createNutritionRowTemplate(counting);
+        $('#listNutrition').append(newRowTemplate);
       }
 
       $(this).data('counting', counting + 1);
