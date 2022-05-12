@@ -3,11 +3,20 @@ mixin homeTemplate(isAmp=false)
     .card.card-border.content
       .text-center
         h1.heading.heading-page Newest Recipes
-        p Lorem ipsum dolor sit amet consectetur adipiscing eli sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet consectetur adipiscing eli sed do eiusmod tempor incididunt ut labore et dolore.
+        p We're all about good recipes and quality home cooking that everyone can enjoy.
 
       each recipe in recipes
         a.list-recipe(href= `recipe/${recipe.slug}`, title= recipe.name)
-          img.img.img-radius.img-recipe.img-recipe-thumb(src= recipe.imgThumb, alt= recipe.name)
+          +imageTemplate(
+            recipe.imgThumb,
+            'img img-radius img-recipe img-recipe-thumb',
+            recipe.name,
+            320,
+            200,
+            isAmp,
+            'fixed',
+            recipe.imgThumbWebP,
+          )
           .list-recipe-summary
             div
               h3.heading.heading-section= recipe.name

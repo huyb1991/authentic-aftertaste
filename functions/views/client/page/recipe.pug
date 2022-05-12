@@ -1,11 +1,21 @@
 mixin recipeTemplate(isAmp=false)
   .container.pb40
     .card.card-border.recipe-wrapper
-      img.img.img-recipe.recipe-cover(src= recipe.imgCover, alt= recipe.name)
+      +imageTemplate(
+        recipe.imgCover,
+        'img img-recipe recipe-cover',
+        recipe.name,
+        400,
+        220,
+        isAmp,
+        'fixed',
+        recipe.imgCoverWebP,
+      )
       .recipe-content.content
         .flex
           h1.heading.heading-page= recipe.name
           +ratingTemplate(recipe.ratings)
+        p #{recipe.author}
 
         //- Summary
         .recipe-summary.card.card-border
@@ -44,17 +54,18 @@ mixin recipeTemplate(isAmp=false)
           each ingredient, idx in (recipe.ingredients || [])
             .recipe-item
               .recipe-checkbox
-              p.recipe-label.flex
-                -if (ingredient.quantity)
-                  span.qty= ingredient.quantity
-                -if (ingredient.quantityExtra)
-                  span.qtyExtra= ingredient.quantityExtra
-                -if (ingredient.unit)
-                  span.unit= ingredient.unit
-                -if (ingredient.ingredient)
-                  span.ingredient= ingredient.ingredient
-                -if (ingredient.note)
-                  |(#{ingredient.note})
+              .recipe-label.flex
+                p.m0
+                  -if (ingredient.quantity)
+                    span.qty= ingredient.quantity
+                  -if (ingredient.quantityExtra)
+                    span.qtyExtra= ingredient.quantityExtra
+                  -if (ingredient.unit)
+                    span.unit= ingredient.unit
+                  -if (ingredient.ingredient)
+                    span.ingredient= ingredient.ingredient
+                  -if (ingredient.note)
+                    |(#{ingredient.note})
 
         //- Directions
         .flex.flex-between.recipe-section(data-target="direction")

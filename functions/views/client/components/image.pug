@@ -1,15 +1,25 @@
-mixin imageTemplate(src, className, alt, width, height, isAmp=false, layout="fixed")
-  if isAmp
-    amp-img(
-      layout= layout,
-      class= className,
-      alt= alt,
-      src= src.replace('jpg', 'webp'),
-      width= width,
-      height= height,
-    )
+mixin imageTemplate(src, className, alt, width, height, isAmp = false, layout = "fixed", srcWebP = "")
+  -if (isAmp)
+    -if (srcWebP)
       amp-img(
-        fallback,
+        layout= layout,
+        class= className,
+        alt= alt,
+        src= srcWebP,
+        width= width,
+        height= height,
+      )
+        amp-img(
+          fallback,
+          layout= layout,
+          class= className,
+          alt= alt,
+          src= src,
+          width= width,
+          height= height,
+        )
+    -else
+      amp-img(
         layout= layout,
         class= className,
         alt= alt,
@@ -17,9 +27,20 @@ mixin imageTemplate(src, className, alt, width, height, isAmp=false, layout="fix
         width= width,
         height= height,
       )
-  else
-    img(
-      class= className,
-      alt= alt,
-      src= src,
-    )
+
+  -else
+    -if (srcWebP)
+      img(
+        class= className,
+        alt= alt,
+        src= srcWebP,
+        loading="lazy",
+        onerror= `this.onerror=null; this.src='${src}'`
+      )
+    -else
+      img(
+        class= className,
+        alt= alt,
+        src= src,
+        loading="lazy"
+      )
