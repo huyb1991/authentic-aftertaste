@@ -1,7 +1,16 @@
 mixin recipeTemplate(isAmp=false)
   .container.pb40
     .card.card-border.recipe-wrapper
-      img.img.img-recipe.recipe-cover(src= recipe.imgCover, alt= recipe.name)
+      +imageTemplate(
+        recipe.imgCover,
+        'img img-recipe recipe-cover',
+        recipe.name,
+        400,
+        220,
+        isAmp,
+        'fixed',
+        recipe.imgCoverWebP,
+      )
       .recipe-content.content
         .flex
           h1.heading.heading-page= recipe.name
