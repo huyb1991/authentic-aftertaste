@@ -81,6 +81,7 @@ const RecipeDetailUpdate = (req, res) => {
   const {
     ingredients = [],
     directions = [],
+    nutritions = [],
     ratings,
     slug,
     prevSlug,
@@ -91,12 +92,14 @@ const RecipeDetailUpdate = (req, res) => {
   } = req.body;
   const submitIngredients = ingredients.filter(it => it.ingredient);
   const submitDirections = directions.filter(it => it.desc);
+  const submitNutritions = nutritions.filter(it => it.name && it.value);
   const ratingArr = ratings.map(it => Number(it));
   const recipeData = {
     ...rest,
     slug,
     ingredients: submitIngredients,
     directions: submitDirections,
+    nutritions: submitNutritions,
     ratings: ratingArr,
     time: {
       prep: Number(timePrep || 0),
