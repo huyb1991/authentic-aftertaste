@@ -1,0 +1,87 @@
+.row
+  .col-md-12
+    hr
+    h3 Nutrition
+
+  -var defaultNutrition = [];
+  -defaultNutrition.push({ order: 0, name: 'calories', value: '' })
+  -defaultNutrition.push({ order: 1, name: 'carbohydrates', value: '' })
+  -defaultNutrition.push({ order: 2, name: 'protein', value: '' })
+  -defaultNutrition.push({ order: 3, name: 'cholesterol', value: '' })
+  -defaultNutrition.push({ order: 4, name: 'sodium', value: '' })
+  -defaultNutrition.push({ order: 5, name: 'fat', value: '' })
+  -defaultNutrition.push({ order: 6, name: 'saturatedFat', value: '' })
+  -defaultNutrition.push({ order: 7, name: 'potassium', value: '' })
+  -defaultNutrition.push({ order: 8, name: 'fiber', value: '' })
+  -defaultNutrition.push({ order: 9, name: 'sugar', value: '' })
+  -defaultNutrition.push({ order: 10, name: 'calcium', value: '' })
+  -defaultNutrition.push({ order: 11, name: 'iron', value: '' })
+
+  #listNutrition.col-md-12
+    -var nutritionCounting = (data.nutritions || defaultNutrition).length
+
+    //- Render Nutrition rows
+    input#nutritionCounting(type="hidden", value= nutritionCounting)
+
+    //- Display Nutrition row
+    each _, index in Array(nutritionCounting)
+        -var rowOrder = defaultNutrition[index].order
+        -var rowName = defaultNutrition[index].name
+        -var rowValue = ''
+
+        -if (data.nutritions && data.nutritions[index])
+          -var rowOrder = Number(data.nutritions[index].order)
+          -var rowName = data.nutritions[index].name
+          -var rowValue = data.nutritions[index].value
+
+        .row.nutrition(id= `nutrition${index}`)
+          .col-md-1
+            .form-group
+              label Order
+              input.form-control(
+                name= `nutritions[${index}][order]`,
+                type="number",
+                placeholder="Order",
+                readonly,
+                value= rowOrder
+              )
+          .col-md-2
+            .form-group
+              label Name
+              input.form-control(
+                name= `nutritions[${index}][name]`,
+                type="text",
+                placeholder="Name",
+                value= rowName
+              )
+          .col-md-2
+            .form-group
+              label Value
+              input.form-control(
+                name= `nutritions[${index}][value]`,
+                type="text",
+                placeholder="Value",
+                value= rowValue
+              )
+          .col-md-2
+            br
+            .btn-group.mt-2
+              button.btn-action.btn.btn-outline-secondary(
+                type="button",
+                data-type="nutrition",
+                data-action="remove",
+                data-index= index
+              )
+                i.fa.fa-minus-circle.text-danger
+
+  //- Add new button
+  .col-md-2.offset-md-10
+    .form-group
+      label &nbsp;
+      button.btn-add-new.form-control.btn.btn-info(
+        type="button",
+        data-type="nutrition",
+        data-counting= nutritionCounting
+      )
+        i.fa.fa-plus-circle.mr-2
+        | Nutrition

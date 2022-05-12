@@ -130,13 +130,18 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
         additional: getCookingTimeSchema(recipe.time.additional),
         cook: getCookingTimeSchema(recipe.time.cook),
         total: getCookingTimeSchema(totalTime),
-      }
+      };
+
+      // Get calories
+      const nutritionCalories = (recipe.nutritions || []).find(it => it.name === 'calories');
+      const calories = nutritionCalories ? nutritionCalories.value : 10;
 
       return CONTENT.writeFileContent(fileName, {
         ...recipe,
         time: formatTime,
         timeSchema: formatTimeSchema,
         ratings: getRatingValue(recipe.ratings),
+        calories
       })
       .then(() => {
         // Change sitemap url after change slug

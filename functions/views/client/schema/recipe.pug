@@ -1,5 +1,6 @@
+//- Ingredients
 -var ingredientList = []
-each ingredient in recipe.ingredients
+each ingredient in (recipe.ingredients || [])
   -var ingredientItem = '';
   -if (ingredient.quantity)
     -ingredientItem += ingredient.quantity + ' ';
@@ -14,8 +15,9 @@ each ingredient in recipe.ingredients
 
   -ingredientList.push(`"${ingredientItem.trim()}"`)
 
+//- Directions
 -var directionList = []
-each direction in recipe.directions
+each direction in (recipe.directions || [])
   -directionList.push(JSON.stringify({ '@type': 'HowToStep', text: direction.desc }))
 
 script(type="application/ld+json").
@@ -39,6 +41,10 @@ script(type="application/ld+json").
     "prepTime": "#{recipe.timeSchema.prep}",
     "cookTime": "#{recipe.timeSchema.cook}",
     "totalTime": "#{recipe.timeSchema.total}",
+    "nutrition": {
+      "@type": "NutritionInformation",
+      "calories": "#{recipe.calories || 10} calories"
+    },
     "recipeIngredient": [
       !{ingredientList.join(',').split(',')}
     ],
