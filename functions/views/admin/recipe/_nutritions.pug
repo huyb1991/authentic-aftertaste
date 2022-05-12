@@ -2,7 +2,20 @@
   .col-md-12
     hr
     h3 Nutrition
+
   -var defaultNutrition = [];
+  -defaultNutrition.push({ order: 0, name: 'calories', value: '' })
+  -defaultNutrition.push({ order: 1, name: 'carbohydrates', value: '' })
+  -defaultNutrition.push({ order: 2, name: 'calories', value: '' })
+  -defaultNutrition.push({ order: 3, name: 'cholesterol', value: '' })
+  -defaultNutrition.push({ order: 4, name: 'sodium', value: '' })
+  -defaultNutrition.push({ order: 5, name: 'fat', value: '' })
+  -defaultNutrition.push({ order: 6, name: 'saturatedFat', value: '' })
+  -defaultNutrition.push({ order: 7, name: 'potassium', value: '' })
+  -defaultNutrition.push({ order: 8, name: 'fiber', value: '' })
+  -defaultNutrition.push({ order: 9, name: 'sugar', value: '' })
+  -defaultNutrition.push({ order: 10, name: 'calcium', value: '' })
+  -defaultNutrition.push({ order: 11, name: 'iron', value: '' })
 
   #listNutrition.col-md-12
     -var nutritionCounting = (data.nutritions || defaultNutrition).length
@@ -12,8 +25,8 @@
 
     //- Display Nutrition row
     each _, index in Array(nutritionCounting)
-        -var rowOrder = ''
-        -var rowName = ''
+        -var rowOrder = defaultNutrition[index].order
+        -var rowName = defaultNutrition[index].name
         -var rowValue = ''
 
         -if (data.nutritions && data.nutritions[index])
@@ -29,6 +42,7 @@
                 name= `nutritions[${index}][order]`,
                 type="number",
                 placeholder="Order",
+                readonly,
                 value= rowOrder
               )
           .col-md-3
