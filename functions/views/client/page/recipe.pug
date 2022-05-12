@@ -44,17 +44,18 @@ mixin recipeTemplate(isAmp=false)
           each ingredient, idx in (recipe.ingredients || [])
             .recipe-item
               .recipe-checkbox
-              p.recipe-label.flex
-                -if (ingredient.quantity)
-                  span.qty= ingredient.quantity
-                -if (ingredient.quantityExtra)
-                  span.qtyExtra= ingredient.quantityExtra
-                -if (ingredient.unit)
-                  span.unit= ingredient.unit
-                -if (ingredient.ingredient)
-                  span.ingredient= ingredient.ingredient
-                -if (ingredient.note)
-                  |(#{ingredient.note})
+              .recipe-label.flex
+                p.m0
+                  -if (ingredient.quantity)
+                    span.qty= ingredient.quantity
+                  -if (ingredient.quantityExtra)
+                    span.qtyExtra= ingredient.quantityExtra
+                  -if (ingredient.unit)
+                    span.unit= ingredient.unit
+                  -if (ingredient.ingredient)
+                    span.ingredient= ingredient.ingredient
+                  -if (ingredient.note)
+                    |(#{ingredient.note})
 
         //- Directions
         .flex.flex-between.recipe-section(data-target="direction")
