@@ -6,6 +6,7 @@ mixin recipeTemplate(isAmp=false)
         .flex
           h1.heading.heading-page= recipe.name
           +ratingTemplate(recipe.ratings)
+        p #{recipe.author}
 
         //- Summary
         .recipe-summary.card.card-border
