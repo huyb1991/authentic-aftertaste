@@ -30,11 +30,18 @@ mixin recipeTemplate(isAmp=false)
                 use(xlink:href="#icon-mark")
               span.ml10.text-capitalize #{timeItem}:
               span.ml10= recipe.time[timeItem] || '0 min'
+          //- Serving
           p.recipe-summary-item.flex
             svg.icon(fill="currentColor", width="20", height="20")
               use(xlink:href="#icon-mark")
             span.ml10.text-capitalize Servings:
             span.ml10= recipe.serving
+          //- Calories
+          p.recipe-summary-item.flex
+            svg.icon(fill="currentColor", width="20", height="20")
+              use(xlink:href="#icon-mark")
+            span.ml10.text-capitalize Calories:
+            span.ml10= recipe.calories
 
         //- Information
         .recipe-info.flex.flex-between.recipe-section(data-target="information")
