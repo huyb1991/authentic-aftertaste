@@ -35,6 +35,7 @@ $summary-width: 240px;
       max-width: calc(100% - 340px);
 
       &.recipe-section-content {
+        margin-top: $space-normal;
         max-width: calc(100% - 380px);
       }
     }
