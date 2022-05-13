@@ -12,6 +12,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-overflow-scrolling: touch;
   position: relative; // Smoothly on mobile browser
+  background-image: url('img/bg.png');
 }
 
 a {
