@@ -4,17 +4,18 @@ mixin ratingTemplate(rating = {})
   -var RATING_SCORE = Number(rating.score || 4.5);
   -var RATING_COUNT = Number(rating.count || 1);
 
-  div.rating.text-primary.flex.ml20
-    -if (RATING_SCORE >= 0)
-      while i <= MAX_SCORE
-        svg.icon
-          -if (i <= RATING_SCORE)
-            use(xlink:href=`#icon-star`)
-          -else
-            -if (RATING_SCORE > i-1)
-              use(xlink:href=`#icon-star-half`)
+  .flex
+    .rating.text-primary.flex
+      -if (RATING_SCORE >= 0)
+        while i <= MAX_SCORE
+          svg.icon
+            -if (i <= RATING_SCORE)
+              use(xlink:href=`#icon-star`)
             -else
-              use(xlink:href=`#icon-star-empty`)
-        - i++
-  .recipe-rating-count.ml5.text-small
-    | #{RATING_SCORE} (#{RATING_COUNT})
+              -if (RATING_SCORE > i-1)
+                use(xlink:href=`#icon-star-half`)
+              -else
+                use(xlink:href=`#icon-star-empty`)
+          - i++
+    .recipe-rating-count.ml5.text-small
+      | #{RATING_SCORE} (#{RATING_COUNT})

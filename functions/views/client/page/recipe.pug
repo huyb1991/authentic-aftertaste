@@ -14,8 +14,13 @@ mixin recipeTemplate(isAmp=false)
       .recipe-content.content
         .flex
           h1.heading.heading-page= recipe.name
+          -if (recipe.cuisine)
+            span.recipe-cuisine.text-primary.text-small= recipe.cuisine
+        .flex.mt20
           +ratingTemplate(recipe.ratings)
-        p #{recipe.author}
+          p.recipe-author
+            span.text-light By 
+            | #{recipe.author}
 
         //- Summary
         .recipe-summary.card.card-border

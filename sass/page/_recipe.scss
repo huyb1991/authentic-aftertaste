@@ -7,6 +7,13 @@ $summary-width: 240px;
     }
   }
 
+  &-cuisine {
+    border: 1px solid var(--primary-color);
+    border-radius: $radius-large;
+    padding: 0 $space-small;
+    margin: $space-tiny 0 0 $space-small;
+  }
+
   &-cover {
     display: block;
     border-radius: 20px 20px 0 0; // Clear card border
@@ -26,6 +33,11 @@ $summary-width: 240px;
   &-info {
     @media screen and (min-width: $desktopMin) {
       max-width: calc(100% - 340px);
+
+      &.recipe-section-content {
+        margin-top: $space-normal;
+        max-width: calc(100% - 380px);
+      }
     }
   }
 
@@ -65,6 +77,12 @@ $summary-width: 240px;
     &-count {
       margin-top: 3px;
     }
+  }
+
+  &-author {
+    border-left: 1px solid var(--divider-color);
+    margin: 0 0 0 $space-normal;
+    padding-left: $space-normal;
   }
 
   &-section {
