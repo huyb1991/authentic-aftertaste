@@ -67,6 +67,12 @@ $summary-width: 240px;
     }
   }
 
+  &-author {
+    border-left: 1px solid var(--divider-color);
+    margin: 0 0 0 $space-normal;
+    padding-left: $space-normal;
+  }
+
   &-section {
     border-top: 1px solid var(--divider-color);
     margin-top: 20px;
