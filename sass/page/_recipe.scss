@@ -26,6 +26,10 @@ $summary-width: 240px;
   &-info {
     @media screen and (min-width: $desktopMin) {
       max-width: calc(100% - 340px);
+
+      &.recipe-section-content {
+        max-width: calc(100% - 380px);
+      }
     }
   }
 
