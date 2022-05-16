@@ -42,6 +42,7 @@ mixin recipeTemplate(isAmp=false)
               use(xlink:href="#icon-mark")
             span.ml10.text-capitalize Calories:
             span.ml10= recipe.calories
+              | &nbsp;calories
 
         //- Information
         .recipe-info.flex.flex-between.recipe-section(data-target="information")
@@ -92,4 +93,15 @@ mixin recipeTemplate(isAmp=false)
             .recipe-item
               .recipe-checkbox.flex.flex-center
                 span= idx+1
-              p.recipe-label= direction.desc
+              div
+                p.recipe-label= direction.desc
+                +imageTemplate(
+                  direction.img,
+                  'img img-radius img-recipe recipe-direction-img',
+                  `${recipe.name} step ${idx+1}`,
+                  320,
+                  200,
+                  isAmp,
+                  'fixed',
+                  direction.imgWebP,
+                )

@@ -1,3 +1,5 @@
+-var recipeUrl = `${BASE_URL}/recipe/${recipe.slug}`
+
 //- Ingredients
 -var ingredientList = []
 each ingredient in (recipe.ingredients || [])
@@ -17,8 +19,8 @@ each ingredient in (recipe.ingredients || [])
 
 //- Directions
 -var directionList = []
-each direction in (recipe.directions || [])
-  -directionList.push(JSON.stringify({ '@type': 'HowToStep', text: direction.desc }))
+each direction, idx in (recipe.directions || [])
+  -directionList.push(JSON.stringify({ '@type': 'HowToStep', name: `Make ${recipe.name} Step ${idx+1}`, text: direction.desc, url: `${recipeUrl}#step${idx+1}`, image: direction.img }))
 
 script(type="application/ld+json").
   {
@@ -57,6 +59,4 @@ script(type="application/ld+json").
       "ratingCount": "#{recipe.ratings.count || 1}"
     }
   }
-
-//- nutrition
 //- video

@@ -107,16 +107,15 @@ const RecipeDetailUpdate = (req, res) => {
       additional: Number(timeAdditional || 0),
     }
   };
-  // TODO: Update ordering
 
   // Create new Recipe
   if (id === 'create') {
     // Set 4 or 5 star rating for new Recipe
     const radomRatingValue = getRandomNumber(RATING_SCORE.MAX - 1, RATING_SCORE.MAX);
     if (radomRatingValue === 4) {
-      recipeData[ratings] = [0, 0, 0, 1, 0];
+      recipeData.ratings = [0, 0, 0, 1, 0];
     } else {
-      recipeData[ratings] = [0, 0, 0, 0, 1];
+      recipeData.ratings = [0, 0, 0, 0, 1];
     }
 
     return MODELS.recipeAdd(recipeData)
