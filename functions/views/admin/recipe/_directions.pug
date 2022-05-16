@@ -13,10 +13,14 @@
     each _, index in Array(directionCounting)
       -var rowOrder = 1
       -var rowDesc = ''
+      -var rowImage = ''
+      -var rowImageWebP = ''
 
       -if (data.ingredients && data.directions[index])
         -var rowOrder = Number(data.directions[index].order)
         -var rowDesc = data.directions[index].desc
+        -var rowImage = data.directions[index].image
+        -var rowImageWebP = data.directions[index].imgWebP
 
       .row.ingredient(id= `ingredient${index}`)
         .col-md-1
@@ -37,6 +41,25 @@
               rows="2"
               placeholder="Description"
             ) #{rowDesc}
+
+          .row
+            .form-group.col-md-6
+              label Image
+              input.form-control(
+                name= `directions[${index}][img]`,
+                type="text",
+                placeholder="Image",
+                value= rowImage
+              )
+            .form-group.col-md-6
+              label Image WebP
+              input.form-control(
+                name= `directions[${index}][imgWebP]`,
+                type="text",
+                placeholder="Image WebP",
+                value= rowImageWebP
+              )
+
         .col-md-2.text-right
           br
           .btn-group.mt-2
