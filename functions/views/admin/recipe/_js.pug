@@ -73,7 +73,7 @@ script(type="text/javascript").
       <div class="col-md-1">
         <div class="form-group">
           <label>Order</label>
-          <input readonly class="form-control" type="text" value="${rIndex}" name="directions[${rIndex}][order]" />
+          <input class="form-control" type="text" value="${rIndex}" name="directions[${rIndex}][order]" />
         </div>
       </div>`;
     var rowDescription = `
@@ -82,18 +82,29 @@ script(type="text/javascript").
           <label>Description</label>
           <textarea class="form-control" name="directions[${rIndex}][desc]" rows="2" placeholder="Description"></textarea>
         </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>Image</label>
+            <input class="form-control" type="text" name="directions[${rIndex}][img]" placeholder="Image" />
+          </div>
+          <div class="form-group col-md-6">
+            <label>Image WebP</label>
+            <input class="form-control" type="text" name="directions[${rIndex}][imgWebP]" placeholder="Image WebP" />
+          </div>
+        </div>
       </div>`;
     var rowAction = `
       <div class="col-md-2 text-right">
         <br>
         <div class="btn-group mt-2">
-          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="ingredient" data-action="remove">
+          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="direction" data-action="remove">
             <i class="fa fa-minus-circle text-danger"></i>
           </button>
-          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="ingredient" data-action="up">
+          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="direction" data-action="up">
             <i class="fa fa-arrow-up"></i>
           </button>
-          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="ingredient" data-action="down">
+          <button class="btn-action btn btn-outline-secondary" type="button" data-index="${rIndex}" data-type="direction" data-action="down">
             <i class="fa fa-arrow-down"></i>
           </button>
         </div>
