@@ -11,7 +11,7 @@
 
     //- Display Direction row
     each _, index in Array(directionCounting)
-      -var rowOrder = 1
+      -var rowOrder = index
       -var rowDesc = ''
       -var rowImage = ''
       -var rowImageWebP = ''
@@ -30,7 +30,6 @@
               name= `directions[${index}][order]`,
               type="text",
               placeholder="Order",
-              readonly,
               value= rowOrder
             )
         .col-md-9
