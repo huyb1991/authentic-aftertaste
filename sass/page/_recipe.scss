@@ -26,6 +26,15 @@ $summary-width: 240px;
     }
   }
 
+  &-direction-img {
+    display: block;
+    margin: 0 auto;
+
+    @media screen and (min-width: $tabletMin) {
+      max-width: 600px;
+    }
+  }
+
   &-content {
     position: relative;
   }
