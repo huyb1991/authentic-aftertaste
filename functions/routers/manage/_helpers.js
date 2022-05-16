@@ -18,11 +18,23 @@ const {
  * @returns Time as text
  */
 const getCookingTimeText = (totalTime = 0) => {
-  const totalHour = parseInt(totalTime/60);
-  const totalMin = parseInt(totalTime%60);
+  let totalHour = parseInt(totalTime/60);
+  let totalMin = parseInt(totalTime%60);
+  const totalDay = parseInt(totalHour/24);
 
   // Format time as string
   let time = '';
+
+  if (totalDay) {
+    time += `${totalDay} d`;
+    time += ' ';
+
+    // Time is total min
+    const newTime = totalTime - (totalDay*24*60);
+
+    totalHour = parseInt(newTime/60);
+    totalMin = parseInt(newTime%60);
+  }
   if (totalHour) {
     time += `${totalHour} hr`;
 
