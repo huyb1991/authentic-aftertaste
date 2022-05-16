@@ -16,13 +16,13 @@
       -var rowImage = ''
       -var rowImageWebP = ''
 
-      -if (data.ingredients && data.directions[index])
+      -if (data.directions && data.directions[index])
         -var rowOrder = Number(data.directions[index].order)
         -var rowDesc = data.directions[index].desc
         -var rowImage = data.directions[index].image
         -var rowImageWebP = data.directions[index].imgWebP
 
-      .row.ingredient(id= `ingredient${index}`)
+      .row.direction(id= `direction${index}`)
         .col-md-1
           .form-group
             label Order
