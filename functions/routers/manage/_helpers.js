@@ -12,42 +12,58 @@ const {
 } = require('../../helpers/sitemap');
 
 /**
- * Format time to hours and min, eg:
- * 30m = 30 mins | 80m = 1 hr 20 mins | 140m = 2 hrs 20 mins
- * @param {number} totalTime
- * @returns Time as text
+ * Get cooking time by group by object: { day: X, hour: Y, min: Z };
+ * @param {*} totalTime 
+ * @returns {Object}
  */
-const getCookingTimeText = (totalTime = 0) => {
+const getCookingTime = (totalTime = 0) => {
   let totalHour = parseInt(totalTime/60);
   let totalMin = parseInt(totalTime%60);
   const totalDay = parseInt(totalHour/24);
 
-  // Format time as string
-  let time = '';
-
   if (totalDay) {
-    time += `${totalDay} d`;
-    time += ' ';
-
     // Time is total min
     const newTime = totalTime - (totalDay*24*60);
 
     totalHour = parseInt(newTime/60);
     totalMin = parseInt(newTime%60);
   }
-  if (totalHour) {
-    time += `${totalHour} hr`;
 
-    if (totalHour > 1) {
+  return {
+    day: totalDay || 0,
+    hour: totalHour || 0,
+    min: totalMin || 0,
+  };
+};
+
+/**
+ * Format time to hours and min, eg:
+ * 30m = 30 mins | 80m = 1 hr 20 mins | 140m = 2 hrs 20 mins
+ * @param {number} totalTime
+ * @returns Time as text
+ */
+const getCookingTimeText = (totalTime = 0) => {
+  const { day, hour, min } = getCookingTime(totalTime);
+
+  // Format time as string
+  let time = '';
+  if (day) {
+    time += `${day} d`;
+    time += ' ';
+  }
+  if (hour) {
+    time += `${hour} hr`;
+
+    if (hour > 1) {
       time += 's';
     }
 
     time += ' ';
   }
-  if (totalMin) {
-    time += `${totalMin} min`;
+  if (min) {
+    time += `${min} min`;
 
-    if (totalMin > 1) {
+    if (min > 1) {
       time += 's';
     }
   }
@@ -58,10 +74,9 @@ const getCookingTimeText = (totalTime = 0) => {
 // Get cooking time (duration) for schema markup
 // Format: P0DT2H30M = 2 hrs 30 mins
 const getCookingTimeSchema = (totalTime = 0) => {
-  const totalHour = parseInt(totalTime/60);
-  const totalMin = parseInt(totalTime%60);
+  const { day, hour, min } = getCookingTime(totalTime);
 
-  return `P0DT${totalHour}H${totalMin}M`;
+  return `P${day}DT${hour}H${min}M`;
 };
 
 //--- HELPER ---//
