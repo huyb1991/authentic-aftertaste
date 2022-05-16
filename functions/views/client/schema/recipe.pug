@@ -18,7 +18,7 @@ each ingredient in (recipe.ingredients || [])
 //- Directions
 -var directionList = []
 each direction in (recipe.directions || [])
-  -directionList.push(JSON.stringify({ '@type': 'HowToStep', text: direction.desc }))
+  -directionList.push(JSON.stringify({ '@type': 'HowToStep', text: direction.desc, image: direction.img }))
 
 script(type="application/ld+json").
   {
