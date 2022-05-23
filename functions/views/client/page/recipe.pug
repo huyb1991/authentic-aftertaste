@@ -95,13 +95,14 @@ mixin recipeTemplate(isAmp=false)
                 span= idx+1
               div
                 p.recipe-label= direction.desc
-                +imageTemplate(
-                  direction.img,
-                  'img img-radius img-recipe recipe-direction-img',
-                  `${recipe.name} step ${idx+1}`,
-                  320,
-                  200,
-                  isAmp,
-                  'fixed',
-                  direction.imgWebP,
-                )
+                - if (direction.img)
+                  +imageTemplate(
+                    direction.img,
+                    'img img-radius img-recipe recipe-direction-img',
+                    `${recipe.name} step ${idx+1}`,
+                    320,
+                    200,
+                    isAmp,
+                    'fixed',
+                    direction.imgWebP,
+                  )

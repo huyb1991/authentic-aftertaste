@@ -11,6 +11,10 @@ const {
   createOrUpdateSitemapBySlugAndEntity,
 } = require('../../helpers/sitemap');
 
+const sortByOrder = (data = []) => {
+  return data.sort((a, b) => Number(a.order) - Number(b.order));
+};
+
 /**
  * Get cooking time by group by object: { day: X, hour: Y, min: Z };
  * @param {*} totalTime 
@@ -241,6 +245,7 @@ const AutoUpdateBlogPostContent = (
 };
 
 module.exports = {
+  sortByOrder,
   AutoUpdateBlogPostContent,
   AutoUpdateRecipeContent,
 };
