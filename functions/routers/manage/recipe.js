@@ -64,7 +64,10 @@ const RecipeDetail = (req, res) => {
         {
           title: `Detail ${ENTITY_NAME[ENTITY.RECIPE]}`,
           entity: ENTITY.RECIPE,
-          data,
+          data: {
+            ...data,
+            nutritions: (data.nutritions || []).sort((a, b) => Number(a.order) - Number(b.order))
+          },
           ...flashMessage
         },
       );
