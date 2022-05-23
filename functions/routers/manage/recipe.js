@@ -9,7 +9,7 @@ const {
 
 // Helpers
 const { getFlashMessage, getRandomNumber } = require('../../helpers');
-const { AutoUpdateRecipeContent } = require('./_helpers');
+const { sortByOrder, AutoUpdateRecipeContent } = require('./_helpers');
 const CONTENT = require('../../content/_helpers');
 
 const RecipeList = (req, res) => {
@@ -66,7 +66,9 @@ const RecipeDetail = (req, res) => {
           entity: ENTITY.RECIPE,
           data: {
             ...data,
-            nutritions: (data.nutritions || []).sort((a, b) => Number(a.order) - Number(b.order))
+            ingredients: sortByOrder(data.ingredients || []),
+            directions: sortByOrder(data.directions || []),
+            nutritions: sortByOrder(data.nutritions || []),
           },
           ...flashMessage
         },
