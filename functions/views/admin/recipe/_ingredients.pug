@@ -11,7 +11,7 @@
 
     //- Display Ingredient row
     each _, index in Array(ingredientCounting)
-        -var rowOrder = ''
+        -var rowOrder = Number(index+1)
         -var rowQuantity = 1
         -var rowQuantityExtra = ''
         -var rowUnit = ''
@@ -19,7 +19,6 @@
         -var rowNote = ''
 
         -if (data.ingredients && data.ingredients[index])
-          -var rowOrder = Number(data.ingredients[index].order)
           -var rowQuantity = Number(data.ingredients[index].quantity)
           -var rowQuantityExtra = data.ingredients[index].quantityExtra
           -var rowUnit = data.ingredients[index].unit
@@ -27,14 +26,16 @@
           -var rowNote = data.ingredients[index].note
 
         .row.ingredient(id= `ingredient${index}`)
-          input.form-control(
-            name= `ingredients[${index}][order]`,
-            type="hidden",
-            placeholder="Order",
-            readonly,
-            value= rowOrder
-          )
           .col-md-1
+            .form-group
+              label Order
+              input.form-control(
+                name= `ingredients[${index}][order]`,
+                type="number",
+                placeholder="Order",
+                value= rowOrder
+              )
+          .col-md-2
             .form-group
               label Quantity
               input.form-control(
@@ -52,7 +53,6 @@
                 placeholder="Quantity Extra",
                 value= rowQuantityExtra
               )
-          .col-md-1
           .col-md-2
             .form-group
               label Unit
@@ -71,7 +71,7 @@
                 placeholder="Ingredient",
                 value= rowIngredient
               )
-          .col-md-2
+          .col-md-1
             .form-group
               label Note
               input.form-control(
