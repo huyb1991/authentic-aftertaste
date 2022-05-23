@@ -25,12 +25,11 @@
 
     //- Display Nutrition row
     each _, index in Array(nutritionCounting)
-        -var rowOrder = index
+        -var rowOrder = Number(index + 1)
         -var rowName = defaultNutrition[index] ? defaultNutrition[index].name : ''
         -var rowValue = ''
 
         -if (data.nutritions && data.nutritions[index])
-          -var rowOrder = Number(data.nutritions[index].order)
           -var rowName = data.nutritions[index].name
           -var rowValue = data.nutritions[index].value
 
