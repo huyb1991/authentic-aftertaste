@@ -11,13 +11,12 @@
 
     //- Display Direction row
     each _, index in Array(directionCounting)
-      -var rowOrder = index
+      -var rowOrder = Number(index+1)
       -var rowDesc = ''
       -var rowImage = ''
       -var rowImageWebP = ''
 
       -if (data.directions && data.directions[index])
-        -var rowOrder = Number(data.directions[index].order)
         -var rowDesc = data.directions[index].desc
         -var rowImage = data.directions[index].img
         -var rowImageWebP = data.directions[index].imgWebP
