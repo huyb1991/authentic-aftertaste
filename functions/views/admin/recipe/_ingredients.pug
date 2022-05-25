@@ -26,22 +26,19 @@
           -var rowNote = data.ingredients[index].note
 
         .row.ingredient(id= `ingredient${index}`)
+          input.form-control(
+            name= `ingredients[${index}][order]`,
+            type="hidden",
+            placeholder="Order",
+            readOnly,
+            value= rowOrder
+          )
           .col-md-1
-            .form-group
-              label Order
-              input.form-control(
-                name= `ingredients[${index}][order]`,
-                type="number",
-                placeholder="Order",
-                value= rowOrder
-              )
-          .col-md-2
             .form-group
               label Quantity
               input.form-control(
                 name= `ingredients[${index}][quantity]`,
-                type="number",
-                placeholder="Quantity",
+                type="text",
                 value= rowQuantity
               )
           .col-md-1
@@ -50,7 +47,6 @@
               input.form-control(
                 name= `ingredients[${index}][quantityExtra]`,
                 type="text",
-                placeholder="Quantity Extra",
                 value= rowQuantityExtra
               )
           .col-md-2
@@ -62,6 +58,7 @@
                 placeholder="Unit",
                 value= rowUnit
               )
+          .col-md-1
           .col-md-3
             .form-group
               label Ingredient
@@ -71,7 +68,7 @@
                 placeholder="Ingredient",
                 value= rowIngredient
               )
-          .col-md-1
+          .col-md-2
             .form-group
               label Note
               input.form-control(
