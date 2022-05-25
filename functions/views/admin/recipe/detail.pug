@@ -207,9 +207,18 @@ block content
         .col-md-8
           .form-group
             label(for="description") Short Description
-            #description!= data.description
+            textarea(
+              id="description",
+              name="description",
+              rows="4"
+              class="form-control",
+              placeholder="Short Description"
+            ) #{data.description}
         .col-md-4
           include _cooking-time.pug
+
+        .col-md-12
+          #information!= data.information
 
       //- Ingredients
       include _ingredients.pug
