@@ -1,6 +1,8 @@
 extends ../_default/base.pug
 
 block content
+  script(src='https://cdn.tiny.cloud/1/69yu9r8rq253xgqrkz78e6tdol0h9x471pfw2sta06uyjjms/tinymce/5/tinymce.min.js', referrerpolicy='origin')
+
   .container
     h3= title
     input(id="entity", type="hidden", value= entity)
@@ -214,6 +216,9 @@ block content
             ) #{data.description}
         .col-md-4
           include _cooking-time.pug
+
+        .col-md-12
+          #information!= data.information
 
       //- Ingredients
       include _ingredients.pug
