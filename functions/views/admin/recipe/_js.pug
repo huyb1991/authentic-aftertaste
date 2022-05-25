@@ -1,18 +1,12 @@
 script(type="text/javascript").
   function createIngredientRowTemplate(rIndex) {
     var rowTemplate = `<div id="ingredient${rIndex}" class="row ingredient">`;
-    var rowOrder = `
+    var rowOrder = `<input readOnly class="form-control" type="hidden" value="${rIndex+1}" name="ingredients[${rIndex}][order]" />`;
+    var rowQty = `
       <div class="col-md-1">
         <div class="form-group">
-          <label>Order</label>
-          <input class="form-control" type="number" value="${rIndex+1}" name="ingredients[${rIndex}][order]" />
-        </div>
-      </div>`;
-    var rowQty = `
-      <div class="col-md-2">
-        <div class="form-group">
           <label>Quantity</label>
-          <input class="form-control" type="number" value="1" name="ingredients[${rIndex}][quantity]" />
+          <input class="form-control" type="text" value="1" name="ingredients[${rIndex}][quantity]" />
         </div>
       </div>`;
     var rowQtyExtra = `
@@ -29,6 +23,7 @@ script(type="text/javascript").
           <input class="form-control" type="text" name="ingredients[${rIndex}][unit]" />
         </div>
       </div>`;
+    var rowSpacing = '<div class="col-md-1"></div>';
     var rowIngredient = `
       <div class="col-md-3">
         <div class="form-group">
@@ -37,7 +32,7 @@ script(type="text/javascript").
         </div>
       </div>`;
     var rowNote = `
-      <div class="col-md-1">
+      <div class="col-md-2">
         <div class="form-group">
           <label>Note</label>
           <input class="form-control" type="text" name="ingredients[${rIndex}][note]" />
@@ -63,6 +58,7 @@ script(type="text/javascript").
     rowTemplate += rowQty;
     rowTemplate += rowQtyExtra;
     rowTemplate += rowUnit;
+    rowTemplate += rowSpacing;
     rowTemplate += rowIngredient;
     rowTemplate += rowNote;
     rowTemplate += rowAction;
@@ -77,7 +73,7 @@ script(type="text/javascript").
       <div class="col-md-1">
         <div class="form-group">
           <label>Order</label>
-          <input class="form-control" type="text" value="${rIndex+1}" name="directions[${rIndex}][order]" />
+          <input readOnly class="form-control" type="text" value="${rIndex+1}" name="directions[${rIndex}][order]" />
         </div>
       </div>`;
     var rowDescription = `
@@ -128,7 +124,7 @@ script(type="text/javascript").
       <div class="col-md-1">
         <div class="form-group">
           <label>Order</label>
-          <input class="form-control" type="text" value="${rIndex+1}" name="nutritions[${rIndex}][order]" />
+          <input readOnly class="form-control" type="text" value="${rIndex+1}" name="nutritions[${rIndex}][order]" />
         </div>
       </div>`;
     var rowName = `
