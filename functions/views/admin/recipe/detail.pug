@@ -1,6 +1,8 @@
 extends ../_default/base.pug
 
 block content
+  script(src='https://cdn.tiny.cloud/1/69yu9r8rq253xgqrkz78e6tdol0h9x471pfw2sta06uyjjms/tinymce/5/tinymce.min.js', referrerpolicy='origin')
+
   .container
     h3= title
     input(id="entity", type="hidden", value= entity)
@@ -205,13 +207,14 @@ block content
         .col-md-8
           .form-group
             label(for="description") Short Description
-            textarea(
-              id="description",
-              name="description",
-              rows="4"
-              class="form-control",
-              placeholder="Short Description"
-            ) #{data.description}
+            #content(name="description")!= data.description
+            //- textarea(
+            //-   id="description",
+            //-   name="description",
+            //-   rows="4"
+            //-   class="form-control",
+            //-   placeholder="Short Description"
+            //- ) #{data.description}
         .col-md-4
           include _cooking-time.pug
 
