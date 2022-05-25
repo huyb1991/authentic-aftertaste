@@ -203,7 +203,7 @@ script(type="text/javascript").
 
   function tinyEditor() {
     tinymce.init({
-      selector: '#content',
+      selector: '#description',
       menubar: false,
       statusbar: false,
       plugins: 'fullscreen link image lists paste table',
@@ -226,7 +226,7 @@ script(type="text/javascript").
     });
 
     $('#contentForm').submit(function() {
-      $('#content').val(tinymce.activeEditor.getContent());
+      $('#description').val(tinymce.activeEditor.getContent());
       return true;
     });
   };
