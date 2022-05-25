@@ -12,6 +12,7 @@ $summary-width: 240px;
     border-radius: $radius-large;
     padding: 0 $space-small;
     margin: $space-tiny 0 0 $space-small;
+    text-transform: capitalize;
   }
 
   &-cover {
@@ -40,6 +41,10 @@ $summary-width: 240px;
   }
 
   &-info {
+    a {
+      color: var(--primary-color);
+    }
+
     @media screen and (min-width: $desktopMin) {
       max-width: calc(100% - 340px);
 
