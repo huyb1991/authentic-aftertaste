@@ -9,7 +9,7 @@ const {
 
 // Helpers
 const { getFlashMessage, getRandomNumber } = require('../../helpers');
-const { sortByOrder, getLatestRecipeIdByCuisine, AutoUpdateRecipeContent } = require('./_helpers');
+const { sortByOrder, getLatestRecipeSlugByCuisine, AutoUpdateRecipeContent } = require('./_helpers');
 const CONTENT = require('../../content/_helpers');
 
 const RecipeList = (req, res) => {
@@ -125,17 +125,22 @@ const RecipeDetailUpdate = (req, res) => {
       recipeData.ratings = [0, 0, 0, 0, 1];
     }
 
-    return MODELS.recipeAdd(recipeData)
-      .then(newId => {
-        AutoUpdateRecipeContent(newId, slug, prevSlug);
-        const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
-        return res.redirect(`/admin/${ENTITY.RECIPE}/${newId}/?success=true&message=${message}`);
-      })
-      .catch(err => {
-        console.log(`${actionAddMsg} error: ${err.message}`);
-        const message = encodeURIComponent(`${actionAddMsg} error!!!`);
+    return getLatestRecipeSlugByCuisine(recipeData.cuisine)
+      .then((relatedItems = []) => {
+        recipeData.relatedRecipes = relatedItems;
 
-        return res.redirect(`/admin/${ENTITY.RECIPE}/?error=true&message=${message}`);
+        return MODELS.recipeAdd(recipeData)
+          .then(newId => {
+            AutoUpdateRecipeContent(newId, slug, prevSlug);
+            const message = encodeURIComponent(`${actionAddMsg} successfully - id: ${newId}.`);
+            return res.redirect(`/admin/${ENTITY.RECIPE}/${newId}/?success=true&message=${message}`);
+          })
+          .catch(err => {
+            console.log(`${actionAddMsg} error: ${err.message}`);
+            const message = encodeURIComponent(`${actionAddMsg} error!!!`);
+    
+            return res.redirect(`/admin/${ENTITY.RECIPE}/?error=true&message=${message}`);
+          });
       });
   }
 
