@@ -167,10 +167,8 @@ const getRelatedRecipesBySlug = (slugs = []) => {
   }
 
   return MODELS.recipeGetAll(conditions, NUMBER_OF_RELATED_ITEMS)
-    .then(items => items.map((id, name, slug) => ({
-      id,
-      name,
-      slug,
+    .then(items => items.map(({ id, name, slug, imgThumb, imgThumbWebP }) => ({
+      id, name, slug, imgThumb, imgThumbWebP
     })));
 };
 
