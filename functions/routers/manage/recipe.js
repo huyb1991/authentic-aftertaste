@@ -16,18 +16,21 @@ const RecipeList = (req, res) => {
   const flashMessage = getFlashMessage(req.query);
   const headers = [
     { name: 'Recipe Name', field: 'name' },
+    { name: 'Created', field: 'created' },
     { name: 'Operator', field: '_' },
   ];
 
   return MODELS.recipeGetAll()
     .then(data => {
+      const dataOrdering = data.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+
       return res.render(
         'admin/list',
         {
           title: `List ${ENTITY_NAME[ENTITY.RECIPE]}`,
           entity: ENTITY.RECIPE,
           headers,
-          data,
+          data: dataOrdering,
           ...flashMessage
         },
       );
