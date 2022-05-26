@@ -9,7 +9,7 @@ const {
 
 // Helpers
 const { getFlashMessage, getRandomNumber } = require('../../helpers');
-const { sortByOrder, AutoUpdateRecipeContent } = require('./_helpers');
+const { sortByOrder, getLatestRecipeIdByCuisine, AutoUpdateRecipeContent } = require('./_helpers');
 const CONTENT = require('../../content/_helpers');
 
 const RecipeList = (req, res) => {
@@ -84,6 +84,7 @@ const RecipeDetailUpdate = (req, res) => {
 
   // Format and validation data
   const {
+    relatedRecipes = '',
     ingredients = [],
     directions = [],
     nutritions = [],
@@ -105,6 +106,7 @@ const RecipeDetailUpdate = (req, res) => {
     ingredients: submitIngredients,
     directions: submitDirections,
     nutritions: submitNutritions,
+    relatedRecipes: relatedRecipes.split(','),
     ratings: ratingArr,
     time: {
       prep: Number(timePrep || 0),
