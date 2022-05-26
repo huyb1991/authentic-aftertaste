@@ -15,6 +15,9 @@ const sortByOrder = (data = []) => {
   return data.sort((a, b) => Number(a.order) - Number(b.order));
 };
 
+// Private constants
+const NUMBER_OF_RELATED_ITEMS = 3;
+
 /**
  * Get cooking time by group by object: { day: X, hour: Y, min: Z };
  * @param {*} totalTime 
@@ -135,6 +138,22 @@ const updateListAllRecipe = (name= '', slug = '', prevSlug = '') => {
     });
 };
 
+// Get 3 latest recipes by cuisine
+const getLatestRecipeIdByCuisine = (cuisine = '') => {
+  const conditions = [];
+
+  if (!!cuisine.trim()) {
+    conditions.push({
+      fieldName: 'cuisine',
+      operator: '==',
+      value: cuisine
+    });
+  }
+
+  return MODELS.recipeGetAll(conditions, NUMBER_OF_RELATED_ITEMS)
+    .then(items => items.map(it => it.id));
+};
+
 const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
   return MODELS.recipeGetDetailById(recipeId)
     .then(recipe => {
@@ -246,6 +265,7 @@ const AutoUpdateBlogPostContent = (
 
 module.exports = {
   sortByOrder,
+  getLatestRecipeIdByCuisine,
   AutoUpdateBlogPostContent,
   AutoUpdateRecipeContent,
 };
