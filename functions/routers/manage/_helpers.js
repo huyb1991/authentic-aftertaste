@@ -167,9 +167,29 @@ const getRelatedRecipesBySlug = (slugs = []) => {
   }
 
   return MODELS.recipeGetAll(conditions, NUMBER_OF_RELATED_ITEMS)
-    .then(items => items.map(({ id, name, slug, imgThumb, imgThumbWebP }) => ({
-      id, name, slug, imgThumb, imgThumbWebP
-    })));
+    .then(items => items.map(({
+      id,
+      name,
+      slug,
+      description,
+      time,
+      serving,
+      imgThumb,
+      imgThumbWebP,
+    }) => {
+      const totalTime = Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
+
+      return {
+        id,
+        name,
+        slug,
+        description,
+        imgThumb,
+        imgThumbWebP,
+        serving,
+        time: getCookingTimeText(totalTime),
+      };
+    }));
 };
 
 const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
