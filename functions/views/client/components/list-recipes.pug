@@ -1,0 +1,26 @@
+mixin listRecipeTemplate(recipes = [])
+  each recipe in recipes
+    a.list-recipe(href= `recipe/${recipe.slug}`, title= recipe.name)
+      +imageTemplate(
+        recipe.imgThumb,
+        'img img-radius img-recipe img-recipe-thumb',
+        recipe.name,
+        320,
+        200,
+        isAmp,
+        'fixed',
+        recipe.imgThumbWebP,
+      )
+      .list-recipe-summary
+        div
+          h3.heading.heading-section= recipe.name
+          p.list-recipe-desc= recipe.description
+        .list-recipe-time
+          span
+            svg(fill="currentColor", width="20", height="20")
+              use(xlink:href="#icon-cooking")
+            span.ml5 Time: #{recipe.time}
+          span.ml20
+            svg(fill="currentColor", width="20", height="20")
+              use(xlink:href="#icon-serving")
+            span.ml5 Servings: #{recipe.serving}
