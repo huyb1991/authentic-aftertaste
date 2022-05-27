@@ -18,6 +18,11 @@ const sortByOrder = (data = []) => {
 // Private constants
 const NUMBER_OF_RELATED_ITEMS = 3;
 
+// Calculating recipe total time
+const getTotalTime = (time = {}) => {
+  return Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
+};
+
 /**
  * Get cooking time by group by object: { day: X, hour: Y, min: Z };
  * @param {*} totalTime 
@@ -100,7 +105,7 @@ const createListLatestRecipe = () => {
             name, slug, description, imgThumb, imgThumbWebP, serving,
             time = {}, ratings = [0, 0, 0, 0, 0],
           } = recipe;
-          const totalTime = Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
+          const totalTime = getTotalTime(time);
 
           return {
             name,
@@ -177,7 +182,7 @@ const getRelatedRecipesBySlug = (slugs = []) => {
       imgThumb,
       imgThumbWebP,
     }) => {
-      const totalTime = Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
+      const totalTime = getTotalTime(time);
 
       return {
         id,
@@ -206,7 +211,7 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
       }
 
       // Format time
-      const totalTime = Number(recipe.time.prep || 0) + Number(recipe.time.cook || 0) + Number(recipe.time.additional || 0);
+      const totalTime = getTotalTime(recipe.time);
       const formatTime = {
         prep: getCookingTimeText(recipe.time.prep),
         additional: getCookingTimeText(recipe.time.additional),
