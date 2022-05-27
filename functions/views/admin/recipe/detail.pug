@@ -90,6 +90,18 @@ block content
                     readOnly,
                     value= ratingValue
                   )
+          -if (data.id)
+            .row
+              .form-group.col-md-12
+                label(for="relatedRecipes") Related Recipes
+                input.form-control(
+                  id="relatedRecipes",
+                  name="relatedRecipes",
+                  type="text",
+                  value= `${(data.relatedRecipes || []).join(',')}`,
+                  placeholder="Related Recipes",
+                  readOnly
+                )
 
         .col-md-6
           .form-row

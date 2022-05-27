@@ -15,6 +15,14 @@ const sortByOrder = (data = []) => {
   return data.sort((a, b) => Number(a.order) - Number(b.order));
 };
 
+// Private constants
+const NUMBER_OF_RELATED_ITEMS = 3;
+
+// Calculating recipe total time
+const getTotalTime = (time = {}) => {
+  return Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
+};
+
 /**
  * Get cooking time by group by object: { day: X, hour: Y, min: Z };
  * @param {*} totalTime 
@@ -97,7 +105,7 @@ const createListLatestRecipe = () => {
             name, slug, description, imgThumb, imgThumbWebP, serving,
             time = {}, ratings = [0, 0, 0, 0, 0],
           } = recipe;
-          const totalTime = Number(time.prep || 0) + Number(time.cook || 0) + Number(time.additional || 0);
+          const totalTime = getTotalTime(time);
 
           return {
             name,
@@ -135,6 +143,60 @@ const updateListAllRecipe = (name= '', slug = '', prevSlug = '') => {
     });
 };
 
+// Get 3 latest recipes by cuisine
+const getLatestRecipeSlugByCuisine = (cuisine = '') => {
+  const conditions = [];
+
+  if (!!cuisine.trim()) {
+    conditions.push({
+      fieldName: 'cuisine',
+      operator: '==',
+      value: cuisine
+    });
+  }
+
+  return MODELS.recipeGetAll(conditions, NUMBER_OF_RELATED_ITEMS)
+    .then(items => items.map(it => it.slug));
+};
+
+// Get short content for to display on related recipes
+const getRelatedRecipesBySlug = (slugs = []) => {
+  const conditions = [];
+
+  if (slugs.length) {
+    conditions.push({
+      fieldName: 'slug',
+      operator: 'in',
+      value: slugs,
+    });
+  }
+
+  return MODELS.recipeGetAll(conditions, NUMBER_OF_RELATED_ITEMS)
+    .then(items => items.map(({
+      id,
+      name,
+      slug,
+      description,
+      time,
+      serving,
+      imgThumb,
+      imgThumbWebP,
+    }) => {
+      const totalTime = getTotalTime(time);
+
+      return {
+        id,
+        name,
+        slug,
+        description,
+        imgThumb,
+        imgThumbWebP,
+        serving,
+        time: getCookingTimeText(totalTime),
+      };
+    }));
+};
+
 const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
   return MODELS.recipeGetDetailById(recipeId)
     .then(recipe => {
@@ -149,7 +211,7 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
       }
 
       // Format time
-      const totalTime = Number(recipe.time.prep || 0) + Number(recipe.time.cook || 0) + Number(recipe.time.additional || 0);
+      const totalTime = getTotalTime(recipe.time);
       const formatTime = {
         prep: getCookingTimeText(recipe.time.prep),
         additional: getCookingTimeText(recipe.time.additional),
@@ -167,25 +229,29 @@ const AutoUpdateRecipeContent = (recipeId, slug = '', prevSlug = '') => {
       const nutritionCalories = (recipe.nutritions || []).find(it => it.name === 'calories');
       const calories = nutritionCalories ? nutritionCalories.value : 10;
 
-      return CONTENT.writeFileContent(fileName, {
-        ...recipe,
-        time: formatTime,
-        timeSchema: formatTimeSchema,
-        ratings: getRatingValue(recipe.ratings),
-        calories
-      })
-      .then(() => {
-        // Change sitemap url after change slug
-        if (prevSlug.trim() && slug.trim() !== prevSlug.trim()) {
-          const oldUrl = `${BASE_URL_SITEMAP}/${ENTITY.RECIPE}/${prevSlug}`;
-          const newUrl = `${BASE_URL_SITEMAP}/${ENTITY.RECIPE}/${slug}`;
-
-          return updateSitemapUrl(oldUrl, newUrl);
-        }
-
-        return createOrUpdateSitemapBySlugAndEntity(sitemapSlug, ENTITY.RECIPE)
-          .then(() => recipe.id);
-      });
+      return getRelatedRecipesBySlug(recipe.relatedRecipes)
+        .then(relatedRecipes => {
+          return CONTENT.writeFileContent(fileName, {
+            ...recipe,
+            calories,
+            relatedRecipes,
+            time: formatTime,
+            timeSchema: formatTimeSchema,
+            ratings: getRatingValue(recipe.ratings),
+          })
+          .then(() => {
+            // Change sitemap url after change slug
+            if (prevSlug.trim() && slug.trim() !== prevSlug.trim()) {
+              const oldUrl = `${BASE_URL_SITEMAP}/${ENTITY.RECIPE}/${prevSlug}`;
+              const newUrl = `${BASE_URL_SITEMAP}/${ENTITY.RECIPE}/${slug}`;
+    
+              return updateSitemapUrl(oldUrl, newUrl);
+            }
+    
+            return createOrUpdateSitemapBySlugAndEntity(sitemapSlug, ENTITY.RECIPE)
+              .then(() => recipe.id);
+          });
+        });
     });
 };
 
@@ -246,6 +312,7 @@ const AutoUpdateBlogPostContent = (
 
 module.exports = {
   sortByOrder,
+  getLatestRecipeSlugByCuisine,
   AutoUpdateBlogPostContent,
   AutoUpdateRecipeContent,
 };

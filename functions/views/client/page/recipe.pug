@@ -106,3 +106,9 @@ mixin recipeTemplate(isAmp=false)
                     'fixed',
                     direction.imgWebP,
                   )
+
+    //- Related recipes
+    h3.heading.heading-page.text-center.mt40.mb20 You may also like
+    .card.card-border.content
+      include ../components/list-recipes.pug
+      +listRecipeTemplate((recipe.relatedRecipes || []))
